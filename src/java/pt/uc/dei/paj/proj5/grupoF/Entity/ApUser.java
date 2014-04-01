@@ -6,12 +6,22 @@
 package pt.uc.dei.paj.proj5.grupoF.Entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -30,7 +40,7 @@ public class ApUser implements Serializable {
 
     @NotNull
     @Basic(optional = false)
-    @Column(name = "user_name", nullable = false)
+    @Column(nullable = false)
     private String name;
 
     @NotNull
@@ -47,13 +57,87 @@ public class ApUser implements Serializable {
     @Column(nullable = false)
     private String password;
 
-    public Long getId() {
-        return ApUserId;
+    @NotNull
+    @Basic(optional = false)
+    @Column(nullable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date registerDate;
+
+    @OneToMany(mappedBy = "apUser", cascade = CascadeType.ALL)
+    private List<Log> logList;
+
+    @OneToMany(mappedBy = "apUser", cascade = CascadeType.ALL)
+    private List<Evaluation> evaluationList;
+    
+    
+    @ManyToOne
+    private Edition edition;
+    
+
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setId(Long id) {
-        this.ApUserId = id;
+    public void setEmail(String email) {
+        this.email = email;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
+    }
+
+    public void setLogList(List<Log> logList) {
+        this.logList = logList;
+    }
+
+    public void setEvaluationList(List<Evaluation> evaluationList) {
+        this.evaluationList = evaluationList;
+    }
+
+    public void setEdition(Edition edition) {
+        this.edition = edition;
+    }
+
+    public void setApUserId(Long ApUserId) {
+        this.ApUserId = ApUserId;
+    }
+
+    public Date getRegisterDate() {
+        return registerDate;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Log> getLogList() {
+        return logList;
+    }
+
+    public List<Evaluation> getEvaluationList() {
+        return evaluationList;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Edition getEdition() {
+        return edition;
+    }
+
+    public Long getApUserId() {
+        return ApUserId;
+    }
+    
 
     @Override
     public int hashCode() {
