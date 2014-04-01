@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./Template_Proj5.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+
+
+    <ui:define name="left">
+        left
+    </ui:define>
+
+    <ui:define name="content">
+        <div align="center">           
+            
+            <h:form id="login">
+                <h:panelGrid columns="1" rowClasses="gridRows" style="text-align: center">
+                    <h:graphicImage class="img"  value="#{resource['images:logo_uc.png']}"/>
+                </h:panelGrid> 
+                <h:panelGrid columns="2" rowClasses="gridRows">
+                    <h:outputLabel value="Email" for="email" class="labels"/>
+                    <h:inputText id="email" class="textFields" value="#{UserController.email}" />
+                    <h:outputLabel value="Password" for="password" class="labels"/>
+                    <h:inputSecret id="password" class="textFields" value="#{UserController.password}"/>
+                </h:panelGrid> 
+                <h:commandButton id="login" value="Login" class="btn" action="#{UserController.userLogin()}"></h:commandButton>
+                <br/>
+                <h:messages class="errorMessages"/>
+                <br/><br/>
+                <h:commandLink id="register" value="Criar conta. Registe-se agora." class="linkLogin" action="user/Register"/>
+                 <br/><br/>
+
+            </h:form>  
+        </div>
+    </ui:define>
+
+</ui:composition>
