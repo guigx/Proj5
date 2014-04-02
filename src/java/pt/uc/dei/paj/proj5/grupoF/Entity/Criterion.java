@@ -33,12 +33,14 @@ public class Criterion implements Serializable {
     
     @OneToMany(mappedBy = "criterion", cascade = CascadeType.ALL)
     private List<Evaluation> evaluationList;
+    
+    @ManyToOne
+    private Edition edition;
 
     public Criterion() {
     }
     
     
-
     public String getQuestion() {
         return question;
     }
@@ -63,9 +65,7 @@ public class Criterion implements Serializable {
         this.edition = edition;
     }
     
-    @ManyToOne
-    private Edition edition;
-
+    
     public Long getId() {
         return id;
     }

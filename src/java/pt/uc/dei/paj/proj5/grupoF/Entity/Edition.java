@@ -36,8 +36,6 @@ public class Edition implements Serializable {
     private Long id;
 
     @NotNull
-    @Basic(optional = false)
-    @Column(name = "user_name", nullable = false)
     private String name;
 
     @NotNull
