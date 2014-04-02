@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -34,10 +35,22 @@ public class Evaluation implements Serializable {
     
     @ManyToOne
     private  Project project;
+    
+    @NotNull
+    private int rating;
 
     public Evaluation() {
     }
 
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    
     public Project getProject() {
         return project;
     }
