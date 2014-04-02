@@ -10,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
@@ -49,7 +48,6 @@ public class Evaluation implements Serializable {
     public void setRating(int rating) {
         this.rating = rating;
     }
-
     
     public Project getProject() {
         return project;
@@ -75,9 +73,6 @@ public class Evaluation implements Serializable {
     public void setCriterion(Criterion criterion) {
         this.criterion = criterion;
     }
-
-    
-    
 
     public Long getId() {
         return id;

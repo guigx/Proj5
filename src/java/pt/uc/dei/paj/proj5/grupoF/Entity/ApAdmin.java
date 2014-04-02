@@ -6,13 +6,10 @@
 package pt.uc.dei.paj.proj5.grupoF.Entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,14 +28,28 @@ public class ApAdmin implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ApAdminId;
-    
-    @ManyToMany
-    private List<Edition> editionList;
+
+    @NotNull
+    @Basic(optional = false)
+    @Column(name = "user_name", nullable = false)
+    private String name;
+
+    @NotNull
+    @Basic(optional = false)
+    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
+            + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+            + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+            message = "Invalid email")
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Basic(optional = false)
+    @NotNull
+    @Column(nullable = false)
+    private String password;
 
     public ApAdmin() {
     }
-    
-    
 
     public Long getApAdminId() {
         return ApAdminId;
@@ -71,26 +82,9 @@ public class ApAdmin implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
     
-    @NotNull
-    @Basic(optional = false)
-    @Column(name = "user_name", nullable = false)
-    private String name;
-
-    @NotNull
-    @Basic(optional = false)
-    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
-            + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
-            + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
-            message = "Invalid email")
-    @Column(nullable = false, unique = true)
-    private String email;
-
-    @Basic(optional = false)
-    @NotNull
-    @Column(nullable = false)
-    private String password;
-
+    
     @Override
     public int hashCode() {
         int hash = 0;
