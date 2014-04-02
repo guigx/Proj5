@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -64,10 +65,20 @@ public class ApUser implements Serializable {
 
     @OneToMany(mappedBy = "apUser", cascade = CascadeType.ALL)
     private List<Evaluation> evaluationList;
-    
+
     @ManyToOne
     private Edition edition;
-    
+
+    @ManyToMany
+    private List<Project> projectList;
+
+    public List<Project> getProjectList() {
+        return projectList;
+    }
+
+    public void setProjectList(List<Project> projectList) {
+        this.projectList = projectList;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -132,7 +143,6 @@ public class ApUser implements Serializable {
     public Long getApUserId() {
         return ApUserId;
     }
-    
 
     @Override
     public int hashCode() {

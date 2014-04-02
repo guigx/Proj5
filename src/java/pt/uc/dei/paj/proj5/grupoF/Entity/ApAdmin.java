@@ -29,9 +29,6 @@ public class ApAdmin implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ApAdminId;
 
-    @ManyToMany
-    private List<Edition> editionList;
-
     @NotNull
     @Basic(optional = false)
     @Column(name = "user_name", nullable = false)
@@ -84,10 +81,6 @@ public class ApAdmin implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public List<Edition> getEditionList() {
-        return editionList;
     }
 
     
