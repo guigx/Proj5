@@ -6,7 +6,6 @@
 package pt.uc.dei.paj.proj5.grupoF.Entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -60,8 +59,6 @@ public class Edition implements Serializable {
 
     public Edition() {
     }
-    
-    
 
     public String getName() {
         return name;
@@ -119,6 +116,14 @@ public class Edition implements Serializable {
         this.id = id;
     }
 
+    public List<ApAdmin> getApAdminList() {
+        return apAdminList;
+    }
+
+    public void setApAdminList(List<ApAdmin> apAdminList) {
+        this.apAdminList = apAdminList;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

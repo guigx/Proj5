@@ -7,14 +7,12 @@
 package pt.uc.dei.paj.proj5.grupoF.Entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -40,7 +38,6 @@ public class Criterion implements Serializable {
     public Criterion() {
     }
     
-    
     public String getQuestion() {
         return question;
     }
@@ -64,8 +61,7 @@ public class Criterion implements Serializable {
     public void setEdition(Edition edition) {
         this.edition = edition;
     }
-    
-    
+       
     public Long getId() {
         return id;
     }
