@@ -12,7 +12,7 @@ import javax.inject.Named;
 
 /**
  *
- * @author Guilherme Pereira
+ * @author Grupo F
  */
 @Named
 @RequestScoped

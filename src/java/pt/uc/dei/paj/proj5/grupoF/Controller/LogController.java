@@ -11,7 +11,7 @@ import javax.faces.bean.RequestScoped;
 
 /**
  *
- * @author Guilherme Pereira
+ * @author Grupo F
  */
 @ManagedBean
 @RequestScoped

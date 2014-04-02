@@ -6,14 +6,14 @@
 
 package pt.uc.dei.paj.proj5.grupoF.Controller;
 
-import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.inject.Named;
 
 /**
  *
- * @author Guilherme Pereira
+ * @author Grupo F
  */
-@ManagedBean
+@Named
 @RequestScoped
 public class ProjetController {
 
