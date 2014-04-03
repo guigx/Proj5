@@ -23,7 +23,7 @@ import javax.validation.constraints.Pattern;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "ApAdmin.getUserByEmail", query = "SELECT u FROM ApAdmin u WHERE u.email = :email")
+    @NamedQuery(name = "ApAdmin.getAdminByEmail", query = "SELECT u FROM ApAdmin u WHERE u.email = :email")
 })
 
 public class ApAdmin implements Serializable {
