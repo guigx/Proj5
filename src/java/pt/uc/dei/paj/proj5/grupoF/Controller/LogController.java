@@ -6,14 +6,15 @@
 
 package pt.uc.dei.paj.proj5.grupoF.Controller;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
+
 
 /**
  *
  * @author Grupo F
  */
-@ManagedBean
+@Named
 @RequestScoped
 public class LogController {
 

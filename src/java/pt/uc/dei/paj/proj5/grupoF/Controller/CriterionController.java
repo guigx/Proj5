@@ -8,7 +8,6 @@ package pt.uc.dei.paj.proj5.grupoF.Controller;
 
 
 import javax.enterprise.context.RequestScoped;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 /**
