@@ -69,7 +69,6 @@ public class Edition implements Serializable {
     }
 
     public Edition(String name, int scale) {
-        this.id = id;
         this.name = name;
         this.yearEdition = new Date();
         this.scale = scale;
