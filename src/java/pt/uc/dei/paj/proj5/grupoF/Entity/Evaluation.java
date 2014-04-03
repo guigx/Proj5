@@ -37,9 +37,18 @@ public class Evaluation implements Serializable {
     
     @NotNull
     private int rating;
-
+    
     public Evaluation() {
     }
+
+    public Evaluation(ApUser apUser, Criterion criterion, Project project, int rating) {
+        this.apUser = apUser;
+        this.criterion = criterion;
+        this.project = project;
+        this.rating = rating;
+    }
+    
+    
 
     public int getRating() {
         return rating;

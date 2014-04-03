@@ -41,6 +41,13 @@ public class Project implements Serializable {
     public Project() {
     }
 
+    public Project(List<Evaluation> evaluationList, Edition edition, List<ApUser> apuserList) {
+        this.evaluationList = evaluationList;
+        this.edition = edition;
+        this.apuserList = apuserList;
+    }
+    
+
     public List<Evaluation> getEvaluationList() {
         return evaluationList;
     }
