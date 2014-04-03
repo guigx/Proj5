@@ -6,6 +6,8 @@
 package pt.uc.dei.paj.proj5.grupoF.Entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -33,7 +35,6 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "Edition.getEditionByName", query = "SELECT e FROM Edition e WHERE e.name = :name")
 })
 
-
 public class Edition implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,22 +50,33 @@ public class Edition implements Serializable {
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date yearEdition;
-    
+
     private int scale;
-    
+
     @OneToMany(mappedBy = "edition", cascade = CascadeType.ALL)
     private List<ApUser> userList;
-    
+
     @OneToMany(mappedBy = "edition", cascade = CascadeType.ALL)
     private List<Project> projectList;
-    
+
     @OneToMany(mappedBy = "edition", cascade = CascadeType.ALL)
     private List<Criterion> criterionList;
-    
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private List<ApAdmin> apAdminList;
 
     public Edition() {
+    }
+
+    public Edition(String name, int scale) {
+        this.id = id;
+        this.name = name;
+        this.yearEdition = new Date();
+        this.scale = scale;
+        this.userList = new ArrayList();
+        this.projectList = new ArrayList();
+        this.criterionList = new ArrayList();
+        this.apAdminList = new ArrayList();
     }
 
     public String getName() {
@@ -76,7 +88,7 @@ public class Edition implements Serializable {
     }
 
     public Date getYearEdition() {
-        return yearEdition;
+        return new Date( yearEdition.getYear(), 0, 0 );
     }
 
     public void setYearEdition(Date yearEdition) {
@@ -130,7 +142,7 @@ public class Edition implements Serializable {
     public void setApAdminList(List<ApAdmin> apAdminList) {
         this.apAdminList = apAdminList;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
