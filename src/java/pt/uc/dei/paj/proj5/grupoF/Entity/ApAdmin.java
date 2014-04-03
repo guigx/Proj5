@@ -6,14 +6,14 @@
 package pt.uc.dei.paj.proj5.grupoF.Entity;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -22,6 +22,10 @@ import javax.validation.constraints.Pattern;
  * @author Guilherme Pereira
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "ApAdmin.getUserByEmail", query = "SELECT u FROM ApAdmin u WHERE u.email = :email")
+})
+
 public class ApAdmin implements Serializable {
 
     private static final long serialVersionUID = 1L;
