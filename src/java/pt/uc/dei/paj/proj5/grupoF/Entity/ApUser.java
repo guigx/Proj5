@@ -17,6 +17,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,6 +29,14 @@ import javax.validation.constraints.Pattern;
  *
  * @author Grupo F
  */
+@NamedQueries({
+    @NamedQuery(name = "ApUser.findAll", query = "SELECT u FROM ApUser u"),
+    @NamedQuery(name = "ApUser.findByUserId", query = "SELECT u FROM ApUser u WHERE u.ApUserId = :ApUserId"),
+    @NamedQuery(name = "ApUser.findByName", query = "SELECT u FROM ApUser u WHERE u.name = :name"),
+    @NamedQuery(name = "ApUser.findByEmail", query = "SELECT u FROM ApUser u WHERE u.email = :email"),
+    @NamedQuery(name = "ApUser.findByPassword", query = "SELECT u FROM ApUser u WHERE u.password = :password"),
+    @NamedQuery(name = "ApUser.findByregisterDate", query = "SELECT u FROM ApUser u WHERE u.registerDate = :registerDate"),
+    @NamedQuery(name = "ApUser.findByregisterlogList", query = "SELECT u FROM ApUser u WHERE u.logList = :logList")})
 @Entity
 public class ApUser implements Serializable {
 

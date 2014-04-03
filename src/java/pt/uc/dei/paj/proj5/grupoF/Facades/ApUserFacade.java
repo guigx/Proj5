@@ -6,14 +6,19 @@
 
 package pt.uc.dei.paj.proj5.grupoF.Facades;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApUser;
+import pt.uc.dei.paj.proj5.grupoF.Exception.InvalidAuthException;
+import pt.uc.dei.paj.proj5.grupoF.Exception.UserNotFoundException;
 
 /**
  *
- * @author Guilherme Pereira
+ * @author Grupo F
  */
 @Stateless
 public class ApUserFacade extends AbstractFacade<ApUser> {
@@ -29,4 +34,42 @@ public class ApUserFacade extends AbstractFacade<ApUser> {
         super(ApUser.class);
     }
     
+        public ApUser getApUserByEmail(String email) throws UserNotFoundException {
+        try {
+            ApUser u = (ApUser) em.createNamedQuery("ApUser.findByEmail").setParameter("email", email).getSingleResult();
+            return u;
+        } catch (NoResultException ex) {
+            Logger.getLogger(ApUserFacade.class.getName()).log(Level.SEVERE, "Erro na procura de utilizador por email.", ex);
+            throw new UserNotFoundException();
+        }
+    }
+    
+        public boolean emailExists(String email) {
+        try {
+            getApUserByEmail(email);
+            return true;
+        } catch (UserNotFoundException ex) {
+            return false;
+        }
+    }
+    
+         /**
+     * Checks if a email and a password inserted by a user are a valid
+     * authentication to enter the application.
+     *
+     * @param email
+     * @param password
+     * @return The authenticated user.
+     * @throws InvalidAuthException
+     * @throws UserNotFoundException
+     */
+    public ApUser validAuthenticationApuser(String email, String password) throws InvalidAuthException, UserNotFoundException {
+        ApUser apuser = getApUserByEmail(email);
+        if (password.equals(apuser.getPassword())) {
+            return apuser;
+        } else {
+            Logger.getLogger(ApUserFacade.class.getName()).log(Level.SEVERE, "Erro na autenticação de utilizador.");
+            throw new InvalidAuthException("Password inválida.");
+        }
+    }
 }

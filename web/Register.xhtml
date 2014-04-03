@@ -1,54 +1,91 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="./Template_Proj5.xhtml"
-                xmlns:h="http://xmlns.jcp.org/jsf/html">
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <title>GetPlayWeb</title>
+    </h:head>
+ <h:body>  
+    <!--<ui:define name="content">-->
 
+        <h:form id="newUser">
+            <div align="center">
 
-
-    <ui:define name="left">
-        left
-    </ui:define>
-
-    <ui:define name="content">
-        <div align="center">
-            <h:form id="newUser">
                 <div style="margin: 30px">
                     <h:graphicImage style="margin-bottom: 20px;" value="#{resource['images:logotipo_peq.png']}"/>
                     <br/><h:outputLabel value="Regista-te" class="bigTitle"/>
                 </div>
                 <h:panelGrid columns="3" rowClasses="gridRows">
                     <h:outputLabel value="Nome" class="labels"/>
-                    <h:inputText id="nome" title="Nome" class="textFields" value="#{UserController.apuser.name}" required="true" requiredMessage="Introduza um nome."/>
+                    <h:inputText id="nome" title="Nome" class="textFields" value="#{userController.apuser.name}" required="true" requiredMessage="Introduza um nome."/>
                     <h:message for="nome" class="errorMessages"/>
 
                     <h:outputLabel value="Email" class="labels"/>
-                    <h:inputText id="email" title="Email" class="textFields" value="#{UserController.apuser.email}" required="true" requiredMessage="Introduza um email."/>
+                    <h:inputText id="email" title="Email" class="textFields" value="#{userController.apuser.email}" required="true" requiredMessage="Introduza um email."/>
                     <h:message for="email" class="errorMessages"/>
 
                     <h:outputLabel value="Password" class="labels"/>
-                    <h:inputSecret id="password" title="Password" class="textFields" value="#{UserController.apuser.password}" required="true" requiredMessage="Introduza uma password."/>
+                    <h:inputSecret id="password" title="Password" class="textFields" value="#{userController.apuser.password}" required="true" requiredMessage="Introduza uma password."/>
                     <h:message for="password" class="errorMessages"/>
 
                     <h:outputLabel value="Confirme a Password" class="labels"/>
-                    <h:inputSecret id="confirmpassword" title="Confirme a Password" class="textFields" value="#{UserController.confirmPassword}" required="true" requiredMessage="Confirme a password."/>
+                    <h:inputSecret id="confirmpassword" title="Confirme a Password" class="textFields" value="#{userController.confirmPassword}" required="true" requiredMessage="Confirme a password."/>
                     <h:message for="confirmpassword" class="errorMessages"/>
-                    
-                    <h:outputLabel value="Ano de Registo" class="labels"/>
-                    <h:inputSecret id="anoregisto" title="Ano de Registo" class="textFields" value="#{UserController.confirmPassword}" required="true" requiredMessage="Introduza ano de registo."/>
-                    <h:message for="anoregisto" class="errorMessages"/>
-                                        
-                    <h:outputLabel value="N.º Edicao" class="labels"/>
-                    <h:inputSecret id="numedicao" title="N.º Edicao" class="textFields" value="#{UserController.confirmPassword}" required="true" requiredMessage="Introduza numero da edicao."/>
-                    <h:message for="numedicao" class="errorMessages"/>  
+
                 </h:panelGrid>
+                <div id="dd" class="wrapper-dropdown-5" tabindex="1" >
+                    <h:outputLabel style="display: inline" value="Edition"></h:outputLabel>
+                    <ul class="dropdown">
+                        <li><h:commandLink value="Edit your Profile" action="editUser"></h:commandLink></li>
+                        <li><h:commandLink value="Delete Account" action="#{userManagedBean.deleteAccount()}"></h:commandLink></li>
+                        <li><h:commandLink value="Log Out" action="#{userManagedBean.logOut()}"></h:commandLink></li>
+                    </ul>
+                </div>
 
-                <h:commandButton value="Submeter" class="btn" action="#{UserController.createNewUser()}"/>
-                <h:commandButton value="Cancelar" class="btn" action="/Login" immediate="true"/>
-                <!--<h:messages class="errorMessages"/>-->
-                <br/>
-            </h:form> 
-        </div>
-    </ui:define>
+            </div>
+            <!-- jQuery if needed -->
+            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+            <script type="text/javascript">
+                function DropDown(el) {
+                    this.dd = el;
+                    this.initEvents();
+                }
+                DropDown.prototype = {
+                    initEvents: function() {
+                        var obj = this;
 
-</ui:composition>
+                        obj.dd.on('click', function(event) {
+                            $(this).toggleClass('active');
+                            event.stopPropagation();
+                        });
+                    }
+                }
+
+                $(function() {
+
+                    var dd = new DropDown($('#dd'));
+
+                    $(document).click(function() {
+                        // all dropdowns
+                        $('.wrapper-dropdown-5').removeClass('active');
+                    });
+
+                });
+
+
+            </script>
+            <h:commandButton value="Submeter" class="btn" action="#{UserController.createNewUser()}"/>
+            <h:commandButton value="Cancelar" class="btn" action="/Login" immediate="true"/>
+            <br/>
+          
+        </h:form> 
+    <!--</ui:define>-->
+     </h:body>
+</html>

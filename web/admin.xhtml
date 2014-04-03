@@ -9,6 +9,8 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <title>GetPlayWeb</title>
     </h:head>
  <h:body>  
     <div align="center">           
@@ -22,7 +24,7 @@ and open the template in the editor.
                 <h:outputLabel value="Password" for="password" class="labels"/>
                 <h:inputSecret id="password" class="textFields" value="#{userController.password}"/>
             </h:panelGrid> 
-            <h:commandButton id="login" value="Login" class="btn" action="#{userController.userLoginUser()}"></h:commandButton>
+            <h:commandButton id="login" value="Login" class="btn" action="#{userController.userLoginAdmin()}"></h:commandButton>
             <br/>
             <h:messages class="errorMessages"/>
             <br/><br/>
