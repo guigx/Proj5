@@ -31,9 +31,11 @@ import javax.validation.constraints.NotNull;
  */
 
 @NamedQueries({
-    @NamedQuery(name = "Edition.findAll", query = "SELECT u FROM Edition u"),
-    @NamedQuery(name = "Edition.findByEditionId", query = "SELECT u FROM Edition u WHERE u.id = :id"),
-    @NamedQuery(name = "Edition.findByName", query = "SELECT u FROM Edition u WHERE u.name = :name")})
+    @NamedQuery(name = "Edition.findAll", query = "SELECT e FROM Edition e"),
+    @NamedQuery(name = "Edition.findByEditionId", query = "SELECT e FROM Edition e WHERE e.id = :id"),
+    @NamedQuery(name = "Edition.findByName", query = "SELECT e FROM Edition e WHERE e.name = :name"),
+    @NamedQuery(name = "Edition.findAllEvaluationById_edition", query = "SELECT e FROM Edition e  ")
+})
 @Entity
 public class Edition implements Serializable {
 

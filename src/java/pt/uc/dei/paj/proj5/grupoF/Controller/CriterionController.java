@@ -9,7 +9,7 @@ package pt.uc.dei.paj.proj5.grupoF.Controller;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
+import pt.uc.dei.paj.proj5.grupoF.EJB.LoggedUser;
 import pt.uc.dei.paj.proj5.grupoF.Facades.CriterionFacade;
 
 /**
@@ -22,7 +22,7 @@ public class CriterionController {
     @Inject
     private CriterionFacade criterionfacade;
     private String name;
-    private Edition edition;
+    private LoggedUser logged;
 
     /**
      * Creates a new instance of CriterionController
@@ -31,9 +31,9 @@ public class CriterionController {
     }
 
     public String createCriterion() {
-        if (criterionfacade.createCriterion(name, edition)) {
+        if (criterionfacade.createCriterion(name, logged.getCurrentEdition())) {
             return "paginaqualquer";   //pagina com a definicao de criterios. 
-            //Podemos atribuir mensagem de erro
+                                        //Podemos atribuir mensagem de erro
         }
         return null; //podemos devolver pagina de erro a informar que o criterio nao foi criado
     }

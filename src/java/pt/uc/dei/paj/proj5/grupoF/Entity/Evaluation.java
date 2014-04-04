@@ -11,12 +11,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author Guilherme Pereira
  */
+
+//@NamedQueries({
+//    @NamedQuery(name = "ApUser.findByEvaluation", query = "SELECT u FROM ApUser u")
+//})
+
 @Entity
 public class Evaluation implements Serializable {
 
@@ -37,7 +44,7 @@ public class Evaluation implements Serializable {
     private  Project project;
     
     @NotNull
-    private int rating;
+    private int rating;          //nota avaliacao
     
     public Evaluation() {
     }
@@ -53,7 +60,7 @@ public class Evaluation implements Serializable {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(int rating) { 
         this.rating = rating;
     }
     

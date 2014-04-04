@@ -14,13 +14,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import pt.uc.dei.paj.proj5.grupoF.EJB.LoggedUser;
 
 /**
  *
  * @author Guilherme Pereira
  */
+@NamedQueries({
+    @NamedQuery(name = "Criterion.findAllCriterionByEdition", query = "SELECT c FROM Criterion c WHERE c.edition= :edition")})
+
 @Entity
 public class Criterion implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -36,15 +40,13 @@ public class Criterion implements Serializable {
     @ManyToOne
     private Edition edition;
     
-    private LoggedUser logged;
-
     
     public Criterion() {
     }
 
     public Criterion(String question, Edition edition) {
         this.question = question;
-        this.edition = logged.getCurrentEdition();
+        this.edition = edition;
     }
     
     public String getQuestion() {

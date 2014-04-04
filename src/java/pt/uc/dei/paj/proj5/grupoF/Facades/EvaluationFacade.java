@@ -29,4 +29,8 @@ public class EvaluationFacade extends AbstractFacade<Evaluation> {
         super(Evaluation.class);
     }
     
+    //create new evaluation from a project
+    public void createEvaluation(){
+        
+    }
 }

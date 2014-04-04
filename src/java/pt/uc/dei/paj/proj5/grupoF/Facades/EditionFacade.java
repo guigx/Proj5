@@ -30,7 +30,7 @@ public class EditionFacade extends AbstractFacade<Edition> {
         super(Edition.class);
     }
 
-    public boolean createEdition(String name, int scale) {
+    public boolean createEdition(String name, int scale) { //scale - limite superior das notas
         this.create(new Edition(name, scale));
         return true;
     }
@@ -53,7 +53,10 @@ public class EditionFacade extends AbstractFacade<Edition> {
         }
     }
     
+    public void deleteEdition(int id_edition){//tem de se verificar se temos algum criterio desta edicao preenchido
+        this.remove(find(id_edition));
+    }        
             
-            
+    
 
 }
