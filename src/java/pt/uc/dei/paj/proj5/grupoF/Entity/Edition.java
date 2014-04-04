@@ -29,7 +29,6 @@ import javax.validation.constraints.NotNull;
  *
  * @author Guilherme Pereira
  */
-
 @NamedQueries({
     @NamedQuery(name = "Edition.findAll", query = "SELECT e FROM Edition e"),
     @NamedQuery(name = "Edition.findByEditionId", query = "SELECT e FROM Edition e WHERE e.id = :id"),
@@ -53,6 +52,7 @@ public class Edition implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date yearEdition;
 
+    @NotNull
     private int scale;
 
     @OneToMany(mappedBy = "edition", cascade = CascadeType.ALL)
@@ -89,7 +89,7 @@ public class Edition implements Serializable {
     }
 
     public Date getYearEdition() {
-        return new Date( yearEdition.getYear(), 0, 0 );
+        return new Date(yearEdition.getYear(), 0, 0);
     }
 
     public void setYearEdition(Date yearEdition) {

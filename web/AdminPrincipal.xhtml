@@ -1,89 +1,54 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"   
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core" 
-      template="./TemplateAdmin.xhtml"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition template="./TemplateAdmin.xhtml"  xmlns="http://www.w3.org/1999/xhtml"   
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui">
 
-    <h:body>
+    <ui:define name="content">
 
-        <ui:composition template="./TemplateAdmin.xhtml">
+        <h:form> 
+            <h:dataTable value="#{editionController.allEdition}" var="item" border="0" cellpadding="2" 
+                         cellspacing="0" rowClasses="odd_row,even_row" rules="all" style="border:solid 1px">
+                <h:column>
+                    <f:facet name="header">Edition</f:facet>
+                    <h:outputText value="#{item.name}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Scale</f:facet>
+                    <h:outputText value="#{item.scale}" />
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Select" action="aa" />
+                </h:column>
+            </h:dataTable>
+            <div align="right">
 
-            <ui:define name="content">
+            </div>
+            <p:commandButton id="modalDialogButton" value="Add new Edition" onclick="PF('dlg2').show();" type="button"/>
+        </h:form>           
 
-                <h:form> 
-                    <h:dataTable value="#{editionController.allEdition}" var="item" border="0" cellpadding="2" 
-                                 cellspacing="0" rowClasses="odd_row,even_row" rules="all" style="border:solid 1px">
-                        <h:column>
-                            <f:facet name="header">Edition</f:facet>
-                            <h:outputText value="#{item.name}" />
-                        </h:column>
-                        <h:column>
-                            <h:commandButton value="Select" action="aa" />
-                        </h:column>
-                    </h:dataTable>
-                    <div align="right">
+        <p:dialog id="modalDialog" header="Create New Edition" widgetVar="dlg2" modal="true" height="auto" width="auto">
+            <h:form>
+                <table>
+                    <tr>
+                        <td><h:outputLabel value="Name"/></td>
+                        <td><h:inputText value="#{editionController.name}"/></td>
+                    </tr>
 
-                    </div>
-                    <p:commandButton id="modalDialogButton" value="Add new Edition" onclick="PF('dlg2').show();" type="button"/>
-                </h:form>           
+                    <tr>
+                        <td><h:outputLabel value="Criteria Scale"/></td>
+                        <td><h:inputText value="#{editionController.scale}" required="true" requiredMessage="Scale required"/></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><h:commandButton value="SAVE" action="#{editionController.createEdition()}"></h:commandButton></td>
+                    </tr>
+                </table>
+            </h:form>
+        </p:dialog>
 
-                <p:dialog id="modalDialog" header="Create Paj Edition" widgetVar="dlg2" modal="true" height="auto" width="auto">
-                    <h:form>
-                        <table>
-                            <tr>
-                                <td><h:outputLabel value="Name"/></td>
-                                <td><h:inputText value="#{editionController.edition.name}"/></td>
-                            </tr>
+    </ui:define>
 
-                            <tr>
-                                <td><h:outputLabel value="Criteria Scale"/></td>
-                                <td><h:inputText value="#{editionController.edition.scale}" required="true" requiredMessage="Scale required"/></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td><h:commandButton value="SAVE" action="#{editionController.createEdition()}"></h:commandButton></td>
-                            </tr>
-                        </table>
-                    </h:form>
-                </p:dialog>
-
-
-
-
-
-
-                sdasdsa
-
-
-                <h:panelGrid columns="1" cellpadding="5">
-                    <p:commandButton id="basic" value="Basic" onclick="PF('dlg1').show();" type="button" />
-
-                    <p:commandButton id="modalDialogButton" value="Modal" onclick="PF('dlg2').show();" type="button"/>
-
-                    <p:commandButton id="effectsDialogButton" value="Effects" onclick="PF('dlg3').show();" type="button" />
-                </h:panelGrid>
-
-                <p:dialog id="basicDialog" header="Basic Dialog" widgetVar="dlg1">
-                    <h:outputText value="Resistance to PrimeFaces is futile!" />
-                </p:dialog>
-
-                <p:dialog id="modalDialog2" header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
-                    <h:outputText value="This is a Modal Dialog." />
-                </p:dialog>
-
-                <p:dialog header="Effects" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">
-                    <h:outputText value="This dialog has nice effects." />
-                </p:dialog>
-
-
-
-
-            </ui:define>
-
-        </ui:composition>
-
-    </h:body>
-</html>
+</ui:composition>

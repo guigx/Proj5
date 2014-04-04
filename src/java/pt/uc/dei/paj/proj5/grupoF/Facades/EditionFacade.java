@@ -8,6 +8,7 @@ package pt.uc.dei.paj.proj5.grupoF.Facades;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
 
@@ -42,10 +43,12 @@ public class EditionFacade extends AbstractFacade<Edition> {
      * @return
      */
     public Edition findByName(String name) {
-        TypedQuery<Edition> q = em.createNamedQuery("Edition.getEditionByName", Edition.class);
+        Query q = em.createNamedQuery("Edition.findByName", Edition.class);
         q.setParameter("name", name);
         try {
-            return q.getSingleResult();
+            System.out.println("------"+q.getSingleResult());
+            return (Edition) q.getSingleResult();
+            
         } catch (Exception e) {
             e.printStackTrace();
             return null;   //enviar para pagina de erro com informacao de que 
