@@ -103,5 +103,5 @@ public class Criterion implements Serializable {
     public String toString() {
         return "pt.uc.dei.paj.proj5.grupoF.Entity.Criterion[ id=" + id + " ]";
     }
-    
+  
 }

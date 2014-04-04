@@ -33,6 +33,7 @@ public class CriterionFacade extends AbstractFacade<Criterion> {
      public boolean createCriterion(String question,Edition edition ) {
         this.create(new Criterion(question,edition));
         return true;
+        
     }
     
     
