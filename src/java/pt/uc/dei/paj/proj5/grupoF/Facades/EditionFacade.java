@@ -29,16 +29,17 @@ public class EditionFacade extends AbstractFacade<Edition> {
     public EditionFacade() {
         super(Edition.class);
     }
-    
-    public boolean createEdition(String name, int scale){
+
+    public boolean createEdition(String name, int scale) {
         this.create(new Edition(name, scale));
         return true;
     }
 
     /**
      * search if the name already exist
+     *
      * @param name - name of edition
-     * @return 
+     * @return
      */
     public Edition findByName(String name) {
         TypedQuery<Edition> q = em.createNamedQuery("Edition.getEditionByName", Edition.class);
@@ -46,7 +47,9 @@ public class EditionFacade extends AbstractFacade<Edition> {
         try {
             return q.getSingleResult();
         } catch (Exception e) {
-            return null;
+            e.printStackTrace();
+            return null;   //enviar para pagina de erro com informacao de que 
+                           //nao existe objecto com este valor
         }
     }
 

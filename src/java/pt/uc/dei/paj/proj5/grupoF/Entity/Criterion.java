@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import pt.uc.dei.paj.proj5.grupoF.EJB.LoggedUser;
 
 /**
  *
@@ -34,12 +35,16 @@ public class Criterion implements Serializable {
     
     @ManyToOne
     private Edition edition;
+    
+    private LoggedUser logged;
 
+    
     public Criterion() {
     }
 
-    public Criterion(String question) {
+    public Criterion(String question, Edition edition) {
         this.question = question;
+        this.edition = logged.getCurrentEdition();
     }
     
     public String getQuestion() {

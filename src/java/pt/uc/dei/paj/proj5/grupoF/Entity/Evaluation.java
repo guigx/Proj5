@@ -20,6 +20,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Evaluation implements Serializable {
 
+    
     //VER ID COMPOSTO
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,8 +49,6 @@ public class Evaluation implements Serializable {
         this.rating = rating;
     }
     
-    
-
     public int getRating() {
         return rating;
     }

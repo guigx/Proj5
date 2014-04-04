@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Criterion;
+import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
 
 /**
  *
@@ -28,5 +29,11 @@ public class CriterionFacade extends AbstractFacade<Criterion> {
     public CriterionFacade() {
         super(Criterion.class);
     }
+    
+     public boolean createCriterion(String question,Edition edition ) {
+        this.create(new Criterion(question,edition));
+        return true;
+    }
+    
     
 }

@@ -38,15 +38,14 @@ import javax.validation.constraints.Pattern;
     @NamedQuery(name = "ApUser.findByregisterDate", query = "SELECT u FROM ApUser u WHERE u.registerDate = :registerDate"),
     @NamedQuery(name = "ApUser.findByregisterlogList", query = "SELECT u FROM ApUser u WHERE u.logList = :logList")})
 @Entity
-@NamedQueries({
-    @NamedQuery(name = "ApUser.getUserByEmail", query = "SELECT u FROM ApUser u WHERE u.email = :email")
-})
+
 
 public class ApUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
     private Long ApUserId;
 
     @NotNull
