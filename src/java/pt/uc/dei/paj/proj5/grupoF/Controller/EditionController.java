@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pt.uc.dei.paj.proj5.grupoF.Controller;
 
-
-
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -30,34 +28,48 @@ public class EditionController {
     private String name;
     private int scale;
     private List<Criterion> criterionList;
-    
+    private Edition edition;
 
     /**
      * Creates a new instance of EditionController
      */
     public EditionController() {
     }
+    
+    @PostConstruct
+    public void initEdition(){
+        this.edition=new Edition();
+    }
 
     public String createEdition() {
-        if (editionfacade.findByName(name)==null){
+        if (editionfacade.findByName(name) == null) {
             editionfacade.createEdition(name, scale);
             return "paginaqualquer";   //pagina com a definicao de criterios. 
-                                       //Podemos atribuir mensagem de erro
-        }     
-            return null;
+            //Podemos atribuir mensagem de erro
+        }
+        return null;
+    }
+
+    public Edition getEdition() {
+        return edition;
+    }
+
+    public void setEdition(Edition edition) {
+        this.edition = edition;
     }
 
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public List<Edition> getAllEdition(){
+    public List<Edition> getAllEdition() {
         return editionfacade.findAll();
     }
+
     public EditionFacade getEditionfacade() {
         return editionfacade;
     }
