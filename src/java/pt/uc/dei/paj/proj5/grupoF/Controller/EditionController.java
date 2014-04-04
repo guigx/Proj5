@@ -44,8 +44,7 @@ public class EditionController {
     public String createEdition() {
         if (editionfacade.findByName(name) == null) {
             editionfacade.createEdition(name, scale);
-            return "paginaqualquer";   //pagina com a definicao de criterios. 
-            //Podemos atribuir mensagem de erro
+            return "AdminPrincipal"; 
         }
         return null;
     }
