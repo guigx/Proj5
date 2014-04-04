@@ -9,22 +9,22 @@
         <h:outputStylesheet name="./css/default.css"/>
         <h:outputStylesheet name="./css/cssLayout.css"/>
         <h:outputStylesheet name="./css/styles.css"/>
-        
-        <!--<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>-->
+
+        <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
         <script type='text/javascript' src="#{facesContext.externalContext.requestContextPath}/resources/javaScript/menu_jquery.js"></script>
         <title>Sistema de Autoavaliação PAJ</title>
     </h:head>
 
     <h:body>
 
-        <div id="top" class="top">
+        <div id="top">
             <ui:insert name="top">
                 <h:form>
                     <h:panelGrid columns="4">
 
-                        <!--<h:graphicImage value="#{resource['images:logotipo_main.png']}"/>-->
+                        <h:graphicImage value="#{resource['images:logo_uc.png']}"/>
 
-                        <h:outputText class="nameLabel" value="Bem-vindo(a) #{UserController.lg.loggedUser.name}!"/>
+                        <h:outputText value="Bem-vindo(a) #{userController.lg.loggedAdmin.name}!"/>
 
                     </h:panelGrid>
                 </h:form>
@@ -35,13 +35,14 @@
             <div id="left">
                 <ui:insert name="left">
 
-                    <ui:include src="menu.xhtml" />
+                    <ui:include src="menuAdmin.xhtml" />
 
                 </ui:insert>
             </div>
 
             <div id="content" class="left_content">
-                <ui:insert name="content">Content</ui:insert>
+                <ui:insert name="content">
+                </ui:insert>
             </div>
 
         </div>

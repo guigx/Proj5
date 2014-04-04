@@ -10,6 +10,7 @@ import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApAdmin;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApUser;
+import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
 
 /**
  *
@@ -22,6 +23,7 @@ public class LoggedUser implements Serializable {
     private static final long serialVersionUID = 1L;
     private ApUser loggedUser;
     private ApAdmin loggedAdmin;
+    private Edition currentEdition;
 
     public LoggedUser() {
     }
