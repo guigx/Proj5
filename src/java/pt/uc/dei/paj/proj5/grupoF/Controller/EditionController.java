@@ -13,6 +13,7 @@ import javax.inject.Named;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Criterion;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
 import pt.uc.dei.paj.proj5.grupoF.Facades.EditionFacade;
+import pt.uc.dei.paj.proj5.grupoF.Facades.EvaluationFacade;
 
 /**
  *
@@ -25,10 +26,13 @@ public class EditionController {
 
     @Inject
     private EditionFacade editionfacade;
+    @Inject
+    private EvaluationFacade evaluationfacade;
     private String name;
     private int scale;
     private List<Criterion> criterionList;
     private Edition edition;
+    
 
     /**
      * Creates a new instance of EditionController
@@ -41,13 +45,21 @@ public class EditionController {
         this.edition=new Edition();
     }
 
-    public String createEdition() {
+    //create now edition
+    public String createEdition(long id_edition) {
         if (editionfacade.findByName(name) == null) {
             editionfacade.createEdition(name, scale);
             return "paginaqualquer";   //pagina com a definicao de criterios. 
             //Podemos atribuir mensagem de erro
         }
         return null;
+    }
+    
+    //clears list if no review
+    public void deleteEdition(int id_edition) {
+        if (evaluationfacade.findEvaluationByIdEdition(id_edition) == null) {
+            editionfacade.deleteEdition(id_edition);
+        }
     }
 
     public Edition getEdition() {

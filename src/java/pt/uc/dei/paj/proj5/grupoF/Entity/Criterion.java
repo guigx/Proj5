@@ -23,7 +23,7 @@ import javax.persistence.OneToMany;
  * @author Guilherme Pereira
  */
 @NamedQueries({
-    @NamedQuery(name = "Criterion.findAllCriterionByEdition", query = "SELECT c FROM Criterion c WHERE c.edition= :edition")})
+    @NamedQuery(name = "Criterion.findAllCriterionByEdition", query = "SELECT c FROM Criterion c WHERE c.edition.name :id_edition")})
 
 @Entity
 public class Criterion implements Serializable {

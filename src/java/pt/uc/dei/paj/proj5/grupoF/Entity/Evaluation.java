@@ -20,9 +20,9 @@ import javax.validation.constraints.NotNull;
  * @author Guilherme Pereira
  */
 
-//@NamedQueries({
-//    @NamedQuery(name = "ApUser.findByEvaluation", query = "SELECT u FROM ApUser u")
-//})
+@NamedQueries({
+    @NamedQuery(name = "Evaluation.findByIdEdition", query = "SELECT e FROM Evaluation e WHERE e.project.edition.id = :id_edition")
+})
 
 @Entity
 public class Evaluation implements Serializable {

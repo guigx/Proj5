@@ -39,9 +39,9 @@ public class CriterionFacade extends AbstractFacade<Criterion> {
     }
 
     
-    public List<Criterion> findAllCriterionByEdition(Edition edition) {
-        TypedQuery<Criterion> q = em.createNamedQuery("Criterion.findAllByEdition", Criterion.class);
-        q.setParameter("edition", edition);
+    public List<Criterion> findAllCriterionByEdition(long id_edition) {
+        TypedQuery<Criterion> q = em.createNamedQuery("Criterion.findAllCriterionByEdition", Criterion.class);
+        q.setParameter("id_edition", id_edition);
         try {
             return q.getResultList(); // envia os criterios para tabela para atrubuir notas
         } catch (Exception e) {
