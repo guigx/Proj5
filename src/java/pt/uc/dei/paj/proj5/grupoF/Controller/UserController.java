@@ -7,7 +7,6 @@ package pt.uc.dei.paj.proj5.grupoF.Controller;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -45,14 +44,13 @@ public class UserController {
     public UserController() {
     }
 
-    
-        public ApAdmin getAdmin() {
+    public ApAdmin getAdmin() {
         if (apadmin == null) {
             apadmin = new ApAdmin();
         }
         return apadmin;
     }
-    
+
     public ApUser getApuser() {
         if (apuser == null) {
             apuser = new ApUser();
@@ -75,7 +73,7 @@ public class UserController {
     public void setApadmin(ApAdmin apadmin) {
         this.apadmin = apadmin;
     }
-    
+
     public ApUserFacade getEjbUser() {
         return ejbUser;
     }
@@ -115,7 +113,7 @@ public class UserController {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     /**
      * Checks if the email and password inserted are valid authentication.
      *
@@ -124,22 +122,19 @@ public class UserController {
     public String userLoginAdmin() {
         FacesContext ctx = FacesContext.getCurrentInstance();
         //Encrypt password
-        String p = new String(password);
         password = EncriptPassword.md5(password);
-        System.out.println("Logging with " + email + " pass: " + p + "/" + password);
         try {
             ApAdmin loggedAdmin = ejbAdmin.validAuthenticationApadmin(email, password);
-            System.out.println("Got user: " + loggedAdmin);
             lg.setLoggedAdmin(loggedAdmin);
-            return "/nova?faces-redirect=true";
+            return "/AdminPrincipal?faces-redirect=true";
         } catch (InvalidAuthException | UserNotFoundException ex) {
             ctx.addMessage("admin", new FacesMessage("Email ou password inválidos."));
             ex.printStackTrace();
             return null;
         }
     }
-    
-        /**
+
+    /**
      * Checks if the email and password inserted are valid authentication.
      *
      * @return The next page if the authentication is valid, null otherwise.
@@ -147,12 +142,9 @@ public class UserController {
     public String userLoginUser() {
         FacesContext ctx = FacesContext.getCurrentInstance();
         //Encrypt password
-        String p = new String(password);
         password = EncriptPassword.md5(password);
-        System.out.println("Logging with " + email + " pass: " + p + "/" + password);
         try {
             ApUser loggedUser = ejbUser.validAuthenticationApuser(email, password);
-            System.out.println("Got user: " + loggedUser);
             lg.setLoggedUser(loggedUser);
             return "/novo?faces-redirect=true";
         } catch (InvalidAuthException | UserNotFoundException ex) {
@@ -161,7 +153,7 @@ public class UserController {
         }
     }
 
-        /**
+    /**
      * Creates a new user. Checks if the email inserted is valid. If the user is
      * correctly created, is logged in the application.
      *

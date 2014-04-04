@@ -29,8 +29,6 @@ import javax.validation.constraints.Pattern;
     @NamedQuery(name = "ApAdmin.findByEmail", query = "SELECT u FROM ApAdmin u WHERE u.email = :email"),
     @NamedQuery(name = "ApAdmin.findByPassword", query = "SELECT u FROM ApAdmin u WHERE u.password = :password")})
 @Entity
-
-
 public class ApAdmin implements Serializable {
 
     private static final long serialVersionUID = 1L;

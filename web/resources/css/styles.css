@@ -33,7 +33,7 @@ and open the template in the editor.
 }
 #cssmenu > ul > li {
     cursor: pointer;
-    background: #000;
+    background: #ece3a5;
     border-bottom: 1px solid #464646;
 }
 #cssmenu > ul > li:last-child {
@@ -44,30 +44,30 @@ and open the template in the editor.
     display: block;
     color: #ffffff;
     text-shadow: 0 1px 1px #000;
-    background: #686868;
-    background: -moz-linear-gradient(#686868 0%, #464646 100%);
+    background: #ece3a5;
+    background: -moz-linear-gradient(#ece3a5 0%, #464646 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #686868), color-stop(100%, #464646));
-    background: -webkit-linear-gradient(#686868 0%, #464646 100%);
-    background: linear-gradient(#686868 0%, #464646 100%);
+    background: -webkit-linear-gradient(#ece3a5 0%, #464646 100%);
+    background: linear-gradient(#ece3a5 0%, #464646 100%);
 }
 #cssmenu > ul > li > a:hover {
-    background: #97c700;
-    background: -moz-linear-gradient(#97c700 0%, #709400 100%);
+    background: #ece3a5;
+    background: -moz-linear-gradient(#036fab 0%, #709400 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #97c700), color-stop(100%, #709400));
-    background: -webkit-linear-gradient(#97c700 0%, #709400 100%);
-    background: linear-gradient(#97c700 0%, #709400 100%);
+    background: -webkit-linear-gradient(#036fab 0%, #709400 100%);
+    background: linear-gradient(#036fab 0%, #709400 100%);
     text-decoration: none;
 }
 #cssmenu > ul > li.active {
     border-bottom: none;
 }
 #cssmenu > ul > li.active > a {
-    background: #97c700;
-    background: -moz-linear-gradient(#97c700 0%, #709400 100%);
+    background: #ece3a5;
+    background: -moz-linear-gradient(#036fab 0%, #709400 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #97c700), color-stop(100%, #709400));
-    background: -webkit-linear-gradient(#97c700 0%, #709400 100%);
-    background: linear-gradient(#97c700 0%, #709400 100%);
-    color: #4e5800;
+    background: -webkit-linear-gradient(#036fab 0%, #709400 100%);
+    background: linear-gradient(#036fab 0%, #709400 100%);
+    color: #ece3a5;
     text-shadow: 0 1px 1px #709400;
 }
 #cssmenu > ul > li.has-sub > a:after {
@@ -90,7 +90,7 @@ and open the template in the editor.
     display: none;
 }
 #cssmenu ul ul a {
-    background: #efefef;
+    background: #ece3a5;
     display: block;
     color: #797979;
     font-size: 16px;
@@ -99,7 +99,7 @@ and open the template in the editor.
     border-bottom: 1px solid #c9c9c9;
 }
 #cssmenu ul ul li.odd a {
-    background: #e5e5e5;
+    background: #ece3a5;
 }
 #cssmenu ul ul li:last-child {
     border: none;
@@ -110,9 +110,9 @@ and open the template in the editor.
     display: block;
     color: #0A7920;
     text-shadow: 0 1px 1px #000;
-    background: #686868;
-    background: -moz-linear-gradient(#686868 0%, #464646 100%);
+    background: #ece3a5;
+    background: -moz-linear-gradient(#ece3a5 0%, #ece3a5 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #686868), color-stop(100%, #464646));
-    background: -webkit-linear-gradient(#686868 0%, #464646 100%);
-    background: linear-gradient(#686868 0%, #464646 100%);
+    background: -webkit-linear-gradient(#ece3a5 0%, #ece3a5 100%);
+    background: linear-gradient(#ece3a5 0%, #ece3a5 100%);
 }

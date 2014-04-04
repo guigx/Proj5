@@ -13,6 +13,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Criterion;
+import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
 import pt.uc.dei.paj.proj5.grupoF.Facades.EditionFacade;
 
 /**
@@ -54,6 +55,9 @@ public class EditionController {
         this.name = name;
     }
 
+    public List<Edition> getAllEdition(){
+        return editionfacade.findAll();
+    }
     public EditionFacade getEditionfacade() {
         return editionfacade;
     }
