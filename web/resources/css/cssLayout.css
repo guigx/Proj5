@@ -29,8 +29,12 @@
 
 .left_content {
     padding-left: 5px;
-    margin-left: 250px;
-
+    position: absolute;
+    left: 267px;
+    top: 152px;
+}
+.left{
+    max-width: 250px;
 }
 
 .right_content {
