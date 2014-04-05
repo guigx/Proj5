@@ -1,15 +1,15 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition template="./TemplateAdmin.xhtml"  xmlns="http://www.w3.org/1999/xhtml"   
+<ui:composition template="./TemplateAdmin.xhtml"  xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
 
-        <h:form> 
-            <h:dataTable value="#{editionController.allEdition}" var="item" border="0" cellpadding="2" 
+        <h:form>
+            <h:dataTable value="#{editionController.allEdition}" var="item" border="0" cellpadding="2"
                          cellspacing="0" rowClasses="odd_row,even_row" rules="all" style="border:solid 1px">
                 <h:column>
                     <f:facet name="header">Edition</f:facet>
@@ -20,14 +20,16 @@
                     <h:outputText value="#{item.scale}" />
                 </h:column>
                 <h:column>
-                    <h:commandButton value="Select" action="aa" />
+                    <h:commandButton value="Select" action="#{editionController.deleteEdition()}" >
+                        <f:setPropertyActionListener target="#{editionController.selectedEdition}" value="#{item}" />
+                    </h:commandButton>>
                 </h:column>
             </h:dataTable>
             <div align="right">
 
             </div>
             <p:commandButton id="modalDialogButton" value="Add new Edition" onclick="PF('dlg2').show();" type="button"/>
-        </h:form>           
+        </h:form>
 
         <p:dialog id="modalDialog" header="Create New Edition" widgetVar="dlg2" modal="true" height="auto" width="auto">
             <h:form>
@@ -48,6 +50,44 @@
                 </table>
             </h:form>
         </p:dialog>
+
+        <p:dialog id="modalDialo" header="Create New Criterion" widgetVar="dlg11" modal="true" height="auto" width="auto">
+            <h:form>
+                <table>
+                    <tr>
+                        <td><h:outputLabel value="Criterion"/></td>
+                        <td><h:inputText value="#{criterionController.name}"/></td>
+                    </tr>
+
+
+                    <tr>
+                        <td></td>
+                        <td><h:commandButton value="SAVE" action="#{criterionController.createCriterion()}"></h:commandButton></td>
+                    </tr>
+                </table>
+            </h:form>
+        </p:dialog>
+
+        <h:form>
+            <h:dataTable value="#{criterionController.allCriterion}" var="crt" border="0" cellpadding="2"
+                         cellspacing="0" rowClasses="odd_row,even_row" rules="all" style="border:solid 1px">
+                <h:column>
+                    <f:facet name="header">Edition</f:facet>
+                    <h:outputText value="#{crt.edition.name}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Scale</f:facet>
+                    <h:outputText value="#{crt.question}" />
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Delete" action="cccCriterionccc" />
+                </h:column>
+            </h:dataTable>
+            <div align="right">
+
+            </div>
+            <p:commandButton id="modalDialogBut" value="Add new Criterion" onclick="PF('dlg11').show();" type="button"/>
+        </h:form>
 
     </ui:define>
 

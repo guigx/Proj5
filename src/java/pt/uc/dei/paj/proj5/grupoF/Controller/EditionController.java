@@ -21,7 +21,6 @@ import pt.uc.dei.paj.proj5.grupoF.Facades.EvaluationFacade;
  */
 @Named
 @RequestScoped
-
 public class EditionController {
 
     @Inject
@@ -32,32 +31,32 @@ public class EditionController {
     private int scale;
     private List<Criterion> criterionList;
     private Edition edition;
-    
+    private Edition selectedEdition;
 
     /**
      * Creates a new instance of EditionController
      */
     public EditionController() {
     }
-    
+
     @PostConstruct
-    public void initEdition(){
-        this.edition=new Edition();
+    public void initEdition() {
+        this.edition = new Edition();
     }
 
     //create now edition
-    public String createEdition(long id_edition) {
+    public String createEdition() {
         if (editionfacade.findByName(name) == null) {
             editionfacade.createEdition(name, scale);
-            return "AdminPrincipal"; 
+            return "AdminPrincipal";
         }
         return null;
     }
-    
+
     //clears list if no review
-    public void deleteEdition(int id_edition) {
-        if (evaluationfacade.findEvaluationByIdEdition(id_edition) == null) {
-            editionfacade.deleteEdition(id_edition);
+    public void deleteEdition() {
+        if (evaluationfacade.findEvaluationByIdEdition(selectedEdition.getId()) == null) {
+            editionfacade.deleteEdition(selectedEdition.getId());
         }
     }
 
@@ -105,4 +104,11 @@ public class EditionController {
         this.scale = scale;
     }
 
+    public Edition getSelectedEdition() {
+        return selectedEdition;
+    }
+
+    public void setSelectedEdition(Edition selectedEdition) {
+        this.selectedEdition = selectedEdition;
+    }
 }
