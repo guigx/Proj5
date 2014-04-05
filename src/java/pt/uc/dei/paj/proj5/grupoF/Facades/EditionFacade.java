@@ -56,7 +56,7 @@ public class EditionFacade extends AbstractFacade<Edition> {
         }
     }
     
-    public void deleteEdition(int id_edition){//tem de se verificar se temos algum criterio desta edicao preenchido
+    public void deleteEdition(long id_edition){//tem de se verificar se temos algum criterio desta edicao preenchido
         this.remove(find(id_edition));
     }        
             

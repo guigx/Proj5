@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pt.uc.dei.paj.proj5.grupoF.Facades;
 
 import java.util.List;
@@ -20,6 +19,7 @@ import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
  */
 @Stateless
 public class CriterionFacade extends AbstractFacade<Criterion> {
+
     @PersistenceContext(unitName = "Proj5PU")
     private EntityManager em;
 
@@ -31,14 +31,13 @@ public class CriterionFacade extends AbstractFacade<Criterion> {
     public CriterionFacade() {
         super(Criterion.class);
     }
-    
-     public boolean createCriterion(String question,Edition edition ) {
-        this.create(new Criterion(question,edition));
+
+    public boolean createCriterion(String question, Edition edition) {
+        this.create(new Criterion(question, edition));
         return true;
-        
+
     }
 
-    
     public List<Criterion> findAllCriterionByEdition(long id_edition) {
         TypedQuery<Criterion> q = em.createNamedQuery("Criterion.findAllCriterionByEdition", Criterion.class);
         q.setParameter("id_edition", id_edition);
@@ -50,9 +49,8 @@ public class CriterionFacade extends AbstractFacade<Criterion> {
             //nao existe objecto com este valor
         }
     }
-    
+
 //    public void deleteCriterion(int id_criterion) {//tem de se verificar se temos algum criterio desta edicao preenchido
 //        this.remove(find(id_criterion));
 //    }
-
 }
