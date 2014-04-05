@@ -46,7 +46,7 @@ public class EditionController {
     }
 
     //create now edition
-    public String createEdition(long id_edition) {
+    public String createEdition() {
         if (editionfacade.findByName(name) == null) {
             editionfacade.createEdition(name, scale);
             return "AdminPrincipal"; 

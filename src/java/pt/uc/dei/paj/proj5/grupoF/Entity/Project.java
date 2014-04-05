@@ -14,12 +14,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
  *
- * @author Guilherme Pereira
+ * @author GrupoF
  */
+
+@NamedQueries({
+    @NamedQuery(name = "Edition.findAll", query = "SELECT e FROM Edition e"),
+    @NamedQuery(name = "Edition.findByEditionId", query = "SELECT e FROM Edition e WHERE e.id = :id"),})
 @Entity
 public class Project implements Serializable {
 
