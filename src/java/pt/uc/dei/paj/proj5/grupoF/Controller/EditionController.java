@@ -13,6 +13,7 @@ import javax.inject.Named;
 import pt.uc.dei.paj.proj5.grupoF.EJB.LoggedUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Criterion;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
+import pt.uc.dei.paj.proj5.grupoF.Entity.Project;
 import pt.uc.dei.paj.proj5.grupoF.Facades.EditionFacade;
 import pt.uc.dei.paj.proj5.grupoF.Facades.EvaluationFacade;
 
@@ -35,6 +36,7 @@ public class EditionController {
     private List<Criterion> criterionList;
     private Edition edition;
     private Edition selectedEdition;
+    private List<Project> projectList;
 
     /**
      * Creates a new instance of EditionController
@@ -63,9 +65,13 @@ public class EditionController {
 
     //clears list if no review
     public void deleteEdition() {
-        if (evaluationfacade.findEvaluationByIdEdition(selectedEdition.getId()) == null) {
-            editionfacade.deleteEdition(selectedEdition.getId());
-        }
+//        if (evaluationfacade.findEvaluationByIdEdition(selectedEdition.getId()) == null) {
+        editionfacade.deleteEdition(selectedEdition.getId());
+//        }
+    }
+
+    public List<Project> getProjectList() {
+        return projectList;
     }
 
     public Edition getEdition() {

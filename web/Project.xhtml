@@ -8,30 +8,30 @@
 
     <ui:define name="content">
         <h:form>
-            <h:dataTable value="#{projetController.allProject}" var="item" border="0" cellpadding="2"
-                         cellspacing="0" rowClasses="odd_row,even_row" rules="all" style="border:solid 1px">
-                <h:column>
-                    <f:facet name="header">Name</f:facet>
+            <p:dataTable var="item" value="#{projetController.projectOfEdition}">
+                <p:column headerText="Name">
                     <h:outputText value="#{item.name}" />
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Initial Date</f:facet>
-                    <h:outputText value="#{item.scale}" />
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Final Date</f:facet>
-                    <h:outputText value="#{item.scale}" />
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Submit</f:facet>
-                    <h:outputText value="#{item.scale}" />
-                </h:column>
-                <h:column>
-                    <h:commandButton value="Select" action="aa" />
-                </h:column>
-            </h:dataTable>
-            <div align="right">
+                </p:column>
 
+                <p:column headerText="Initial Date">
+                    <h:outputText value="#{item.initialDate}" />
+                </p:column>
+
+                <p:column headerText="Final Date">
+                    <h:outputText value="#{item.finalDate}" />
+                </p:column>
+
+                <p:column headerText="">
+                    <h:outputText  />
+                </p:column>
+
+                <p:column>
+                    <h:commandButton value="Add Student"  ></h:commandButton>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        <h:form>
+            <div align="right">
             </div>
             <p:commandButton id="modalDialogButton" value="Add new Project" onclick="PF('dlg2').show();" type="button"/>
         </h:form>
@@ -41,37 +41,12 @@
                 <h3>Name</h3>
                 <h:inputText value="#{projetController.name}"/>
                 <h3>Initial Date</h3>
-                <p:calendar value="#{calendarBean.date3}" id="InitialDateButtonCal" showOn="button" />
+                <p:calendar value="#{projetController.initialDate}" id="InitialDateButtonCal" showOn="button" />
 
                 <h3>Final Date</h3>
-                <p:calendar value="#{calendarBean.date3}" id="FinalDateButtonCal" showOn="button" />
+                <p:calendar value="#{projetController.finalDate}" id="FinalDateButtonCal" showOn="button" />
 
-                <p:commandButton value="Submit" update="display" oncomplete="PF('dialog').show()"
-                                 action="#{projetController.createEdition()}"/>
-
-                <p:dialog header="Selected Dates" widgetVar="dialog"
-                          showEffect="fade" hideEffect="fade">
-
-                    <h:panelGrid id="display" columns="2" cellpadding="5">
-
-                        <h:outputText value="Inline Date:" />
-                        <h:outputText value="#{calendarBean.date1}" id="inlineDate">
-                            <f:convertDateTime pattern="d/M/yyyy"/>
-                        </h:outputText>
-
-                        <h:outputText value="Popup Date:" />
-                        <h:outputText value="#{calendarBean.date2}" id="popupDate">
-                            <f:convertDateTime pattern="d/M/yyyy"/>
-                        </h:outputText>
-
-                        <h:outputText value="Popup Button Date: " />
-                        <h:outputText value="#{calendarBean.date3}" id="popupButtonDate">
-                            <f:convertDateTime pattern="d/M/yyyy"/>
-                        </h:outputText>
-
-                    </h:panelGrid>
-
-                </p:dialog>
+                <h:commandButton value="Submit" action="#{projetController.createProject()}"/>
 
             </h:form>
         </p:dialog>

@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pt.uc.dei.paj.proj5.grupoF.Facades;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Project;
 
 /**
@@ -17,6 +18,7 @@ import pt.uc.dei.paj.proj5.grupoF.Entity.Project;
  */
 @Stateless
 public class ProjectFacade extends AbstractFacade<Project> {
+
     @PersistenceContext(unitName = "Proj5PU")
     private EntityManager em;
 
@@ -28,5 +30,10 @@ public class ProjectFacade extends AbstractFacade<Project> {
     public ProjectFacade() {
         super(Project.class);
     }
-    
+
+    public List<Project> projectsOfAnEdition(Long idEdition) {
+        Edition edition = em.find(Edition.class, idEdition);
+        return edition.getProjectList();
+    }
+
 }

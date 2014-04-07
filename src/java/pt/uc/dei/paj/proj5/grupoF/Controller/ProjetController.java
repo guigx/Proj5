@@ -5,9 +5,13 @@
  */
 package pt.uc.dei.paj.proj5.grupoF.Controller;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import pt.uc.dei.paj.proj5.grupoF.EJB.LoggedUser;
@@ -19,8 +23,8 @@ import pt.uc.dei.paj.proj5.grupoF.Facades.ProjectFacade;
  * @author Grupo F
  */
 @Named
-@RequestScoped
-public class ProjetController {
+@ViewScoped
+public class ProjetController implements Serializable {
 
     @Inject
     private ProjectFacade projectfacade;
@@ -28,6 +32,26 @@ public class ProjetController {
     private Project project;
     @Inject
     private LoggedUser lg;
+    private List<Project> projectOfEdition;
+
+    private Date initialDate;
+
+    public Date getInitialDate() {
+        return initialDate;
+    }
+
+    public void setInitialDate(Date initialDate) {
+        this.initialDate = initialDate;
+    }
+
+    public Date getFinalDate() {
+        return finalDate;
+    }
+
+    public void setFinalDate(Date finalDate) {
+        this.finalDate = finalDate;
+    }
+    private Date finalDate;
 
     public ProjetController() {
     }
@@ -37,24 +61,47 @@ public class ProjetController {
         this.project = new Project();
     }
 
-//    public String createPlaylist() {
-//        FacesContext ctx = FacesContext.getCurrentInstance();
-//        List<Project> projectCollection = lg.getLoggedAdmin().;
-//
-//        for (Project p : projectCollection) {
-//            if (p.getName().equals(project.getName())) {
-//                ctx.addMessage("newPlaylist:nome", new FacesMessage("Não pode inserir uma playlist com nome repetido."));
-//                return null;
-//            }
-//        }
-//
-//        playlist.setApUser(lg.getLoggedUser());
-//        this.ejbPlaylist.create(playlist);
-//        //refresh the user
-////        lg.getLoggedUser().getPlaylistCollection().add(playlist);
-////        this.ejbUser.edit(lg.getLoggedUser());
-//        return "/playlist/PlayListPrivat?faces-redirect=true";
-//    }
+    public String createProject() {
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        List<Project> projectCollection = lg.getCurrentEdition().getProjectList();
+//        project.setInitialDate(initialDate);
+//        project.setFinalDate(finalDate);
+//        project.setName(name);
+        for (Project p : projectCollection) {
+            if (p.getName().equals(project.getName())) {
+                ctx.addMessage("newProject:nome", new FacesMessage("Não pode inserir uma projecto com nome repetido."));
+                return null;
+            }
+        }
+        project.setEdition(lg.getCurrentEdition());
+        this.projectfacade.create(project);
+        return "Project.xhtml?faces-redirect=true";
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public LoggedUser getLg() {
+        return lg;
+    }
+
+    public void setLg(LoggedUser lg) {
+        this.lg = lg;
+    }
+
+    public List<Project> getProjectOfEdition() {
+        return projectfacade.projectsOfAnEdition(lg.getCurrentEdition().getId());
+    }
+
+    public void setProjectOfEdition(List<Project> projectOfEdition) {
+        this.projectOfEdition = projectOfEdition;
+    }
+
     public List<Project> getAllProject() {
         return projectfacade.findAll();
     }
