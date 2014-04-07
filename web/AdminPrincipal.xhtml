@@ -7,17 +7,15 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
-
         <h:form>
-            <h:dataTable value="#{editionController.allEdition}" var="item" border="0" cellpadding="2"
-                         cellspacing="0" rowClasses="odd_row,even_row" rules="all" style="border:solid 1px">
-                <h:column>
-                    <f:facet name="header">Edition</f:facet>
+            <p:dataTable var="item" value="#{editionController.allEdition}">
+                <p:column headerText="Edition">
                     <h:outputText value="#{item.name}" />
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Scale</f:facet>
+                </p:column>
+
+                <p:column headerText="Scale">
                     <h:outputText value="#{item.scale}" />
+<<<<<<< HEAD
                 </h:column>
                 <h:column>
                     <h:commandButton value="Select" action="#{editionController.deleteEdition()}" >
@@ -28,6 +26,16 @@
                     <!--<h:commandButton value="Select" action="#{editionController.EditionLogin(item)}" ></h:commandButton>-->
                 </h:column>
             </h:dataTable>
+=======
+                </p:column>
+
+                <p:column>
+                    <h:commandButton value="Select" action="#{editionController.EditionLogin(item)}" ></h:commandButton>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+        <h:form>
+>>>>>>> 70e657bf75aaf8f34bfb7169857f9f67eac5959c
             <div align="right">
 
             </div>

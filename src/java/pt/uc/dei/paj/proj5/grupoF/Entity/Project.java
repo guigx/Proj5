@@ -6,6 +6,7 @@
 package pt.uc.dei.paj.proj5.grupoF.Entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -17,12 +18,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author GrupoF
  */
-
 @NamedQueries({
     @NamedQuery(name = "Edition.findAll", query = "SELECT e FROM Edition e"),
     @NamedQuery(name = "Edition.findByEditionId", query = "SELECT e FROM Edition e WHERE e.id = :id"),})
@@ -43,16 +46,50 @@ public class Project implements Serializable {
     @ManyToMany
     private List<ApUser> apuserList;
 
-    
+    @NotNull
+    private String name;
+
+    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date initialDate;
+
+    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date finalDate;
+
     public Project() {
     }
 
-    public Project(List<Evaluation> evaluationList, Edition edition, List<ApUser> apuserList) {
-        this.evaluationList = evaluationList;
-        this.edition = edition;
-        this.apuserList = apuserList;
+    public Date getInitialDate() {
+        return initialDate;
     }
-    
+
+    public void setInitialDate(Date initialDate) {
+        this.initialDate = initialDate;
+    }
+
+    public Date getFinalDate() {
+        return finalDate;
+    }
+
+    public void setFinalDate(Date finalDate) {
+        this.finalDate = finalDate;
+    }
+
+    public Project(Edition edition, String name, Date initialDate, Date finalDate) {
+        this.edition = edition;
+        this.name = name;
+        this.initialDate = initialDate;
+        this.finalDate = finalDate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public List<Evaluation> getEvaluationList() {
         return evaluationList;
@@ -85,7 +122,7 @@ public class Project implements Serializable {
     public void setApuserList(List<ApUser> apuserList) {
         this.apuserList = apuserList;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
