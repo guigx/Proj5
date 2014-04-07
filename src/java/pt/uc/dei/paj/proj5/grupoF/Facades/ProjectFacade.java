@@ -36,4 +36,11 @@ public class ProjectFacade extends AbstractFacade<Project> {
         return edition.getProjectList();
     }
 
+    public void addProject(Project p, Edition edition) {
+        edition.getProjectList().add(p);
+        p.setEdition(edition);
+        this.create(p);
+        em.merge(edition);
+    }
+
 }

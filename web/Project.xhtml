@@ -14,11 +14,15 @@
                 </p:column>
 
                 <p:column headerText="Initial Date">
-                    <h:outputText value="#{item.initialDate}" />
+                    <h:outputText value="#{item.initialDate}">
+                        <f:convertDateTime type="date" pattern="dd-MM-yyyy" timeZone="Europe/Lisbon"/>
+                    </h:outputText>
                 </p:column>
 
                 <p:column headerText="Final Date">
-                    <h:outputText value="#{item.finalDate}" />
+                    <h:outputText value="#{item.finalDate}">
+                        <f:convertDateTime type="date" pattern="dd-MM-yyyy" timeZone="Europe/Lisbon"/>
+                    </h:outputText>
                 </p:column>
 
                 <p:column headerText="">
@@ -39,13 +43,15 @@
         <p:dialog id="modalDialog" header="Create New Project" widgetVar="dlg2" modal="true" height="auto" width="auto">
             <h:form id="form">
                 <h3>Name</h3>
-                <h:inputText value="#{projetController.name}"/>
+                <h:inputText value="#{projetController.project.name}"/>
                 <h3>Initial Date</h3>
-                <p:calendar value="#{projetController.initialDate}" id="InitialDateButtonCal" showOn="button" />
+                <p:calendar value="#{projetController.project.initialDate}" id="InitialDateButtonCal" showOn="button">
 
+                </p:calendar>
                 <h3>Final Date</h3>
-                <p:calendar value="#{projetController.finalDate}" id="FinalDateButtonCal" showOn="button" />
+                <p:calendar value="#{projetController.project.finalDate}" id="FinalDateButtonCal" showOn="button">
 
+                </p:calendar>
                 <h:commandButton value="Submit" action="#{projetController.createProject()}"/>
 
             </h:form>

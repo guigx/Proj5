@@ -75,7 +75,9 @@ public class EditionController {
     }
 
     public Edition getEdition() {
+        System.out.println("EDITION!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + edition.getName());
         return edition;
+
     }
 
     public void setEdition(Edition edition) {

@@ -16,6 +16,7 @@ import pt.uc.dei.paj.proj5.grupoF.EJB.EncriptPassword;
 import pt.uc.dei.paj.proj5.grupoF.EJB.LoggedUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApAdmin;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApUser;
+import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
 import pt.uc.dei.paj.proj5.grupoF.Exception.InvalidAuthException;
 import pt.uc.dei.paj.proj5.grupoF.Exception.UserNotFoundException;
 import pt.uc.dei.paj.proj5.grupoF.Facades.ApAdminFacade;
@@ -40,8 +41,17 @@ public class UserController {
     private String confirmPassword;
     private String email;
     private String password;
+    private Edition edition;
 
     public UserController() {
+    }
+
+    public Edition getEdition() {
+        return edition;
+    }
+
+    public void setEdition(Edition edition) {
+        this.edition = edition;
     }
 
     public ApAdmin getAdmin() {
@@ -169,7 +179,7 @@ public class UserController {
                 try {
                     ApUser loggedUser = ejbUser.getApUserByEmail(apuser.getEmail());
                     lg.setLoggedUser(loggedUser);
-                    return "/Principal?faces-redirect=true";
+                    return "/AdminPrincipal?faces-redirect=true";
                 } catch (UserNotFoundException ex) {
                     Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, "Erro na autenticação de utilizador.", ex);
                     return "/Login?faces-redirect=true";
