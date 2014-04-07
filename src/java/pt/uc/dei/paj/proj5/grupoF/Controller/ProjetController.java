@@ -39,7 +39,7 @@ public class ProjetController {
 
 //    public String createPlaylist() {
 //        FacesContext ctx = FacesContext.getCurrentInstance();
-//        List<Project> projectCollection = lg.getLoggedUser().getAllProject();
+//        List<Project> projectCollection = lg.getLoggedAdmin().;
 //
 //        for (Project p : projectCollection) {
 //            if (p.getName().equals(project.getName())) {

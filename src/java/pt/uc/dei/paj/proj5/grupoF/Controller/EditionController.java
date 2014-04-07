@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import pt.uc.dei.paj.proj5.grupoF.EJB.LoggedUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Criterion;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
 import pt.uc.dei.paj.proj5.grupoF.Facades.EditionFacade;
@@ -27,6 +28,8 @@ public class EditionController {
     private EditionFacade editionfacade;
     @Inject
     private EvaluationFacade evaluationfacade;
+    @Inject
+    private LoggedUser lg;
     private String name;
     private int scale;
     private List<Criterion> criterionList;
@@ -42,6 +45,11 @@ public class EditionController {
     @PostConstruct
     public void initEdition() {
         this.edition = new Edition();
+    }
+
+    public String EditionLogin(Edition edition) {
+        lg.setCurrentEdition(edition);
+        return "Project.xhtml?faces-redirect=true";
     }
 
     //create now edition

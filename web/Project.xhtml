@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition template="./TemplateAdmin.xhtml"  xmlns="http://www.w3.org/1999/xhtml"   
+<ui:composition template="./TemplateAdmin.xhtml"  xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
-        <h:form> 
-            <h:dataTable value="#{projetController.allProject}" var="item" border="0" cellpadding="2" 
+        <h:form>
+            <h:dataTable value="#{projetController.allProject}" var="item" border="0" cellpadding="2"
                          cellspacing="0" rowClasses="odd_row,even_row" rules="all" style="border:solid 1px">
                 <h:column>
                     <f:facet name="header">Name</f:facet>
@@ -33,47 +33,47 @@
             <div align="right">
 
             </div>
-            <p:commandButton id="modalDialogButton" value="Add new Edition" onclick="PF('dlg2').show();" type="button"/>
-        </h:form>           
+            <p:commandButton id="modalDialogButton" value="Add new Project" onclick="PF('dlg2').show();" type="button"/>
+        </h:form>
 
         <p:dialog id="modalDialog" header="Create New Project" widgetVar="dlg2" modal="true" height="auto" width="auto">
-            <h:form id="form">  
-                <h3>Name</h3> 
+            <h:form id="form">
+                <h3>Name</h3>
                 <h:inputText value="#{projetController.name}"/>
-                <h3>Initial Date</h3>  
-                <p:calendar value="#{calendarBean.date3}" id="InitialDateButtonCal" showOn="button" />  
+                <h3>Initial Date</h3>
+                <p:calendar value="#{calendarBean.date3}" id="InitialDateButtonCal" showOn="button" />
 
-                <h3>Final Date</h3>  
-                <p:calendar value="#{calendarBean.date3}" id="FinalDateButtonCal" showOn="button" />  
+                <h3>Final Date</h3>
+                <p:calendar value="#{calendarBean.date3}" id="FinalDateButtonCal" showOn="button" />
 
                 <p:commandButton value="Submit" update="display" oncomplete="PF('dialog').show()"
-                                 action="#{projetController.createEdition()}"/>  
+                                 action="#{projetController.createEdition()}"/>
 
-                <p:dialog header="Selected Dates" widgetVar="dialog"   
-                          showEffect="fade" hideEffect="fade">  
+                <p:dialog header="Selected Dates" widgetVar="dialog"
+                          showEffect="fade" hideEffect="fade">
 
-                    <h:panelGrid id="display" columns="2" cellpadding="5">  
+                    <h:panelGrid id="display" columns="2" cellpadding="5">
 
-                        <h:outputText value="Inline Date:" />  
-                        <h:outputText value="#{calendarBean.date1}" id="inlineDate">  
-                            <f:convertDateTime pattern="d/M/yyyy"/>  
-                        </h:outputText>  
+                        <h:outputText value="Inline Date:" />
+                        <h:outputText value="#{calendarBean.date1}" id="inlineDate">
+                            <f:convertDateTime pattern="d/M/yyyy"/>
+                        </h:outputText>
 
-                        <h:outputText value="Popup Date:" />  
-                        <h:outputText value="#{calendarBean.date2}" id="popupDate">  
-                            <f:convertDateTime pattern="d/M/yyyy"/>  
-                        </h:outputText>  
+                        <h:outputText value="Popup Date:" />
+                        <h:outputText value="#{calendarBean.date2}" id="popupDate">
+                            <f:convertDateTime pattern="d/M/yyyy"/>
+                        </h:outputText>
 
-                        <h:outputText value="Popup Button Date: " />  
-                        <h:outputText value="#{calendarBean.date3}" id="popupButtonDate">  
-                            <f:convertDateTime pattern="d/M/yyyy"/>  
-                        </h:outputText>  
+                        <h:outputText value="Popup Button Date: " />
+                        <h:outputText value="#{calendarBean.date3}" id="popupButtonDate">
+                            <f:convertDateTime pattern="d/M/yyyy"/>
+                        </h:outputText>
 
-                    </h:panelGrid>  
+                    </h:panelGrid>
 
-                </p:dialog>  
+                </p:dialog>
 
-            </h:form>  
+            </h:form>
         </p:dialog>
 
     </ui:define>

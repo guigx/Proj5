@@ -9,7 +9,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
 
 /**
@@ -46,20 +45,17 @@ public class EditionFacade extends AbstractFacade<Edition> {
         Query q = em.createNamedQuery("Edition.findByName", Edition.class);
         q.setParameter("name", name);
         try {
-            System.out.println("------"+q.getSingleResult());
             return (Edition) q.getSingleResult();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
-            return null;   //enviar para pagina de erro com informacao de que 
-                           //nao existe objecto com este valor
+            return null;   //enviar para pagina de erro com informacao de que
+            //nao existe objecto com este valor
         }
     }
-    
-    public void deleteEdition(long id_edition){//tem de se verificar se temos algum criterio desta edicao preenchido
+
+    public void deleteEdition(long id_edition) {//tem de se verificar se temos algum criterio desta edicao preenchido
         this.remove(find(id_edition));
-    }        
-            
-    
+    }
 
 }
