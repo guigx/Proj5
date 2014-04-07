@@ -31,23 +31,23 @@ and open the template in the editor.
                 </div>
                 <h:panelGrid columns="3" rowClasses="gridRows">
                     <h:outputLabel value="Nome" class="labels"/>
-                    <h:inputText id="nome" title="Nome" class="textFields" value="#{userController.apuser.name}" required="true" requiredMessage="Introduza um nome."/>
+                    <h:inputText id="nome" title="Nome" class="textFields" value="#{registerController.apuser.name}" required="true" requiredMessage="Introduza um nome."/>
                     <h:message for="nome" class="errorMessages"/>
 
                     <h:outputLabel value="Email" class="labels"/>
-                    <h:inputText id="email" title="Email" class="textFields" value="#{userController.apuser.email}" required="true" requiredMessage="Introduza um email."/>
+                    <h:inputText id="email" title="Email" class="textFields" value="#{registerController.apuser.email}" required="true" requiredMessage="Introduza um email."/>
                     <h:message for="email" class="errorMessages"/>
 
                     <h:outputLabel value="Password" class="labels"/>
-                    <h:inputSecret id="password" title="Password" class="textFields" value="#{userController.apuser.password}" required="true" requiredMessage="Introduza uma password."/>
+                    <h:inputSecret id="password" title="Password" class="textFields" value="#{registerController.apuser.password}" required="true" requiredMessage="Introduza uma password."/>
                     <h:message for="password" class="errorMessages"/>
 
                     <h:outputLabel value="Confirme a Password" class="labels"/>
-                    <h:inputSecret id="confirmpassword" title="Confirme a Password" class="textFields" value="#{userController.confirmPassword}" required="true" requiredMessage="Confirme a password."/>
+                    <h:inputSecret id="confirmpassword" title="Confirme a Password" class="textFields" value="#{registerController.confirmPassword}" required="true" requiredMessage="Confirme a password."/>
                     <h:message for="confirmpassword" class="errorMessages"/>
 
                     <h:outputLabel value="Edition" class="labels"/>
-                    <h:inputText id="editionSelect" value="#{editionController.name}"
+                    <h:inputText id="editionSelect" value="#{registerController.name}"
                                  class="textFields" required="true" requiredMessage="Confirme a edicao."
                                  onclick="PF('dlg2').show();"/>
                     <h:message for="confirmpassword" class="errorMessages"/>
@@ -57,8 +57,8 @@ and open the template in the editor.
                     <p:dialog id="modalDialog" header="Select Edition" widgetVar="dlg2" modal="true" height="auto" width="auto">
 
                         <p:dataTable rowKey="#{item.id}" var="item"
-                                     value="#{editionController.allEdition}" selectionMode="single"
-                                     selection="#{editionController.edition}">
+                                     value="#{registerController.allEdition}" selectionMode="single"
+                                     selection="#{registerController.edition}">
                             <p:column headerText="Edition">
                                 <h:outputText value="#{item.name}" />
                             </p:column>
@@ -70,8 +70,8 @@ and open the template in the editor.
                     </p:dialog>
                 </h:form>
                 <br/>
-                <h:commandButton value="Submeter" class="btn" action="#{UserController.createNewUser}"/>
-                <h:commandButton value="Cancelar" class="btn" action="/Login" immediate="true"/>
+                <h:commandButton value="Submeter" class="btn" action="#{registerController.createNewUser}"/>
+                <h:commandButton value="Cancelar" class="btn" action="#{registerController.goToLogin()}" immediate="true"/>
             </div>
 
 

@@ -10,28 +10,28 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
     </h:head>
- <h:body>  
-    <div align="center">           
-        <h:form id="login">
-            <h:panelGrid columns="1" rowClasses="gridRows" style="text-align: center">
-                <h:graphicImage class="img"  value="#{resource['images:logo_uc.png']}"/>
-            </h:panelGrid> 
-            <h:panelGrid columns="2" rowClasses="gridRows">
-                <h:outputLabel value="Email" for="email" class="labels"/>
-                <h:inputText id="email" class="textFields" value="#{userController.email}" />
-                <h:outputLabel value="Password" for="password" class="labels"/>
-                <h:inputSecret id="password" class="textFields" value="#{userController.password}"/>
-            </h:panelGrid> 
-            <h:commandButton id="login" value="Login" class="btn" action="#{userController.userLoginUser()}"></h:commandButton>
-            <br/>
-            <h:messages class="errorMessages"/>
+    <h:body>
+        <div align="center">
+            <h:form id="login">
+                <h:panelGrid columns="1" rowClasses="gridRows" style="text-align: center">
+                    <h:graphicImage class="img"  value="#{resource['images:logo_uc.png']}"/>
+                </h:panelGrid>
+                <h:panelGrid columns="2" rowClasses="gridRows">
+                    <h:outputLabel value="Email" for="email" class="labels"/>
+                    <h:inputText id="email" class="textFields" value="#{userController.email}" />
+                    <h:outputLabel value="Password" for="password" class="labels"/>
+                    <h:inputSecret id="password" class="textFields" value="#{userController.password}"/>
+                </h:panelGrid>
+                <h:commandButton id="login" value="Login" class="btn" action="#{userController.userLoginUser()}"></h:commandButton>
+                <br/>
+                <h:messages class="errorMessages"/>
+                <br/><br/>
+            </h:form>
+            <h:form>
+                <h:commandLink id="register" value="Criar conta. Registe-se agora." class="linkLogin" action="#{registerController.goToRegister()}"/>
+            </h:form>
             <br/><br/>
-        </h:form>   
-        <h:form>
-            <h:commandLink id="register" value="Criar conta. Registe-se agora." class="linkLogin" action="Register"/>
-        </h:form>   
-        <br/><br/>
-    </div>
- </h:body>
+        </div>
+    </h:body>
 </html>
 
