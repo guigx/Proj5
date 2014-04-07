@@ -24,6 +24,7 @@ public class CriterionController {
     @Inject
     private CriterionFacade criterionfacade;
     private String name;
+    @Inject
     private LoggedUser logged;
     
 
@@ -36,7 +37,7 @@ public class CriterionController {
     public String createCriterion() {
         if (criterionfacade.createCriterion(name, logged.getCurrentEdition())) {
             System.out.println("logged "+ logged.getCurrentEdition());
-            return "index";   //pagina com a definicao de criterios. 
+            return "Criterion.xhtml";   //pagina com a definicao de criterios. 
                                         //Podemos atribuir mensagem de erro
         }
         return null; //podemos devolver pagina de erro a informar que o criterio nao foi criado
@@ -71,4 +72,5 @@ public class CriterionController {
      public List<Criterion> getAllCriterion() {
         return criterionfacade.findAll();
     }
+    
 }

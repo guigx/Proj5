@@ -123,6 +123,7 @@ public class UserController {
         FacesContext ctx = FacesContext.getCurrentInstance();
         //Encrypt password
         password = EncriptPassword.md5(password);
+        System.out.println("pass - " + password);
         try {
             ApAdmin loggedAdmin = ejbAdmin.validAuthenticationApadmin(email, password);
             lg.setLoggedAdmin(loggedAdmin);

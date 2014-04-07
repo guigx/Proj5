@@ -34,19 +34,11 @@ public class EvaluationFacade extends AbstractFacade<Evaluation> {
     //create new evaluation from a project
     public void createEvaluation() {
 
-        
-        
     }
 
-    public List <Evaluation> findEvaluationByIdEdition(long id_edition) {
+    public int findEvaluationByIdEdition(long id_edition) {
         TypedQuery<Evaluation> q = em.createNamedQuery("Evaluation.findByIdEdition", Evaluation.class);
         q.setParameter("id_edition", id_edition);
-        try {
-            return q.getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;   //enviar para pagina de erro com informacao de que 
-            //nao existe objecto com este valor
-        }
+        return q.getResultList().size();
     }
 }

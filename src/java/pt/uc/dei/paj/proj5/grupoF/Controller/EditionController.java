@@ -11,6 +11,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import pt.uc.dei.paj.proj5.grupoF.EJB.LoggedUser;
+import pt.uc.dei.paj.proj5.grupoF.EJB.TransationBean;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Criterion;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Project;
@@ -31,6 +32,8 @@ public class EditionController {
     private EvaluationFacade evaluationfacade;
     @Inject
     private LoggedUser lg;
+    @Inject
+    private TransationBean transation;
     private String name;
     private int scale;
     private List<Criterion> criterionList;
@@ -65,10 +68,7 @@ public class EditionController {
 
     //clears list if no review
     public void deleteEdition() {
-//        if (evaluationfacade.findEvaluationByIdEdition(selectedEdition.getId()) == null) {
-
-        editionfacade.deleteEdition(selectedEdition.getId());
-//        }
+        transation.deleteEditionTransation(selectedEdition.getId());
     }
 
     public List<Project> getProjectList() {

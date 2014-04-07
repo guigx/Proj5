@@ -15,18 +15,7 @@
 
                 <p:column headerText="Scale">
                     <h:outputText value="#{item.scale}" />
-<<<<<<< HEAD
-                </h:column>
-                <h:column>
-                    <h:commandButton value="Select" action="#{editionController.deleteEdition()}" >
--                        <f:setPropertyActionListener target="#{editionController.selectedEdition}" value="#{item}" />
--                    </h:commandButton>>
-                    
-                    
-                    <!--<h:commandButton value="Select" action="#{editionController.EditionLogin(item)}" ></h:commandButton>-->
-                </h:column>
-            </h:dataTable>
-=======
+
                 </p:column>
 
                 <p:column>
@@ -35,14 +24,13 @@
             </p:dataTable>
         </h:form>
         <h:form>
->>>>>>> 70e657bf75aaf8f34bfb7169857f9f67eac5959c
             <div align="right">
 
             </div>
             <p:commandButton id="modalDialogButton" value="Add new Edition" onclick="PF('dlg2').show();" type="button"/>
         </h:form>
 
-        <p:dialog id="modalDialog" header="Create New Edition" widgetVar="dlg2" modal="true" height="auto" width="auto">
+        <p:dialog id="modalDialogButton" header="Create New Edition" widgetVar="dlg2" modal="true" height="auto" width="auto">
             <h:form>
                 <table>
                     <tr>
@@ -62,43 +50,7 @@
             </h:form>
         </p:dialog>
 
-        <p:dialog id="modalDialo" header="Create New Criterion" widgetVar="dlg11" modal="true" height="auto" width="auto">
-            <h:form>
-                <table>
-                    <tr>
-                        <td><h:outputLabel value="Criterion"/></td>
-                        <td><h:inputText value="#{criterionController.name}"/></td>
-                    </tr>
-
-
-                    <tr>
-                        <td></td>
-                        <td><h:commandButton value="SAVE" action="#{criterionController.createCriterion()}"></h:commandButton></td>
-                    </tr>
-                </table>
-            </h:form>
-        </p:dialog>
-
-        <h:form>
-            <h:dataTable value="#{criterionController.allCriterion}" var="crt" border="0" cellpadding="2"
-                         cellspacing="0" rowClasses="odd_row,even_row" rules="all" style="border:solid 1px">
-                <h:column>
-                    <f:facet name="header">Edition</f:facet>
-                    <h:outputText value="#{crt.edition.name}" />
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Scale</f:facet>
-                    <h:outputText value="#{crt.question}" />
-                </h:column>
-                <h:column>
-                    <h:commandButton value="Delete" action="cccCriterionccc" />
-                </h:column>
-            </h:dataTable>
-            <div align="right">
-
-            </div>
-            <p:commandButton id="modalDialogBut" value="Add new Criterion" onclick="PF('dlg11').show();" type="button"/>
-        </h:form>
+       
 
     </ui:define>
 
