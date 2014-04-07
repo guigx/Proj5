@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./TemplateAdmin.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+
+
+    <ui:define name="content">
+
+        <h:form>
+            <h:dataTable value="#{criterionController.allCriterion}" var="crt" border="0" cellpadding="2"
+                         cellspacing="0" rowClasses="odd_row,even_row" rules="all" style="border:solid 1px">
+                <h:column>
+                    <f:facet name="header">Edition</f:facet>
+                    <h:outputText value="#{crt.edition.name}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Scale</f:facet>
+                    <h:outputText value="#{crt.question}" />
+                </h:column>
+                <h:column>
+                    <h:commandButton value="Delete" action="cccCriterionccc" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+        <div align="right">
+
+            <h:form>
+                <p:commandButton id="modalDialogBut" value="Add new Criterion" onclick="PF('dlg11').show();" type="button"/>
+            </h:form>
+        </div>
+        <p:dialog id="modalDialog" header="Create New Criterion" widgetVar="dlg11" modal="true" height="auto" width="auto">
+            <h:form>
+                <table>
+                    <tr>
+                        <td><h:outputLabel value="Criterion"/></td>
+                        <td><h:inputText value="#{criterionController.name}"/></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><h:commandButton value="SAVE" action="#{criterionController.createCriterion()}"></h:commandButton></td>
+                    </tr>
+                </table>
+            </h:form>
+        </p:dialog>
+    </ui:define>
+
+</ui:composition>
