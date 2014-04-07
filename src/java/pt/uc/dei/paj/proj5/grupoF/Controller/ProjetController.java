@@ -5,12 +5,11 @@
  */
 package pt.uc.dei.paj.proj5.grupoF.Controller;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -23,8 +22,8 @@ import pt.uc.dei.paj.proj5.grupoF.Facades.ProjectFacade;
  * @author Grupo F
  */
 @Named
-@ViewScoped
-public class ProjetController implements Serializable {
+@RequestScoped
+public class ProjetController {
 
     @Inject
     private ProjectFacade projectfacade;
@@ -35,6 +34,14 @@ public class ProjetController implements Serializable {
     private List<Project> projectOfEdition;
 
     private Date initialDate;
+
+    public ProjetController() {
+    }
+
+    @PostConstruct
+    public void initProjectController() {
+        this.project = new Project();
+    }
 
     public Date getInitialDate() {
         return initialDate;
@@ -53,28 +60,16 @@ public class ProjetController implements Serializable {
     }
     private Date finalDate;
 
-    public ProjetController() {
-    }
-
-    @PostConstruct
-    public void initProject() {
-        this.project = new Project();
-    }
-
     public String createProject() {
         FacesContext ctx = FacesContext.getCurrentInstance();
         List<Project> projectCollection = lg.getCurrentEdition().getProjectList();
-//        project.setInitialDate(initialDate);
-//        project.setFinalDate(finalDate);
-//        project.setName(name);
         for (Project p : projectCollection) {
             if (p.getName().equals(project.getName())) {
                 ctx.addMessage("newProject:nome", new FacesMessage("Não pode inserir uma projecto com nome repetido."));
                 return null;
             }
         }
-        project.setEdition(lg.getCurrentEdition());
-        this.projectfacade.create(project);
+        projectfacade.addProject(project, lg.getCurrentEdition());
         return "Project.xhtml?faces-redirect=true";
     }
 

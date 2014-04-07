@@ -19,7 +19,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -37,7 +36,7 @@ public class Project implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "project", cascade = CascadeType.PERSIST)
     private List<Evaluation> evaluationList;
 
     @ManyToOne
@@ -50,11 +49,12 @@ public class Project implements Serializable {
     private String name;
 
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
+
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date initialDate;
 
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date finalDate;
 
     public Project() {
