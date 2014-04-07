@@ -63,9 +63,9 @@ public class EditionController {
 
     //clears list if no review
     public void deleteEdition() {
-        if (evaluationfacade.findEvaluationByIdEdition(selectedEdition.getId()) == null) {
+//        if (evaluationfacade.findEvaluationByIdEdition(selectedEdition.getId()) == null) {
             editionfacade.deleteEdition(selectedEdition.getId());
-        }
+//        }
     }
 
     public Edition getEdition() {
