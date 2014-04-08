@@ -14,6 +14,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import pt.uc.dei.paj.proj5.grupoF.EJB.LoggedUser;
+import pt.uc.dei.paj.proj5.grupoF.Entity.ApUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Project;
 import pt.uc.dei.paj.proj5.grupoF.Facades.ProjectFacade;
 
@@ -32,7 +33,7 @@ public class ProjetController {
     @Inject
     private LoggedUser lg;
     private List<Project> projectOfEdition;
-
+    private List<ApUser> StudentList;
     private Date initialDate;
     private Date currentDay = new Date();
 
@@ -42,6 +43,14 @@ public class ProjetController {
     @PostConstruct
     public void initProjectController() {
         this.project = new Project();
+    }
+
+    public List<ApUser> getStudentList() {
+        return StudentList;
+    }
+
+    public void setStudentList(List<ApUser> StudentList) {
+        this.StudentList = StudentList;
     }
 
     public Date getInitialDate() {

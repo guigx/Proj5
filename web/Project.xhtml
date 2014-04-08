@@ -41,8 +41,8 @@
         <h:form>
             <p:dialog id="dialog"  widgetVar="liststudent" height="auto" width="auto"
                       showEffect="fade" hideEffect="explode">
-                <p:dataTable id="StudentList" var="item" value="#{registerController.edition.userList}" paginator="true" rows="10"
-                             selection="#{registerController.edition}">
+                <p:dataTable  id="StudentList" var="item" rowKey="#{item.apUserId}" value="#{loggedUser.currentEdition.userList}" paginator="true" rows="10"
+                              selection="#{projetController.studentList}">
 
                     <f:facet name="header">
                         Student LIst
@@ -54,14 +54,9 @@
                         #{item.name}
                     </p:column>
 
-                    <p:column headerText="Email" style="width:25%">
-                        #{item.email}
-                    </p:column>
-
-                    <!--                    <f:facet name="footer">
-                                            <p:commandButton id="multiViewButton" value="View" icon="ui-icon-search"
-                                                             update=":form:displayMulti" oncomplete="PF('multiCarDialog').show()"/>
-                                        </f:facet>-->
+                    <f:facet name="footer">
+                        <p:commandButton id="multiViewButton" value="Select" />
+                    </f:facet>
                 </p:dataTable>
             </p:dialog>
         </h:form>
