@@ -82,7 +82,7 @@ public class ApUser implements Serializable {
     @ManyToOne
     private Edition edition;
 
-    @ManyToMany
+    @ManyToMany//(mappedBy = "apUser")
     private List<Project> projectList;
 
     public ApUser() {

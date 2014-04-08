@@ -34,6 +34,7 @@ public class ProjetController {
     private List<Project> projectOfEdition;
 
     private Date initialDate;
+    private Date currentDay = new Date();
 
     public ProjetController() {
     }
@@ -99,6 +100,10 @@ public class ProjetController {
 
     public List<Project> getAllProject() {
         return projectfacade.findAll();
+    }
+
+    public List<Project> getAllProjectOpen() {
+        return projectfacade.findAllOpenByEdition(currentDay/*, lg.getLoggedUser().getApUserId()*/);
     }
 
     public ProjectFacade getProjectfacade() {

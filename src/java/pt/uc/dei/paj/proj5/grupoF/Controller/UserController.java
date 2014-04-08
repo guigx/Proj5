@@ -145,13 +145,9 @@ public class UserController {
 
         //Encrypt password
         String pass = EncriptPassword.md5(password);
-        System.out.println("pass antes ----------------------------- " + pass);
         try {
-            System.out.println("aquiiiiii");
-            System.out.println("emailllllll" + email);
             ApAdmin loggedAdmin = ejbAdmin.validAuthenticationApadmin(email, pass);
             lg.setLoggedAdmin(loggedAdmin);
-            System.out.println("dentroooooooooooooooooooooo");
             return "/AdminPrincipal?faces-redirect=true";
         } catch (InvalidAuthException | UserNotFoundException ex) {
             ctx.addMessage("admin", new FacesMessage("Email ou password inválidos."));
@@ -172,8 +168,8 @@ public class UserController {
         try {
             ApUser loggedUser = ejbUser.validAuthenticationApuser(email, password);
             lg.setLoggedUser(loggedUser);
-
-            return "Admin.hxtml?faces-redirect=true";
+            lg.setCurrentEdition(loggedUser.getEdition());
+            return "/StudentPrincipal.xhtml?faces-redirect=true";
 
         } catch (InvalidAuthException | UserNotFoundException ex) {
             ctx.addMessage("login", new FacesMessage("Email ou password inválidos."));

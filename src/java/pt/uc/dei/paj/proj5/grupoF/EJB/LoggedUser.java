@@ -7,6 +7,7 @@ package pt.uc.dei.paj.proj5.grupoF.EJB;
 
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApAdmin;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
@@ -15,7 +16,7 @@ import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
  *
  * @author Grupo F
  */
-
+@Named
 @SessionScoped
 public class LoggedUser implements Serializable {
 
