@@ -37,7 +37,6 @@ public class ApUserFacade extends AbstractFacade<ApUser> {
 
     public ApUser getApUserByEmail(String email) throws UserNotFoundException {
         try {
-
             ApUser u = (ApUser) em.createNamedQuery("ApUser.findByEmail").setParameter("email", email).getSingleResult();
             System.out.println("u!!!!!!!!!!!!!!!!!!!!" + u);
             return u;
@@ -75,17 +74,34 @@ public class ApUserFacade extends AbstractFacade<ApUser> {
             throw new InvalidAuthException("Password inválida.");
         }
     }
+    
+       public Edition getApUserByEdition(String name) throws UserNotFoundException {
+        try {
+            Edition u = (Edition) em.createNamedQuery("ApUser.findByEdition").setParameter("edition", name).getSingleResult();
+
+            return u;
+        } catch (NoResultException ex) {
+            Logger.getLogger(ApUserFacade.class.getName()).log(Level.SEVERE, "Erro na procura de utilizador por email.", ex);
+            throw new UserNotFoundException();
+        }
+    }
 
     
-//    public boolean
 
 
-    public void createApUser(ApUser apuser, String confirmPassword, Edition edition) {
-        create(apuser);
-        apuser.setEdition(edition);
-        edition.getUserList().add(apuser);
-        edit(apuser);
-        em.merge(edition);
+
+    public void createApUser(String name, String email, String password, String editionName) throws UserNotFoundException{
+        Edition edition = getApUserByEdition(editionName);
+//        String name, String email, String password, Edition edition
+        this.create(new ApUser(name, email, password, edition));
+        
+        
+        
+//        create(apuser);
+//        apuser.setEdition(edition);
+//        edition.getUserList().add(apuser);
+//        edit(apuser);
+//        em.merge(edition);
 
     }
 }

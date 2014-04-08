@@ -17,6 +17,7 @@ and open the template in the editor.
         <h:outputStylesheet name="./css/cssLayout.css"/>
         <title>Sistema de Autoavaliação PAJ</title>
     </h:head>
+    
     <h:body>
         <!--<ui:define name="content">-->
 
@@ -29,15 +30,15 @@ and open the template in the editor.
                 </div>
                 <h:panelGrid columns="3" rowClasses="gridRows">
                     <h:outputLabel value="Nome" class="labels"/>
-                    <h:inputText id="nome" title="Nome" class="textFields" value="#{registerController.apuser.name}" required="true" requiredMessage="Introduza um nome."/>
+                    <h:inputText id="nome" title="Nome" class="textFields" value="#{registerController.name}" required="true" requiredMessage="Introduza um nome."/>
                     <h:message for="nome" class="errorMessages"/>
 
                     <h:outputLabel value="Email" class="labels"/>
-                    <h:inputText id="email" title="Email" class="textFields" value="#{registerController.apuser.email}" required="true" requiredMessage="Introduza um email."/>
+                    <h:inputText id="email" title="Email" class="textFields" value="#{registerController.email}" required="true" requiredMessage="Introduza um email."/>
                     <h:message for="email" class="errorMessages"/>
 
                     <h:outputLabel value="Password" class="labels"/>
-                    <h:inputSecret id="password" title="Password" class="textFields" value="#{registerController.apuser.password}" required="true" requiredMessage="Introduza uma password."/>
+                    <h:inputSecret id="password" title="Password" class="textFields" value="#{registerController.password}" required="true" requiredMessage="Introduza uma password."/>
                     <h:message for="password" class="errorMessages"/>
 
                     <h:outputLabel value="Confirme a Password" class="labels"/>
@@ -45,7 +46,7 @@ and open the template in the editor.
                     <h:message for="confirmpassword" class="errorMessages"/>
 
                     <h:outputLabel value="Edition" class="labels"/>
-                    <h:inputText id="editionSelect" value="#{registerController.name}"
+                    <h:inputText id="editionSelect" value="#{registerController.editionname}"
                                  class="textFields" required="true" requiredMessage="Confirme a edicao."
                                  onclick="PF('dlg2').show();"/>
                     <h:message for="confirmpassword" class="errorMessages"/>
@@ -69,7 +70,7 @@ and open the template in the editor.
                 </h:form>
                 <br/>
                 <h:commandButton value="Submeter" class="btn" action="#{registerController.createNewUser}"/>
-                <h:commandButton value="Cancelar" class="btn" action="#{registerController.goToLogin()}" immediate="true"/>
+                <h:commandButton value="Cancelar" class="btn" action="#{registerController.goToLogin()}" />
             </div>
 
 

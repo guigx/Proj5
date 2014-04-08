@@ -40,14 +40,43 @@ public class RegisterController implements Serializable {
     private ApUserFacade ejbUser;
     @Inject
     private EditionFacade editionFacade;
-    private String confirmPassword;
     private String name;
+    private String email;
+    private String password;
+    private String confirmPassword;
+    private String editionname;
+
     private Edition edition;
 
     /**
      * Creates a new instance of EditionController
      */
     public RegisterController() {
+    }
+
+    public String createNewUser() {
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        if (!ejbUser.emailExists(apuser.getEmail())) {
+            if (apuser.getPassword().equals(confirmPassword)) {
+                //Encrypt password
+                apuser.setPassword(EncriptPassword.md5(apuser.getPassword()));
+//                ejbUser.createApUser(apuser, confirmPassword, edition);
+                try {
+                    ApUser loggedUser = ejbUser.getApUserByEmail(apuser.getEmail());
+                    lg.setLoggedUser(loggedUser);
+                    conversation.end();
+                    return "Admin.xhtml?faces-redirect=true";
+                } catch (UserNotFoundException ex) {
+                    Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, "Erro na autenticação de utilizador.", ex);
+                    return "Login.xhtml?faces-redirect=true";
+                }
+            }
+            ctx.addMessage("newUser:password", new FacesMessage("As passwords não coincidem."));
+            ctx.addMessage("newUser:confirmpassword", new FacesMessage("As passwords não coincidem."));
+            return null;
+        }
+        ctx.addMessage("newUser:email", new FacesMessage("Esse email já está registado."));
+        return null;
     }
 
     public Edition getEdition() {
@@ -125,32 +154,32 @@ public class RegisterController implements Serializable {
         return "Login";
     }
 
-    public String createNewUser() {
-        FacesContext ctx = FacesContext.getCurrentInstance();
-        if (!ejbUser.emailExists(apuser.getEmail())) {
-            if (apuser.getPassword().equals(confirmPassword)) {
-                //Encrypt password
-                apuser.setPassword(EncriptPassword.md5(apuser.getPassword()));
-                ejbUser.createApUser(apuser, confirmPassword, edition);
-                try {
-                    ApUser loggedUser = ejbUser.getApUserByEmail(apuser.getEmail());
-                    lg.setLoggedUser(loggedUser);
-                    conversation.end();
-                    return "Admin.xhtml?faces-redirect=true";
-                } catch (UserNotFoundException ex) {
-                    Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, "Erro na autenticação de utilizador.", ex);
-                    return "Login.xhtml?faces-redirect=true";
-                }
-            }
-            ctx.addMessage("newUser:password", new FacesMessage("As passwords não coincidem."));
-            ctx.addMessage("newUser:confirmpassword", new FacesMessage("As passwords não coincidem."));
-            return null;
-        }
-        ctx.addMessage("newUser:email", new FacesMessage("Esse email já está registado."));
-        return null;
-    }
-
     public List<Edition> getAllEdition() {
         return editionFacade.findAll();
     }
+
+    public String getEditionname() {
+        return editionname;
+    }
+
+    public void setEditionname(String editionname) {
+        this.editionname = editionname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }

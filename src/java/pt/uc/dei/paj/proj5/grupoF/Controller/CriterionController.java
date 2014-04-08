@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pt.uc.dei.paj.proj5.grupoF.Controller;
 
 import java.util.List;
@@ -21,12 +20,13 @@ import pt.uc.dei.paj.proj5.grupoF.Facades.CriterionFacade;
 @Named
 @RequestScoped
 public class CriterionController {
+
     @Inject
     private CriterionFacade criterionfacade;
     private String name;
     @Inject
     private LoggedUser logged;
-    
+    private Criterion selectCriterion;
 
     /**
      * Creates a new instance of CriterionController
@@ -36,15 +36,19 @@ public class CriterionController {
 
     public String createCriterion() {
         if (criterionfacade.createCriterion(name, logged.getCurrentEdition())) {
-            
-            System.out.println("logged "+ logged.getCurrentEdition());
-            
-            return "Criterion.xhtml";   //pagina com a definicao de criterios. 
-                                        //Podemos atribuir mensagem de erro
+
+            System.out.println("logged " + logged.getCurrentEdition());
+
+            return "Criterion.xhtml";   //pagina com a definicao de criterios.
+            //Podemos atribuir mensagem de erro
         }
         return null; //podemos devolver pagina de erro a informar que o criterio nao foi criado
     }
-    
+
+    public void deleteSelectCriterion(Criterion selectCriterion) { //delete criterion of any edition
+        criterionfacade.deleteCriterion(selectCriterion.getId());
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -68,9 +72,17 @@ public class CriterionController {
     public CriterionFacade getCriterionfacade() {
         return criterionfacade;
     }
-    
-     public List<Criterion> getAllCriterion() {
-        return criterionfacade.findAll();
+
+    public List<Criterion> getAllCriterion() {
+        return criterionfacade.findAllCriterionByEdition(logged.getCurrentEdition().getId());
     }
-    
+
+    public Criterion getSelectCriterion() {
+        return selectCriterion;
+    }
+
+    public void setSelectCriterion(Criterion selectCriterion) {
+        this.selectCriterion = selectCriterion;
+    }
+
 }

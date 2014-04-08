@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns:h="http://xmlns.jcp.org/jsf/html"
+<ui:composition template="./TemplateAdmin.xhtml"  xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="./TemplateAdmin.xhtml"
-                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
 
 
@@ -11,18 +11,19 @@
     <ui:define name="content">
 
         <h:form>
-            <p:dataTable value="#{criterionController.allCriterion}" var="crt">
-                <h:column>
+
+            <p:dataTable value="#{criterionController.allCriterion}" var="selectCriterion">
+                <p:column>
                     <f:facet name="header">Edition</f:facet>
-                    <h:outputText value="#{crt.edition.name}" />
-                </h:column>
-                <h:column>
+                    <h:outputText value="#{selectCriterion.edition.name}" />
+                </p:column>
+                <p:column>
                     <f:facet name="header">Scale</f:facet>
-                    <h:outputText value="#{crt.question}" />
-                </h:column>
-                <h:column>
-                    <h:commandButton value="Delete" action="cccCriterionccc" />
-                </h:column>
+                    <h:outputText value="#{selectCriterion.question}" />
+                </p:column>
+                <p:column>
+                    <h:commandButton value="Delete" action="#{criterionController.deleteSelectCriterion(selectCriterion)}" />
+                </p:column>
             </p:dataTable>
         </h:form>
         <div align="right">
