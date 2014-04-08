@@ -6,6 +6,7 @@
 package pt.uc.dei.paj.proj5.grupoF.Entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -34,6 +35,7 @@ import javax.validation.constraints.Pattern;
     @NamedQuery(name = "ApUser.findByUserId", query = "SELECT u FROM ApUser u WHERE u.ApUserId = :ApUserId"),
     @NamedQuery(name = "ApUser.findByName", query = "SELECT u FROM ApUser u WHERE u.name = :name"),
     @NamedQuery(name = "ApUser.findByEmail", query = "SELECT u FROM ApUser u WHERE u.email = :email"),
+    @NamedQuery(name = "ApUser.findByEdition", query = "SELECT u FROM ApUser u WHERE u.edition = :edition"),
     @NamedQuery(name = "ApUser.findByPassword", query = "SELECT u FROM ApUser u WHERE u.password = :password"),
     @NamedQuery(name = "ApUser.findByregisterDate", query = "SELECT u FROM ApUser u WHERE u.registerDate = :registerDate"),
     @NamedQuery(name = "ApUser.findByregisterlogList", query = "SELECT u FROM ApUser u WHERE u.logList = :logList")})
@@ -82,6 +84,22 @@ public class ApUser implements Serializable {
 
     @ManyToMany
     private List<Project> projectList;
+
+    public ApUser() {
+    }
+
+    public ApUser(String name, String email, String password, Date registerDate, List<Evaluation> evaluationList, Edition edition) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.registerDate = registerDate;
+        this.logList = new ArrayList();
+        this.evaluationList = new ArrayList();
+        this.edition = edition;
+        this.projectList = new ArrayList();
+    }
+    
+    
 
     public List<Project> getProjectList() {
         return projectList;

@@ -131,9 +131,14 @@ public class UserController {
      */
     public String userLoginAdmin() {
         FacesContext ctx = FacesContext.getCurrentInstance();
+        
+        System.out.println("pass antes - " + password);
+                
         //Encrypt password
         password = EncriptPassword.md5(password);
+        
         System.out.println("pass - " + password);
+        
         try {
             ApAdmin loggedAdmin = ejbAdmin.validAuthenticationApadmin(email, password);
             lg.setLoggedAdmin(loggedAdmin);
@@ -157,7 +162,7 @@ public class UserController {
         try {
             ApUser loggedUser = ejbUser.validAuthenticationApuser(email, password);
             lg.setLoggedUser(loggedUser);
-            return "/novo?faces-redirect=true";
+            return "index.xhtml";
         } catch (InvalidAuthException | UserNotFoundException ex) {
             ctx.addMessage("login", new FacesMessage("Email ou password inválidos."));
             return null;

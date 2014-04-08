@@ -36,15 +36,15 @@ public class CriterionController {
 
     public String createCriterion() {
         if (criterionfacade.createCriterion(name, logged.getCurrentEdition())) {
+            
             System.out.println("logged "+ logged.getCurrentEdition());
+            
             return "Criterion.xhtml";   //pagina com a definicao de criterios. 
                                         //Podemos atribuir mensagem de erro
         }
         return null; //podemos devolver pagina de erro a informar que o criterio nao foi criado
     }
     
-    
-
     public void setName(String name) {
         this.name = name;
     }

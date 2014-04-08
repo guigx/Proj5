@@ -16,7 +16,6 @@ import pt.uc.dei.paj.proj5.grupoF.Entity.Criterion;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Project;
 import pt.uc.dei.paj.proj5.grupoF.Facades.EditionFacade;
-import pt.uc.dei.paj.proj5.grupoF.Facades.EvaluationFacade;
 
 /**
  *
@@ -28,8 +27,8 @@ public class EditionController {
 
     @Inject
     private EditionFacade editionfacade;
-    @Inject
-    private EvaluationFacade evaluationfacade;
+//    @Inject
+//    private EvaluationFacade evaluationfacade;
     @Inject
     private LoggedUser lg;
     @Inject
@@ -128,4 +127,25 @@ public class EditionController {
     public void setSelectedEdition(Edition selectedEdition) {
         this.selectedEdition = selectedEdition;
     }
+
+    public TransationBean getTransation() {
+        return transation;
+    }
+
+    public void setTransation(TransationBean transation) {
+        this.transation = transation;
+    }
+
+    public void setProjectList(List<Project> projectList) {
+        this.projectList = projectList;
+    }
+
+    public LoggedUser getLg() {
+        return lg;
+    }
+
+    public void setLg(LoggedUser lg) {
+        this.lg = lg;
+    }
+    
 }
