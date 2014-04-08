@@ -132,15 +132,15 @@ public class RegisterController implements Serializable {
             if (apuser.getPassword().equals(confirmPassword)) {
                 //Encrypt password
                 apuser.setPassword(EncriptPassword.md5(apuser.getPassword()));
-                ejbUser.create(apuser);
+                ejbUser.createApUser(apuser, confirmPassword, edition);
                 try {
                     ApUser loggedUser = ejbUser.getApUserByEmail(apuser.getEmail());
                     lg.setLoggedUser(loggedUser);
                     conversation.end();
-                    return "/AdminPrincipal?faces-redirect=true";
+                    return "Admin.xhtml?faces-redirect=true";
                 } catch (UserNotFoundException ex) {
                     Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, "Erro na autenticação de utilizador.", ex);
-                    return "/Login?faces-redirect=true";
+                    return "Login.xhtml?faces-redirect=true";
                 }
             }
             ctx.addMessage("newUser:password", new FacesMessage("As passwords não coincidem."));

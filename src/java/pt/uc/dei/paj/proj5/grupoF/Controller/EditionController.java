@@ -86,7 +86,6 @@ public class EditionController {
     }
 
     public String getName() {
-        System.out.println("EDITION!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + name);
         return name;
     }
 
@@ -94,9 +93,10 @@ public class EditionController {
         this.name = name;
     }
 
-//    public List<Edition> getAllEdition() {
-//        return editionfacade.findAll();
-//    }
+    public List<Edition> getAllEdition() {
+        return editionfacade.findAll();
+    }
+
     public EditionFacade getEditionfacade() {
         return editionfacade;
     }

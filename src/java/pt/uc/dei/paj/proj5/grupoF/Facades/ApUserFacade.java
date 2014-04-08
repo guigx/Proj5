@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pt.uc.dei.paj.proj5.grupoF.Facades;
 
 import java.util.logging.Level;
@@ -13,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApUser;
+import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
 import pt.uc.dei.paj.proj5.grupoF.Exception.InvalidAuthException;
 import pt.uc.dei.paj.proj5.grupoF.Exception.UserNotFoundException;
 
@@ -22,6 +22,7 @@ import pt.uc.dei.paj.proj5.grupoF.Exception.UserNotFoundException;
  */
 @Stateless
 public class ApUserFacade extends AbstractFacade<ApUser> {
+
     @PersistenceContext(unitName = "Proj5PU")
     private EntityManager em;
 
@@ -33,18 +34,20 @@ public class ApUserFacade extends AbstractFacade<ApUser> {
     public ApUserFacade() {
         super(ApUser.class);
     }
-    
-        public ApUser getApUserByEmail(String email) throws UserNotFoundException {
+
+    public ApUser getApUserByEmail(String email) throws UserNotFoundException {
         try {
+
             ApUser u = (ApUser) em.createNamedQuery("ApUser.findByEmail").setParameter("email", email).getSingleResult();
+            System.out.println("u!!!!!!!!!!!!!!!!!!!!" + u);
             return u;
         } catch (NoResultException ex) {
             Logger.getLogger(ApUserFacade.class.getName()).log(Level.SEVERE, "Erro na procura de utilizador por email.", ex);
             throw new UserNotFoundException();
         }
     }
-    
-        public boolean emailExists(String email) {
+
+    public boolean emailExists(String email) {
         try {
             getApUserByEmail(email);
             return true;
@@ -52,8 +55,8 @@ public class ApUserFacade extends AbstractFacade<ApUser> {
             return false;
         }
     }
-    
-         /**
+
+    /**
      * Checks if a email and a password inserted by a user are a valid
      * authentication to enter the application.
      *
@@ -72,4 +75,14 @@ public class ApUserFacade extends AbstractFacade<ApUser> {
             throw new InvalidAuthException("Password inválida.");
         }
     }
+
+    public void createApUser(ApUser apuser, String confirmPassword, Edition edition) {
+        create(apuser);
+        apuser.setEdition(edition);
+        edition.getUserList().add(apuser);
+        edit(apuser);
+        em.merge(edition);
+
+    }
+
 }
