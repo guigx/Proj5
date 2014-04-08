@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,12 +48,10 @@ public class ApUser implements Serializable {
     private Long ApUserId;
 
     @NotNull
-    @Basic(optional = false)
     @Column(nullable = false)
     private String name;
 
     @NotNull
-    @Basic(optional = false)
     @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
             + "[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
             + "(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
@@ -62,27 +59,25 @@ public class ApUser implements Serializable {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Basic(optional = false)
     @NotNull
     @Column(nullable = false)
     private String password;
 
     @NotNull
-    @Basic(optional = false)
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date registerDate;
 
-    @OneToMany(mappedBy = "apUser", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "apUser", cascade = CascadeType.PERSIST)
     private List<Log> logList;
 
-    @OneToMany(mappedBy = "apUser", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "apUser", cascade = CascadeType.PERSIST)
     private List<Evaluation> evaluationList;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Edition edition;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Project> projectList;
 
     public ApUser() {

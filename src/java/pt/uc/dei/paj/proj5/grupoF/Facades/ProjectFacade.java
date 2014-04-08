@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import pt.uc.dei.paj.proj5.grupoF.Entity.ApUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Project;
 
@@ -43,4 +44,27 @@ public class ProjectFacade extends AbstractFacade<Project> {
         em.merge(edition);
     }
 
+    public void updateProject(Project p) {
+        this.edit(p);
+    }
+
+    public void subscribeApUsersToProject(ApUser[] apUsers, Project project) {
+
+        for (int i = 0; i < apUsers.length; i++) {
+            project.getApuserList().add(apUsers[i]);
+            em.merge(project);
+
+            apUsers[i].getProjectList().add(project);
+            em.merge(apUsers[i]);
+            //apUserFacade.edit(apUsers[i]);
+            //projectFacade.updateProject(project);
+            System.out.println("adicionado cenassasssssssssssssssss");
+        }
+
+    }
+    /*
+     public ArrayList<ApUser> getStudentsSubscribedInProject(Project p) {
+     ArrayList<ApUser> users = em.find(Project.class, p)
+     }
+     */
 }

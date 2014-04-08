@@ -25,14 +25,17 @@
                     </h:outputText>
                 </p:column>
 
-                <p:column headerText="">
-                    <h:outputText  />
+                <p:column>
+
+                    <p:commandButton id="multiViewButton" value="StudentList" icon="ui-icon-search"
+                                     oncomplete="PF('subscribed').show();" action="#{loggedUser.setSelectedProject(item)}"/>
+
                 </p:column>
 
                 <p:column>
 
                     <p:commandButton id="multiViewButton" value="Add Student" icon="ui-icon-search"
-                                     oncomplete="PF('liststudent').show();"/>
+                                     oncomplete="PF('liststudent').show();" action="#{loggedUser.setSelectedProject(item)}"/>
 
                 </p:column>
             </p:dataTable>
@@ -42,10 +45,10 @@
             <p:dialog id="dialog"  widgetVar="liststudent" height="auto" width="auto"
                       showEffect="fade" hideEffect="explode">
                 <p:dataTable  id="StudentList" var="item" rowKey="#{item.apUserId}" value="#{loggedUser.currentEdition.userList}" paginator="true" rows="10"
-                              selection="#{projetController.studentList}">
+                              selection="#{projetController.selectedStudentsToSubcribeInProject}">
 
                     <f:facet name="header">
-                        Student LIst
+                        Student List
                     </f:facet>
 
                     <p:column selectionMode="multiple" style="width:2%" />
@@ -55,13 +58,34 @@
                     </p:column>
 
                     <f:facet name="footer">
-                        <p:commandButton id="multiViewButton" value="Select" />
+                        <p:commandButton id="multiViewButton" value="Select" oncomplete="PF('liststudent').hide()"  action="#{projetController.subscribeStudentToProject()}"/>
                     </f:facet>
                 </p:dataTable>
             </p:dialog>
         </h:form>
 
+        <h:form>
+            <p:dialog id="dialog"  widgetVar="subscribed" height="auto" width="auto"
+                      showEffect="fade" hideEffect="explode">
+                <p:dataTable  id="StudentList" var="item" rowKey="#{item.apUserId}" value="#{projetController.getStudentsSubcribedInProject}" paginator="true" rows="10"
+                              selection="#{projetController.selectedStudentsToSubcribeInProject}">
 
+                    <f:facet name="header">
+                        Student List
+                    </f:facet>
+
+                    <p:column selectionMode="multiple" style="width:2%" />
+
+                    <p:column headerText="Name" style="width:25%">
+                        #{item.name}
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <p:commandButton id="multiViewButton" value="Select" oncomplete="PF('liststudent').hide()"  action="#{projetController.subscribeStudentToProject()}"/>
+                    </f:facet>
+                </p:dataTable>
+            </p:dialog>
+        </h:form>
 
 
 

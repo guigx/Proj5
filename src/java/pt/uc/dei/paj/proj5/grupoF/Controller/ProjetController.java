@@ -36,6 +36,8 @@ public class ProjetController {
     private List<ApUser> StudentList;
     private Date initialDate;
 
+    private ApUser[] selectedStudentsToSubcribeInProject;
+
     public ProjetController() {
     }
 
@@ -88,6 +90,7 @@ public class ProjetController {
 
     public void setProject(Project project) {
         this.project = project;
+        System.out.println("projecto alterado:" + project.getName());
     }
 
     public LoggedUser getLg() {
@@ -126,4 +129,23 @@ public class ProjetController {
         this.name = name;
     }
 
+    public ApUser[] getSelectedStudentsToSubcribeInProject() {
+        return selectedStudentsToSubcribeInProject;
+    }
+
+    public void setSelectedStudentsToSubcribeInProject(ApUser[] selectedStudentsToSubcribeInProject) {
+        this.selectedStudentsToSubcribeInProject = selectedStudentsToSubcribeInProject;
+    }
+
+    public void subscribeStudentToProject() {
+        for (int i = 0; i < selectedStudentsToSubcribeInProject.length; i++) {
+            System.out.println("PRoject: " + lg.getSelectedProject().getName() + " | selected user------------------------:" + selectedStudentsToSubcribeInProject[i].getEmail());
+        }
+
+        projectfacade.subscribeApUsersToProject(selectedStudentsToSubcribeInProject, lg.getSelectedProject());
+    }
+
+    private void getStudentsSubcribedInProject() {
+
+    }
 }
