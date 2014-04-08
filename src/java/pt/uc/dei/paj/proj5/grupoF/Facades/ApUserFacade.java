@@ -79,6 +79,7 @@ public class ApUserFacade extends AbstractFacade<ApUser> {
     
 //    public boolean
 
+
     public void createApUser(ApUser apuser, String confirmPassword, Edition edition) {
         create(apuser);
         apuser.setEdition(edition);
