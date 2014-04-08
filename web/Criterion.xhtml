@@ -11,8 +11,7 @@
     <ui:define name="content">
 
         <h:form>
-            <h:dataTable value="#{criterionController.allCriterion}" var="crt" border="0" cellpadding="2"
-                         cellspacing="0" rowClasses="odd_row,even_row" rules="all" style="border:solid 1px">
+            <p:dataTable value="#{criterionController.allCriterion}" var="crt">
                 <h:column>
                     <f:facet name="header">Edition</f:facet>
                     <h:outputText value="#{crt.edition.name}" />
@@ -24,7 +23,7 @@
                 <h:column>
                     <h:commandButton value="Delete" action="cccCriterionccc" />
                 </h:column>
-            </h:dataTable>
+            </p:dataTable>
         </h:form>
         <div align="right">
 

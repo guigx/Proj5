@@ -131,15 +131,15 @@ public class UserController {
      */
     public String userLoginAdmin() {
         FacesContext ctx = FacesContext.getCurrentInstance();
-        
-        System.out.println("pass antes - " + password);
-                
         //Encrypt password
-        password = EncriptPassword.md5(password);
-
+        String pass = EncriptPassword.md5(password);
+        System.out.println("pass antes ----------------------------- " + pass);
         try {
-            ApAdmin loggedAdmin = ejbAdmin.validAuthenticationApadmin(email, password);
+            System.out.println("aquiiiiii");
+            System.out.println("emailllllll" + email);
+            ApAdmin loggedAdmin = ejbAdmin.validAuthenticationApadmin(email, pass);
             lg.setLoggedAdmin(loggedAdmin);
+            System.out.println("dentroooooooooooooooooooooo");
             return "/AdminPrincipal?faces-redirect=true";
         } catch (InvalidAuthException | UserNotFoundException ex) {
             ctx.addMessage("admin", new FacesMessage("Email ou password inválidos."));

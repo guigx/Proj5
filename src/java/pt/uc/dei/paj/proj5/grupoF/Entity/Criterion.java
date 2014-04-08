@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pt.uc.dei.paj.proj5.grupoF.Entity;
 
 import java.io.Serializable;
@@ -28,20 +27,20 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 public class Criterion implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NotNull
     private String question;
-    
+
     @OneToMany(mappedBy = "criterion", cascade = CascadeType.ALL)
     private List<Evaluation> evaluationList;
-    
+
     @ManyToOne
     private Edition edition;
-    
-    
+
     public Criterion() {
     }
 
@@ -49,7 +48,7 @@ public class Criterion implements Serializable {
         this.question = question;
         this.edition = edition;
     }
-    
+
     public String getQuestion() {
         return question;
     }
@@ -73,7 +72,7 @@ public class Criterion implements Serializable {
     public void setEdition(Edition edition) {
         this.edition = edition;
     }
-       
+
     public Long getId() {
         return id;
     }
@@ -106,5 +105,5 @@ public class Criterion implements Serializable {
     public String toString() {
         return "pt.uc.dei.paj.proj5.grupoF.Entity.Criterion[ id=" + id + " ]";
     }
-  
+
 }

@@ -18,18 +18,14 @@
 
         <div id="top">
             <ui:insert name="top">
-                <div>
-                    <h:panelGrid columns="2">
-                        <h:graphicImage value="#{resource['images:logo_uc.png']}"/>
 
-                    </h:panelGrid>
-                </div>
-                <div>
-                    <h:panelGrid columns="3">
-                        <h:outputText value="Welcome #{userController.lg.loggedAdmin.name}!"/>
-                        <h:outputText value="Edition #{userController.lg.currentEdition.name}!"/>
-                    </h:panelGrid>
-                </div>
+                <h:panelGrid columns="4">
+                    <h:graphicImage value="#{resource['images:logo_uc.png']}"/>
+                    <h:outputText value="Welcome #{userController.lg.loggedAdmin.name}!"/>
+                    <h:outputText value="Edition #{userController.lg.currentEdition.name}!"/>
+                </h:panelGrid>
+
+
             </ui:insert>
         </div>
 
