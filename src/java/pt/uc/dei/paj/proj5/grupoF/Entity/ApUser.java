@@ -88,18 +88,16 @@ public class ApUser implements Serializable {
     public ApUser() {
     }
 
-    public ApUser(String name, String email, String password, Date registerDate, List<Evaluation> evaluationList, Edition edition) {
+    public ApUser(String name, String email, String password, Edition edition) {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.registerDate = registerDate;
+        this.registerDate = new Date();
         this.logList = new ArrayList();
         this.evaluationList = new ArrayList();
         this.edition = edition;
         this.projectList = new ArrayList();
     }
-    
-    
 
     public List<Project> getProjectList() {
         return projectList;

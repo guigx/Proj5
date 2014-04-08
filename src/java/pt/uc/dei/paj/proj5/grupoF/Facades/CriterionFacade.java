@@ -45,12 +45,12 @@ public class CriterionFacade extends AbstractFacade<Criterion> {
             return q.getResultList(); // envia os criterios para tabela para atrubuir notas
         } catch (Exception e) {
             e.printStackTrace();
-            return null;   //enviar para pagina de erro com informacao de que 
+            return null;   //enviar para pagina de erro com informacao de que
             //nao existe objecto com este valor
         }
     }
 
-//    public void deleteCriterion(int id_criterion) {//tem de se verificar se temos algum criterio desta edicao preenchido
-//        this.remove(find(id_criterion));
-//    }
+    public void deleteCriterion(long id_criterion) {//tem de se verificar se temos algum criterio desta edicao preenchido
+        this.remove(find(id_criterion));
+    }
 }
