@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pt.uc.dei.paj.proj5.grupoF.Facades;
 
 import java.util.logging.Level;
@@ -22,6 +21,7 @@ import pt.uc.dei.paj.proj5.grupoF.Exception.UserNotFoundException;
  */
 @Stateless
 public class ApAdminFacade extends AbstractFacade<ApAdmin> {
+
     @PersistenceContext(unitName = "Proj5PU")
     private EntityManager em;
 
@@ -33,8 +33,8 @@ public class ApAdminFacade extends AbstractFacade<ApAdmin> {
     public ApAdminFacade() {
         super(ApAdmin.class);
     }
-    
-        /**
+
+    /**
      * Searchs for a user by email.
      *
      * @param email
@@ -50,8 +50,8 @@ public class ApAdminFacade extends AbstractFacade<ApAdmin> {
             throw new UserNotFoundException();
         }
     }
-    
-        /**
+
+    /**
      * Checks if a email and a password inserted by a user are a valid
      * authentication to enter the application.
      *
@@ -63,7 +63,6 @@ public class ApAdminFacade extends AbstractFacade<ApAdmin> {
      */
     public ApAdmin validAuthenticationApadmin(String email, String password) throws InvalidAuthException, UserNotFoundException {
         ApAdmin apadmin = getApAdminByEmail(email);
-        System.out.println("Got admin: " + apadmin + " => " + password + " == " + apadmin.getPassword());
         if (password.equals(apadmin.getPassword())) {
             return apadmin;
         } else {
@@ -71,6 +70,5 @@ public class ApAdminFacade extends AbstractFacade<ApAdmin> {
             throw new InvalidAuthException("Password inválida.");
         }
     }
-    
-    
+
 }

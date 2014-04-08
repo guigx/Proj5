@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition>
+            <h:form>
+                <div id='cssmenu'>
+                    <ul>
+                        <li class='has-sub'><a href='#'><span>Projects</span></a>
+                            <ul>
+                                <li><h:commandLink class="menu2" value="Open" action="?faces-redirect=true"/></li>
+                                <li><h:commandLink class="menu2" value="Closed" action="?faces-redirect=true"/></li>
+                            </ul>
+                        </li>
+                        <li class='has-sub last'><a href='#'><span>My Profile</span></a>
+                            <ul>
+                                <li><h:commandLink class="menu2" value = "Settings" action="/user/EditUser?faces-redirect=true"/></li>
+                                <li class='last'><h:commandLink class="menu2" value = "Logout" action="#{UserController.logout()}"/></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </h:form>
+        </ui:composition>
+    </h:body>
+
+</html>
