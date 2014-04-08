@@ -63,7 +63,10 @@ public class ApAdminFacade extends AbstractFacade<ApAdmin> {
      */
     public ApAdmin validAuthenticationApadmin(String email, String password) throws InvalidAuthException, UserNotFoundException {
         ApAdmin apadmin = getApAdminByEmail(email);
+        System.out.println("apadmin pass------------ " + apadmin.getEmail());
+        System.out.println("apadmin pass------------ " + apadmin.getPassword());
         if (password.equals(apadmin.getPassword())) {
+            System.out.println("tododoooooooooooooooooooooo");
             return apadmin;
         } else {
             Logger.getLogger(ApAdminFacade.class.getName()).log(Level.SEVERE, "Erro na autenticação de utilizador.");

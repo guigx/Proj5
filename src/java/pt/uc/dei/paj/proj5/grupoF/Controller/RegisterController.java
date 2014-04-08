@@ -40,7 +40,6 @@ public class RegisterController implements Serializable {
     private ApUserFacade ejbUser;
     @Inject
     private EditionFacade editionFacade;
-
     private String name;
     private String email;
     private String password;

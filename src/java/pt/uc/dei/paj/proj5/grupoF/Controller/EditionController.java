@@ -147,5 +147,5 @@ public class EditionController {
     public void setLg(LoggedUser lg) {
         this.lg = lg;
     }
-    
+
 }
