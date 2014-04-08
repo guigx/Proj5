@@ -30,75 +30,40 @@
                 </p:column>
 
                 <p:column>
-                    <h:commandButton value="Add Student"></h:commandButton>
+
+                    <p:commandButton id="multiViewButton" value="Add Student" icon="ui-icon-search"
+                                     oncomplete="PF('liststudent').show();"/>
+
                 </p:column>
             </p:dataTable>
         </h:form>
 
-
-
         <h:form>
-
-            <p:dataTable id="StudentList" var="item" value="#{registerController.edition.userList}" paginator="true" rows="10"
-                         selection="#{registerController.edition}">
-
-                <f:facet name="header">
-                    Student LIst
-                </f:facet>
-
-                <p:column selectionMode="multiple" style="width:2%" />
-
-                <p:column headerText="Name" style="width:25%">
-                    #{item.name}
-                </p:column>
-
-                <p:column headerText="Email" style="width:25%">
-                    #{item.email}
-                </p:column>
-
-                <f:facet name="footer">
-                    <p:commandButton id="multiViewButton" value="View" icon="ui-icon-search"
-                                     update=":form:displayMulti" oncomplete="PF('multiCarDialog').show()"/>
-                </f:facet>
-            </p:dataTable>
-
-
-
-            <p:dialog id="dialog" header="Car Detail" widgetVar="singleCarDialog" resizable="false"
+            <p:dialog id="dialog"  widgetVar="liststudent" height="auto" width="auto"
                       showEffect="fade" hideEffect="explode">
-
-                <h:panelGrid id="displaySingle" columns="2" cellpadding="4">
+                <p:dataTable id="StudentList" var="item" value="#{registerController.edition.userList}" paginator="true" rows="10"
+                             selection="#{registerController.edition}">
 
                     <f:facet name="header">
-                        <p:graphicImage value="/images/cars/#{tableBean.selectedCar.manufacturer}.jpg"/>
+                        Student LIst
                     </f:facet>
 
-                    <h:outputText value="Model:" />
-                    <h:outputText value="#{tableBean.selectedCar.model}" style="font-weight:bold"/>
+                    <p:column selectionMode="multiple" style="width:2%" />
 
-                    <h:outputText value="Year:" />
-                    <h:outputText value="#{tableBean.selectedCar.year}" style="font-weight:bold"/>
+                    <p:column headerText="Name" style="width:25%">
+                        #{item.name}
+                    </p:column>
 
-                    <h:outputText value="Manufacturer:" />
-                    <h:outputText value="#{tableBean.selectedCar.manufacturer}" style="font-weight:bold"/>
+                    <p:column headerText="Email" style="width:25%">
+                        #{item.email}
+                    </p:column>
 
-                    <h:outputText value="Color:" />
-                    <h:outputText value="#{tableBean.selectedCar.color}" style="font-weight:bold"/>
-                </h:panelGrid>
+                    <!--                    <f:facet name="footer">
+                                            <p:commandButton id="multiViewButton" value="View" icon="ui-icon-search"
+                                                             update=":form:displayMulti" oncomplete="PF('multiCarDialog').show()"/>
+                                        </f:facet>-->
+                </p:dataTable>
             </p:dialog>
-
-            <p:dialog id="multiDialog" header="Car Detail" widgetVar="multiCarDialog"
-                      height="300" showEffect="fade" hideEffect="explode">
-
-                <p:dataList id="displayMulti" value="#{tableBean.selectedCars}" var="selectedCar">
-                    Model: #{selectedCar.model}, Year: #{selectedCar.year}
-                </p:dataList>
-
-            </p:dialog>  
-
-
-
-
         </h:form>
 
 
