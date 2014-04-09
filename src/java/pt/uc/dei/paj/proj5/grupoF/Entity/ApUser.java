@@ -77,7 +77,7 @@ public class ApUser implements Serializable {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Edition edition;
 
-    @ManyToMany(mappedBy = "apUser", cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Project> projectList;
 
     public ApUser() {

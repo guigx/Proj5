@@ -59,22 +59,6 @@ public class RegisterController implements Serializable {
         this.apuser = new ApUser();
     }
 
-    public String createUser() {
-        System.out.println("entrou");
-        apuser.setPassword(EncriptPassword.md5(apuser.getPassword()));
-        ejbUser.createApUser(apuser, confirmPassword, edition);
-        try {
-            System.out.println("tryyyy");
-            ApUser loggedUser = ejbUser.getApUserByEmail(apuser.getEmail());
-            lg.setLoggedUser(loggedUser);
-            conversation.end();
-            return "StudentPrincipal";
-        } catch (UserNotFoundException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, "Erro na autenticação de utilizador.", ex);
-            return "Login.xhtml?faces-redirect=true";
-        }
-    }
-
     public String createNewUser() {
         FacesContext ctx = FacesContext.getCurrentInstance();
         if (!ejbUser.emailExists(apuser.getEmail())) {

@@ -10,6 +10,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 import pt.uc.dei.paj.proj5.grupoF.EJB.EncriptPassword;
 import pt.uc.dei.paj.proj5.grupoF.EJB.LoggedUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApAdmin;
@@ -35,7 +36,7 @@ public class UserController {
     @Inject
     private LoggedUser lg;
     private ApUser apuser;
-    private ApUser deleteUser;
+//    private ApUser deleteUser;
     private ApAdmin apadmin;
     private String confirmPassword;
     private String email;
@@ -127,14 +128,13 @@ public class UserController {
         this.password = password;
     }
 
-    public ApUser getDeleteUser() {
-        return deleteUser;
-    }
-
-    public void setDeleteUser(ApUser deleteUser) {
-        this.deleteUser = deleteUser;
-    }
-
+//    public ApUser getDeleteUser() {
+//        return deleteUser;
+//    }
+//
+//    public void setDeleteUser(ApUser deleteUser) {
+//        this.deleteUser = deleteUser;
+//    }
     /**
      * Checks if the email and password inserted are valid authentication.
      *
@@ -208,7 +208,42 @@ public class UserController {
 ////////////////        ejbUser.createApUser( name, email, password, editionName);
 //        return null;
 //    }
-    public void deleteApUser() {
-        ejbUser.remove(deleteUser);
+    public String deleteApUser() {
+        ejbUser.remove(lg.getLoggedUser());
+        return "Login";
+    }
+
+    public String logout() {
+        //invalidate user session
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+        session.invalidate();
+        return "/Login?faces-redirect=true";
+    }
+
+    /**
+     * Edits the user information. Checks if the email inserted is valid.
+     *
+     * @return The next page if the user is edited, null otherwise.
+     */
+    public String editUser() {
+        FacesContext ctx = FacesContext.getCurrentInstance();
+
+        if (confirmPassword.equals(apuser.getPassword())) {
+            ApUser logged = lg.getLoggedUser();
+            logged.setName(apuser.getName());
+
+            //encrypt password
+            logged.setPassword(EncriptPassword.md5(apuser.getPassword()));
+
+            this.ejbUser.edit(logged);
+            ctx.addMessage("editUser:success", new FacesMessage("Perfil alterado."));
+
+            return "Login";
+        }
+
+        ctx.addMessage("editUser:password", new FacesMessage("As passwords não coincidem."));
+        ctx.addMessage("editUser:confirmpassword", new FacesMessage("As passwords não coincidem."));
+        return null;
     }
 }
