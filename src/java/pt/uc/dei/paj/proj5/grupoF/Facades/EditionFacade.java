@@ -5,6 +5,7 @@
  */
 package pt.uc.dei.paj.proj5.grupoF.Facades;
 
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -32,12 +33,15 @@ public class EditionFacade extends AbstractFacade<Edition> {
         super(Edition.class);
     }
 
-    public boolean createEdition(String name, int scale) {
+    public void createEdition(String name, int scale) {
         Edition newEd = new Edition();
         newEd.setName(name);
+        System.out.println("NEW EDITION-------NAME" + newEd.getName());
         newEd.setScale(scale);
+        System.out.println("NEW EDITION-------Scale" + newEd.getScale());
+        newEd.setYearEdition(new Date());
         this.create(newEd);
-        return true;
+
     }
 
     /**

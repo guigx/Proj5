@@ -37,7 +37,7 @@ import javax.validation.constraints.Pattern;
     @NamedQuery(name = "ApUser.findByEdition", query = "SELECT u FROM ApUser u WHERE u.edition = :edition"),
     @NamedQuery(name = "ApUser.findByPassword", query = "SELECT u FROM ApUser u WHERE u.password = :password"),
     @NamedQuery(name = "ApUser.findByregisterDate", query = "SELECT u FROM ApUser u WHERE u.registerDate = :registerDate"),
-    @NamedQuery(name = "ApUser.findByregisterlogList", query = "SELECT u FROM ApUser u WHERE u.logList = :logList")})
+    @NamedQuery(name = "ApUser.findByregisterlogList", query = "SELECT u FROM ApUser u WHERE u.logList = :logList"),})
 @Entity
 public class ApUser implements Serializable {
 
@@ -77,7 +77,7 @@ public class ApUser implements Serializable {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Edition edition;
 
-    @ManyToMany(cascade = CascadeType.PERSIST/*, mappedBy = "apUser"*/)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Project> projectList;
 
     public ApUser() {

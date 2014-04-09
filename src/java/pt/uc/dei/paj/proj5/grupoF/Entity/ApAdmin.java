@@ -21,7 +21,6 @@ import javax.validation.constraints.Pattern;
  *
  * @author Grupo F
  */
-
 @NamedQueries({
     @NamedQuery(name = "ApAdmin.findAll", query = "SELECT u FROM ApAdmin u"),
     @NamedQuery(name = "ApAdmin.findByUserId", query = "SELECT u FROM ApAdmin u WHERE u.ApAdminId = :ApAdminId"),
@@ -90,8 +89,6 @@ public class ApAdmin implements Serializable {
         this.password = password;
     }
 
-    
-    
     @Override
     public int hashCode() {
         int hash = 0;

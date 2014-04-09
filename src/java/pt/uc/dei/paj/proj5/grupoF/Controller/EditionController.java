@@ -10,6 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import pt.uc.dei.paj.proj5.grupoF.EJB.LoggedUser;
@@ -62,10 +64,18 @@ public class EditionController {
 
     //create now edition
     public String createEdition() {
+        FacesContext ctx = FacesContext.getCurrentInstance();
         if (editionfacade.findByName(name) == null) {
-            editionfacade.createEdition(name, scale);
-            return "AdminPrincipal";
+            if (scale != 0) {
+
+                editionfacade.createEdition(name, scale);
+                return "AdminPrincipal";
+            } else {
+                ctx.addMessage("createEdition", new FacesMessage("Scale null!!"));
+                return "AdminPrincipal";
+            }
         }
+        ctx.addMessage("createEdition", new FacesMessage("Project already existe!"));
         return null;
     }
 

@@ -14,10 +14,6 @@
 
             <p:dataTable value="#{criterionController.allCriterion}" var="selectCriterion">
                 <p:column>
-                    <f:facet name="header">Edition</f:facet>
-                    <h:outputText value="#{selectCriterion.edition.name}" />
-                </p:column>
-                <p:column>
                     <f:facet name="header">Criterion</f:facet>
                     <h:outputText value="#{selectCriterion.question}" />
                 </p:column>

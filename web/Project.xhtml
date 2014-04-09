@@ -10,7 +10,7 @@
         <h:form>
             <p:dataTable var="item" value="#{projetController.projectOfEdition}">
                 <p:column headerText="Name">
-                    <h:outputText value="#{item.name}" />
+                    <h:commandLink value="#{item.name}" action="#{projetController.prepareProject(item)}" />
                 </p:column>
 
                 <p:column headerText="Initial Date">
@@ -24,9 +24,6 @@
                         <f:convertDateTime type="date" pattern="dd-MM-yyyy" timeZone="Europe/Lisbon"/>
                     </h:outputText>
                 </p:column>
-
-
-
                 <p:column>
 
                     <p:commandButton id="multiViewButton" value="Add Student" icon="ui-icon-search"
@@ -45,8 +42,9 @@
         <h:form>
             <p:dialog id="dialog"  widgetVar="liststudent" height="auto" width="auto"
                       showEffect="fade" hideEffect="explode">
-                <p:dataTable  id="StudentList" var="item" rowKey="#{item}" value="#{loggedUser.currentEdition.userList}" paginator="true" rows="10"
-                              selection="#{projetController.selectedStudentsToSubcribeInProject}">
+                <p:dataTable  id="StudentList" var="item" rowKey="#{item}" value="#{loggedUser.currentEdition.userList}" paginator="true" paginatorPosition="bottom" rows="10"
+                              selection="#{projetController.selectedStudentsToSubcribeInProject}"
+                              filteredValue="#{loggedUser.currentEdition.userList}">
 
                     <f:facet name="header">
                         Student List
@@ -54,7 +52,7 @@
 
                     <p:column selectionMode="multiple" style="width:2%" />
 
-                    <p:column headerText="Name" style="width:25%">
+                    <p:column headerText="Name" style="width:25%" filterBy="name">
                         #{item.name}
                     </p:column>
 

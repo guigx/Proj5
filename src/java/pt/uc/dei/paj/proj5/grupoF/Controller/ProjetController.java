@@ -167,4 +167,13 @@ public class ProjetController {
             error = ex.getMessage();
         }
     }
+
+    public String prepareProject(Project project) {
+        lg.setSelectedProject(project);
+        return "PrivateProject";
+    }
+
+    public String StudentStatus(ApUser Student) {
+        return "";
+    }
 }

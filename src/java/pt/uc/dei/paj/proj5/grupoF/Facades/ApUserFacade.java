@@ -6,14 +6,17 @@
 package pt.uc.dei.paj.proj5.grupoF.Facades;
 
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
+import pt.uc.dei.paj.proj5.grupoF.Entity.Project;
 import pt.uc.dei.paj.proj5.grupoF.Exception.InvalidAuthException;
 import pt.uc.dei.paj.proj5.grupoF.Exception.UserNotFoundException;
 
@@ -98,5 +101,14 @@ public class ApUserFacade extends AbstractFacade<ApUser> {
 
     public void updateApUser(ApUser user) {
         this.edit(user);
+    }
+
+    public List<ApUser> listStudentsProject(Edition edition, Project project) {
+
+        Query q = em.createNamedQuery("ApUser.findByEditionNoProject");
+
+        q.setParameter("edition", edition);
+        q.setParameter("project", project);
+        return (List<ApUser>) q.getResultList();
     }
 }
