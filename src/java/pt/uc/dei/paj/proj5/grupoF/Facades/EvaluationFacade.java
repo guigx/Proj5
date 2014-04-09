@@ -10,7 +10,9 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import pt.uc.dei.paj.proj5.grupoF.Entity.ApUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Evaluation;
+import pt.uc.dei.paj.proj5.grupoF.Entity.Project;
 
 /**
  *
@@ -40,5 +42,11 @@ public class EvaluationFacade extends AbstractFacade<Evaluation> {
         TypedQuery<Evaluation> q = em.createNamedQuery("Evaluation.findByIdEdition", Evaluation.class);
         q.setParameter("id_edition", id_edition);
         return q.getResultList().size();
+    }
+
+    public List<Evaluation> findStudentProjectEvaluation(ApUser student, Project project) {
+        TypedQuery<Evaluation> q = em.createNamedQuery("Evaluation.findStudentProject", Evaluation.class);
+        q.setParameter("apUserId", student.getApUserId()).setParameter("projectId", project.getId());
+        return q.getResultList();
     }
 }

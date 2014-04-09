@@ -9,15 +9,15 @@
 
 
     <ui:define name="content">
-
         <h:form>
-
-            <p:dataTable value="#{criterionController.allCriterion}" var="selectCriterion">
-                <p:column>
-                    <f:facet name="header">Criterion</f:facet>
-                    <h:outputText value="#{selectCriterion.question}" />
+            <p:dataTable   id="EditionList" rowKey="#{selectCriterion}" value="#{criterionController.allCriterion}" var="selectCriterion" paginator="true" paginatorPosition="bottom" rows="10" >
+                <f:facet name="header">
+                    Criterion List
+                </f:facet>
+                <p:column headerText="Criterion" style="width:25%">
+                    #{selectCriterion.question}
                 </p:column>
-                <p:column>
+                <p:column  style="width:25%">
                     <h:commandButton value="Delete" action="#{criterionController.deleteSelectCriterion(selectCriterion)}" />
                 </p:column>
             </p:dataTable>

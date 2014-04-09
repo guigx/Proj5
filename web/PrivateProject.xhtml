@@ -8,21 +8,41 @@
 
     <ui:define name="content">
         <h:form>
-            <p:dataTable id="dataTableStudent" var="student" value="#{loggedUser.selectedProject.apuserList}">
-                <f:facet name="header">
-                    Students Registered
-                </f:facet>
-                <p:column>
+            <h:panelGroup>
+                <p:dataTable id="dataTableStudent" var="student" value="#{loggedUser.selectedProject.apuserList}">
                     <f:facet name="header">
-                        Name
+                        Students Registered
                     </f:facet>
-                    <h:outputText value="#{student.name}" />
-                </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            Name
+                        </f:facet>
+                        <h:outputText value="#{student.name}" />
+                    </p:column>
 
-                <p:column headerText="Status">
-                    <h:commandLink value="#{projetController.StudentStatus(student)}" />
-                </p:column>
-            </p:dataTable>
+                    <p:column headerText="Status">
+                        <h:commandLink value="#{evaluationController.StudentStatus(student)}" action="#{evaluationController.status(value)}" />
+                    </p:column>
+                </p:dataTable>
+            </h:panelGroup>
+            <h:panelGroup rendered="true">
+                <p:dataTable id="dataTableEvaluation" var="student" value="#{loggedUser.selectedProject.apuserList}">
+                    <f:facet name="header">
+                        Students Registered
+                    </f:facet>
+                    <p:column>
+                        <f:facet name="header">
+                            Name
+                        </f:facet>
+                        <h:outputText value="#{student.name}" />
+                    </p:column>
+
+                    <p:column headerText="Status">
+                        <h:commandLink value="#{evaluationController.StudentStatus(student)}" action="#{evaluationController.status(value)}" />
+                    </p:column>
+                </p:dataTable>
+
+            </h:panelGroup>
         </h:form>
     </ui:define>
 </ui:composition>

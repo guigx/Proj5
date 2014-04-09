@@ -7,38 +7,35 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
+
         <h:form>
-            <p:dataTable var="item" value="#{projetController.projectOfEdition}">
-                <p:column headerText="Name">
+            <p:dataTable   id="OpenProjectList" rowKey="#{selectCriterion}" var="item" value="#{projetController.projectOfEdition}" paginator="true" paginatorPosition="bottom" rows="10" >
+                <f:facet name="header">
+                    Open Projects List
+                </f:facet>
+                <p:column headerText="Name" style="width:25%">
                     <h:commandLink value="#{item.name}" action="#{projetController.prepareProject(item)}" />
                 </p:column>
-
-                <p:column headerText="Initial Date">
+                <p:column headerText="Initial Date" style="width:25%">
                     <h:outputText value="#{item.initialDate}">
                         <f:convertDateTime type="date" pattern="dd-MM-yyyy" timeZone="Europe/Lisbon"/>
                     </h:outputText>
                 </p:column>
-
-                <p:column headerText="Final Date">
+                <p:column headerText="Final Date" style="width:25%">
                     <h:outputText value="#{item.finalDate}">
                         <f:convertDateTime type="date" pattern="dd-MM-yyyy" timeZone="Europe/Lisbon"/>
                     </h:outputText>
                 </p:column>
-                <p:column>
-
+                <p:column  style="width:25%">
                     <p:commandButton id="multiViewButton" value="Add Student" icon="ui-icon-search"
                                      oncomplete="PF('liststudent').show();" action="#{loggedUser.setSelectedProject(item)}"/>
-
                 </p:column>
-                <p:column>
-
+                <p:column  style="width:25%">
                     <h:commandButton id="multiViewButton11" value="Remove Project"  action="#{projetController.deleteProject(item)}"/>
-
                 </p:column>
             </p:dataTable>
             <h:outputLabel style="color:red" value="#{projetController.error}"/>
         </h:form>
-
         <h:form>
             <p:dialog id="dialog"  widgetVar="liststudent" height="auto" width="auto"
                       showEffect="fade" hideEffect="explode">
@@ -62,12 +59,6 @@
                 </p:dataTable>
             </p:dialog>
         </h:form>
-
-
-
-
-
-
 
         <h:form>
             <div align="right">
