@@ -83,4 +83,16 @@ public class ProjectFacade extends AbstractFacade<Project> {
             em.merge(edition);
         }
     }
+
+    public List<Project> closeProjectEdition() {
+        TypedQuery<Project> q = em.createNamedQuery("Project.findByProjectClose", Project.class);
+        q.setParameter("currentDay", new Date());
+        return q.getResultList();
+    }
+
+    public List<Project> openProjectEdition() {
+        TypedQuery<Project> q = em.createNamedQuery("Project.findByProjectOpen", Project.class);
+        q.setParameter("currentDay", new Date());
+        return q.getResultList();
+    }
 }

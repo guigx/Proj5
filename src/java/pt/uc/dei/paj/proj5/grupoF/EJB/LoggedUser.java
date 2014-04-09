@@ -6,6 +6,7 @@
 package pt.uc.dei.paj.proj5.grupoF.EJB;
 
 import java.io.Serializable;
+import javax.ejb.Stateful;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApAdmin;
@@ -19,6 +20,7 @@ import pt.uc.dei.paj.proj5.grupoF.Entity.Project;
  */
 @Named
 @SessionScoped
+@Stateful
 public class LoggedUser implements Serializable {
 
     private static final long serialVersionUID = 1L;

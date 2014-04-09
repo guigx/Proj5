@@ -9,7 +9,7 @@
     <ui:define name="content">
 
         <h:form>
-            <p:dataTable   id="OpenProjectList" var="item" value="#{projetController.projectOfEdition}" paginator="true" paginatorPosition="bottom" rows="10" >
+            <p:dataTable   id="OpenProjectList" var="item" value="#{projetController.openProjectOfEdition()}" paginator="true" paginatorPosition="bottom" rows="10" >
                 <f:facet name="header">
                     Open Projects List
                 </f:facet>
@@ -28,7 +28,7 @@
                 </p:column>
                 <p:column  style="width:25%">
                     <p:commandButton id="multiViewButton" value="Add Student" icon="ui-icon-search"
-                                     oncomplete="PF('liststudent').show();" action="#{loggedUser.setSelectedProject(item)}"/>
+                                     oncomplete="PF('liststudent').show();"/>
                 </p:column>
                 <p:column  style="width:25%">
                     <h:commandButton id="multiViewButton11" value="Remove Project"  action="#{projetController.deleteProject(item)}"/>

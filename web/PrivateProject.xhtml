@@ -9,7 +9,7 @@
     <ui:define name="content">
         <h:form>
             <h:panelGroup>
-                <p:dataTable id="dataTableStudent" var="student" value="#{loggedUser.selectedProject.apuserList}">
+                <p:dataTable id="dataTableStudent" rowKey="#{student}" var="student" value="#{loggedUser.selectedProject.apuserList}">
                     <f:facet name="header">
                         Students Registered
                     </f:facet>
@@ -21,28 +21,31 @@
                     </p:column>
 
                     <p:column headerText="Status">
-                        <h:commandLink value="#{evaluationController.StudentStatus(student)}" action="#{evaluationController.status(value)}" />
+                        <p:commandLink value="#{evaluationController.studentStatus(student)}"  oncomplete="#{evaluationController.status(student)}" />
                     </p:column>
                 </p:dataTable>
             </h:panelGroup>
-            <h:panelGroup rendered="true">
-                <p:dataTable id="dataTableEvaluation" var="student" value="#{loggedUser.selectedProject.apuserList}">
-                    <f:facet name="header">
-                        Students Registered
-                    </f:facet>
-                    <p:column>
-                        <f:facet name="header">
-                            Name
-                        </f:facet>
-                        <h:outputText value="#{student.name}" />
-                    </p:column>
 
-                    <p:column headerText="Status">
-                        <h:commandLink value="#{evaluationController.StudentStatus(student)}" action="#{evaluationController.status(value)}" />
-                    </p:column>
-                </p:dataTable>
+            <p:dialog id="modalResult" header="Evaluation" widgetVar="Result" modal="true" height="auto" width="auto">
+                <h:form id="newUser">
+                    <p:dataTable  var="item" value="#{evaluationController.evaluationList}" rowKey="#{item}">
+                        <p:column headerText="Criterion">
+                            <h:outputText value="#{item.criterion.question}" />
+                        </p:column>
+                        <p:column headerText="Evaluation">
+                            <h:outputText value="#{item.rating}" />
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
 
-            </h:panelGroup>
+            </p:dialog>
+
+            <p:dialog id="modalMail" header="Send Email" widgetVar="Email" modal="true" height="auto" width="auto">
+                <h:form>
+
+                </h:form>
+
+            </p:dialog>
         </h:form>
     </ui:define>
 </ui:composition>

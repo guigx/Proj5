@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="./TemplateAdmin.xhtml"  xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+
+        <h:form>
+            <p:dataTable   id="OpenProjectList" var="item" value="#{projetController.closeProjectOfEdition()}" paginator="true" paginatorPosition="bottom" rows="10" >
+                <f:facet name="header">
+                    Open Projects List
+                </f:facet>
+                <p:column headerText="Name" style="width:25%">
+                    <h:commandLink value="#{item.name}" action="#{projetController.prepareProject(item)}" />
+                </p:column>
+                <p:column headerText="Initial Date" style="width:25%">
+                    <h:outputText value="#{item.initialDate}">
+                        <f:convertDateTime type="date" pattern="dd-MM-yyyy" timeZone="Europe/Lisbon"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Final Date" style="width:25%">
+                    <h:outputText value="#{item.finalDate}">
+                        <f:convertDateTime type="date" pattern="dd-MM-yyyy" timeZone="Europe/Lisbon"/>
+                    </h:outputText>
+                </p:column>
+            </p:dataTable>
+            <h:outputLabel style="color:red" value="#{projetController.error}"/>
+        </h:form>
+        </p:dialog>
+
+    </ui:define>
+
+</ui:composition>

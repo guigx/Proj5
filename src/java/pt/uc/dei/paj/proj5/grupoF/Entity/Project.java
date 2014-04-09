@@ -28,10 +28,9 @@ import javax.validation.constraints.NotNull;
 @NamedQueries({
     @NamedQuery(name = "Edition.findAll", query = "SELECT e FROM Edition e"),
     @NamedQuery(name = "Edition.findByEditionId", query = "SELECT e FROM Edition e WHERE e.id = :id"),
-    @NamedQuery(name = "Project.findByProjectClose", query = "SELECT p FROM Project p WHERE p.finalDate <= :currentDay"),
-    @NamedQuery(name = "Project.findByProjectOpen", query = "SELECT p FROM Project p WHERE p.finalDate >= :currentDay"),
-    @NamedQuery(name = "Project.findByProjectOpenNextEnd", query = "SELECT p FROM Project p WHERE p.initialDate > :currentDay")
-})
+    @NamedQuery(name = "Project.findByProjectClose", query = "SELECT p FROM Project p WHERE p.finalDate <= :currentDay OR p.initialDate > :currentDay"),
+    @NamedQuery(name = "Project.findByProjectOpen", query = "SELECT p FROM Project p WHERE p.finalDate >= :currentDay")})
+   // @NamedQuery(name = "Project.findByProjectOpenNextEnd", query = "SELECT p FROM Project p WHERE p.initialDate > :currentDay")})
 @Entity
 public class Project implements Serializable {
 

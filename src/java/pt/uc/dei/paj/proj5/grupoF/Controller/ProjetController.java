@@ -19,6 +19,7 @@ import pt.uc.dei.paj.proj5.grupoF.EJB.LoggedUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Project;
 import pt.uc.dei.paj.proj5.grupoF.Exception.InvalidDeleteEdition;
+import pt.uc.dei.paj.proj5.grupoF.Facades.EvaluationFacade;
 import pt.uc.dei.paj.proj5.grupoF.Facades.ProjectFacade;
 
 /**
@@ -31,6 +32,8 @@ public class ProjetController {
 
     @Inject
     private ProjectFacade projectfacade;
+    @Inject
+    private EvaluationFacade evaluationfacade;
     private String name;
     private String error;
     private Project project;
@@ -39,6 +42,7 @@ public class ProjetController {
     private List<Project> projectOfEdition;
     private List<ApUser> StudentList;
     private Date initialDate;
+    private Date finalDate;
     private Date currentDay = new Date();
 
     private ApUser[] selectedStudentsToSubcribeInProject;
@@ -49,6 +53,14 @@ public class ProjetController {
     @PostConstruct
     public void initProjectController() {
         this.project = new Project();
+    }
+
+    public EvaluationFacade getEvaluationfacade() {
+        return evaluationfacade;
+    }
+
+    public void setEvaluationfacade(EvaluationFacade evaluationfacade) {
+        this.evaluationfacade = evaluationfacade;
     }
 
     public List<ApUser> getStudentList() {
@@ -82,7 +94,6 @@ public class ProjetController {
     public void setFinalDate(Date finalDate) {
         this.finalDate = finalDate;
     }
-    private Date finalDate;
 
     public String createProject() {
         FacesContext ctx = FacesContext.getCurrentInstance();
@@ -113,8 +124,20 @@ public class ProjetController {
         this.lg = lg;
     }
 
-    public List<Project> getProjectOfEdition() {
-        return projectfacade.projectsOfAnEdition(lg.getCurrentEdition().getId());
+    public List<Project> openProjectOfEdition() {
+        return projectfacade.openProjectEdition();
+    }
+
+    public List<Project> closeProjectOfEdition() {
+        return projectfacade.closeProjectEdition();
+    }
+
+    public List<Project> getProjectNoSubmited() {
+        return evaluationfacade.noSubmitedProject(lg.getLoggedUser());
+    }
+
+    public List<Project> getProjectSubmited() {
+        return evaluationfacade.submitedProject(lg.getLoggedUser());
     }
 
     public void setProjectOfEdition(List<Project> projectOfEdition) {
@@ -168,6 +191,8 @@ public class ProjetController {
 
     public String prepareProject(Project project) {
         lg.setSelectedProject(project);
+        System.out.println("Auuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
+        System.out.println(lg.getSelectedProject());
         return "PrivateProject";
     }
 

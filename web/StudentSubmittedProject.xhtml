@@ -10,7 +10,7 @@
         <h:form id="cenasavaliar">
 
 
-            <p:dataTable   id="OpenProjectStudent" var="item" value="#{projetController.projectNoSubmited}" paginator="true" paginatorPosition="bottom" rows="10" >
+            <p:dataTable   id="OpenProjectStudent" var="item" value="#{projetController.projectSubmited}" paginator="true" paginatorPosition="bottom" rows="10" >
                 <f:facet name="header">
                     Open Projects List
                 </f:facet>
@@ -28,8 +28,8 @@
                     </h:outputText>
                 </p:column>
                 <p:column  style="width:25%">
-                    <p:commandButton id="multiViewButton" value="Submit"
-                                     oncomplete="PF('submitAv').show();" action="#{loggedUser.setSelectedProject(item)}"/>
+                    <p:commandButton id="multiViewButton" value="View Results"
+                                     oncomplete="PF('results').show();" action="#{loggedUser.setSelectedProject(item)}"/>
                 </p:column>
             </p:dataTable>
         </h:form>
