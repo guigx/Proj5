@@ -7,23 +7,24 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
+
+
         <h:form>
-            <p:dataTable var="item" value="#{editionController.allEdition}">
-                <p:column headerText="Edition">
-                    <h:outputText value="#{item.name}" />
+            <p:dataTable  id="EditionList" rowKey="#{item}" var="item" value="#{editionController.allEdition}" paginator="true" paginatorPosition="bottom" rows="10">
+                <f:facet name="header">
+                    Edition List
+                </f:facet>
+                <p:column headerText="Edition" style="width:25%">
+                    #{item.name}
                 </p:column>
-
-                <p:column headerText="Scale">
-                    <h:outputText value="#{item.scale}" />
-
+                <p:column headerText="Scale" style="width:25%">
+                    #{item.scale}
                 </p:column>
-
-                <p:column>
+                <p:column style="width:25%">
                     <h:commandButton value="Select" action="#{editionController.EditionLogin(item)}" ></h:commandButton>
                 </p:column>
-                <p:column>
+                <p:column style="width:25%">
                     <h:commandButton value="Delete" action="#{editionController.removeEdition(item)}" ></h:commandButton>
-
                 </p:column>
             </p:dataTable>
             <h:outputLabel style="color:red" value="#{editionController.error}"/>

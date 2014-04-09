@@ -19,33 +19,30 @@ import javax.validation.constraints.NotNull;
  *
  * @author Guilherme Pereira
  */
-
 @NamedQueries({
-    @NamedQuery(name = "Evaluation.findByIdEdition", query = "SELECT e FROM Evaluation e WHERE e.project.edition.id = :id_edition")
-})
-
+    @NamedQuery(name = "Evaluation.findByIdEdition", query = "SELECT e FROM Evaluation e WHERE e.project.edition.id = :id_edition"),
+    @NamedQuery(name = "Evaluation.findStudentProject", query = "SELECT e FROM Evaluation e WHERE e.apUser.ApUserId = :apUserId and e.project.id = :projectId")})
 @Entity
 public class Evaluation implements Serializable {
 
-    
     //VER ID COMPOSTO
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @ManyToOne
     private ApUser apUser;
-        
+
     @ManyToOne
     private Criterion criterion;
-    
+
     @ManyToOne
-    private  Project project;
-    
+    private Project project;
+
     @NotNull
     private int rating;          //nota avaliacao
-    
+
     public Evaluation() {
     }
 
@@ -55,15 +52,15 @@ public class Evaluation implements Serializable {
         this.project = project;
         this.rating = rating;
     }
-    
+
     public int getRating() {
         return rating;
     }
 
-    public void setRating(int rating) { 
+    public void setRating(int rating) {
         this.rating = rating;
     }
-    
+
     public Project getProject() {
         return project;
     }
@@ -71,7 +68,6 @@ public class Evaluation implements Serializable {
     public void setProject(Project project) {
         this.project = project;
     }
-    
 
     public ApUser getApUser() {
         return apUser;

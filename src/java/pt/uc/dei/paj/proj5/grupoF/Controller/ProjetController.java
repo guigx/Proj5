@@ -103,7 +103,6 @@ public class ProjetController {
 
     public void setProject(Project project) {
         this.project = project;
-        System.out.println("projecto alterado:" + project.getName());
     }
 
     public LoggedUser getLg() {
@@ -155,7 +154,6 @@ public class ProjetController {
     }
 
     public void subscribeStudentToProject() {
-        System.out.println("array" + selectedStudentsToSubcribeInProject.length);
         projectfacade.subscribeApUsersToProject(selectedStudentsToSubcribeInProject, lg.getSelectedProject());
     }
 
@@ -173,7 +171,4 @@ public class ProjetController {
         return "PrivateProject";
     }
 
-    public String StudentStatus(ApUser Student) {
-        return "";
-    }
 }
