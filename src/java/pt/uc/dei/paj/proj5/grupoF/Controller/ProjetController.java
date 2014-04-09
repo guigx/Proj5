@@ -7,6 +7,8 @@ package pt.uc.dei.paj.proj5.grupoF.Controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -16,6 +18,7 @@ import javax.inject.Named;
 import pt.uc.dei.paj.proj5.grupoF.EJB.LoggedUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Project;
+import pt.uc.dei.paj.proj5.grupoF.Exception.InvalidDeleteEdition;
 import pt.uc.dei.paj.proj5.grupoF.Facades.ProjectFacade;
 
 /**
@@ -29,6 +32,7 @@ public class ProjetController {
     @Inject
     private ProjectFacade projectfacade;
     private String name;
+    private String error;
     private Project project;
     @Inject
     private LoggedUser lg;
@@ -36,6 +40,8 @@ public class ProjetController {
     private List<ApUser> StudentList;
     private Date initialDate;
     private Date currentDay = new Date();
+
+    private ApUser[] selectedStudentsToSubcribeInProject;
 
     public ProjetController() {
     }
@@ -55,6 +61,14 @@ public class ProjetController {
 
     public Date getInitialDate() {
         return initialDate;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 
     public void setInitialDate(Date initialDate) {
@@ -89,6 +103,7 @@ public class ProjetController {
 
     public void setProject(Project project) {
         this.project = project;
+        System.out.println("projecto alterado:" + project.getName());
     }
 
     public LoggedUser getLg() {
@@ -131,4 +146,25 @@ public class ProjetController {
         this.name = name;
     }
 
+    public ApUser[] getSelectedStudentsToSubcribeInProject() {
+        return selectedStudentsToSubcribeInProject;
+    }
+
+    public void setSelectedStudentsToSubcribeInProject(ApUser[] selectedStudentsToSubcribeInProject) {
+        this.selectedStudentsToSubcribeInProject = selectedStudentsToSubcribeInProject;
+    }
+
+    public void subscribeStudentToProject() {
+        System.out.println("array" + selectedStudentsToSubcribeInProject.length);
+        projectfacade.subscribeApUsersToProject(selectedStudentsToSubcribeInProject, lg.getSelectedProject());
+    }
+
+    public void deleteProject(Project project) {
+        try {
+            projectfacade.deleteProject(lg.getCurrentEdition(), project);
+        } catch (InvalidDeleteEdition ex) {
+            Logger.getLogger(ProjetController.class.getName()).log(Level.SEVERE, null, ex);
+            error = ex.getMessage();
+        }
+    }
 }

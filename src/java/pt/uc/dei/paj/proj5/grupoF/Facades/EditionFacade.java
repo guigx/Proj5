@@ -10,6 +10,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
+import pt.uc.dei.paj.proj5.grupoF.Entity.Project;
+import pt.uc.dei.paj.proj5.grupoF.Exception.InvalidDeleteEdition;
 
 /**
  *
@@ -30,8 +32,11 @@ public class EditionFacade extends AbstractFacade<Edition> {
         super(Edition.class);
     }
 
-    public boolean createEdition(String name, int scale) { //scale - limite superior das notas
-        this.create(new Edition(name, scale));
+    public boolean createEdition(String name, int scale) {
+        Edition newEd = new Edition();
+        newEd.setName(name);
+        newEd.setScale(scale);
+        this.create(newEd);
         return true;
     }
 
@@ -54,8 +59,22 @@ public class EditionFacade extends AbstractFacade<Edition> {
         }
     }
 
-    public void deleteEdition(long id_edition) {//tem de se verificar se temos algum criterio desta edicao preenchido
-        this.remove(find(id_edition));
+    public boolean containEvaluation(Edition edition) {
+        System.out.println("edition--------------------------------" + edition.getName());
+        for (Project p : edition.getProjectList()) {
+            if (!p.getEvaluationList().isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void deleteEdition(Edition edition) throws InvalidDeleteEdition {
+        if (!containEvaluation(edition)) {
+            this.remove(em.merge(edition));
+        } else {
+            throw new InvalidDeleteEdition();
+        }
     }
 
 }

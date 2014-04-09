@@ -10,9 +10,14 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+<<<<<<< HEAD
 import javax.persistence.TypedQuery;
+=======
+import pt.uc.dei.paj.proj5.grupoF.Entity.ApUser;
+>>>>>>> 4670690b6c751da51d5ec4f70c6a29a6009122bd
 import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Project;
+import pt.uc.dei.paj.proj5.grupoF.Exception.InvalidDeleteEdition;
 
 /**
  *
@@ -45,6 +50,7 @@ public class ProjectFacade extends AbstractFacade<Project> {
         em.merge(edition);
     }
 
+<<<<<<< HEAD
     public List<Project> findAllOpenByEdition(Date currentDay/*, long ApUserId*/) {
         TypedQuery<Project> q = em.createNamedQuery("Project.findByProjectOpen", Project.class);
         q.setParameter("currentDay", currentDay);
@@ -55,6 +61,31 @@ public class ProjectFacade extends AbstractFacade<Project> {
             e.printStackTrace();
             return null;   //enviar para pagina de erro com informacao de que
             //nao existe objecto com este valor
+=======
+    public void updateProject(Project p) {
+        this.edit(p);
+    }
+
+    public void subscribeApUsersToProject(ApUser[] apUsers, Project project) {
+
+        for (int i = 0; i < apUsers.length; i++) {
+
+            apUsers[i].getProjectList().add(project);
+            em.merge(apUsers[i]);
+            project.getApuserList().add(apUsers[i]);
+            System.out.println("adicionado cenassasssssssssssssssss");
+        }
+        em.merge(project);
+    }
+
+    public void deleteProject(Edition edition, Project project) throws InvalidDeleteEdition {
+        if (!project.getEvaluationList().isEmpty()) {
+            throw new InvalidDeleteEdition();
+        } else {
+            edition.getProjectList().remove(project);
+            remove(project);
+            em.merge(edition);
+>>>>>>> 4670690b6c751da51d5ec4f70c6a29a6009122bd
         }
     }
 }

@@ -6,18 +6,15 @@
 package pt.uc.dei.paj.proj5.grupoF.Entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -55,29 +52,16 @@ public class Edition implements Serializable {
     @NotNull
     private int scale;
 
-    @OneToMany(mappedBy = "edition", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "edition", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ApUser> userList;
 
-    @OneToMany(mappedBy = "edition", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "edition", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Project> projectList;
 
-    @OneToMany(mappedBy = "edition", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "edition", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Criterion> criterionList;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    private List<ApAdmin> apAdminList;
-
     public Edition() {
-    }
-
-    public Edition(String name, int scale) {
-        this.name = name;
-        this.yearEdition = new Date();
-        this.scale = scale;
-        this.userList = new ArrayList();
-        this.projectList = new ArrayList();
-        this.criterionList = new ArrayList();
-        this.apAdminList = new ArrayList();
     }
 
     public String getName() {
@@ -134,14 +118,6 @@ public class Edition implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public List<ApAdmin> getApAdminList() {
-        return apAdminList;
-    }
-
-    public void setApAdminList(List<ApAdmin> apAdminList) {
-        this.apAdminList = apAdminList;
     }
 
     @Override

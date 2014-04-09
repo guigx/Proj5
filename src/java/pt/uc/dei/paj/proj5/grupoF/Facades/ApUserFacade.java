@@ -5,6 +5,7 @@
  */
 package pt.uc.dei.paj.proj5.grupoF.Facades;
 
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
@@ -74,8 +75,8 @@ public class ApUserFacade extends AbstractFacade<ApUser> {
             throw new InvalidAuthException("Password inválida.");
         }
     }
-    
-       public Edition getApUserByEdition(String name) throws UserNotFoundException {
+
+    public Edition getApUserByEdition(String name) throws UserNotFoundException {
         try {
             Edition u = (Edition) em.createNamedQuery("ApUser.findByEdition").setParameter("edition", name).getSingleResult();
 
@@ -86,22 +87,16 @@ public class ApUserFacade extends AbstractFacade<ApUser> {
         }
     }
 
-    
+    public void createApUser(ApUser apuser, String password, Edition edition) {
+        apuser.setRegisterDate(new Date());
+        create(apuser);
+        apuser.setEdition(edition);
+        edition.getUserList().add(apuser);
+        edit(apuser);
+        em.merge(edition);
+    }
 
-
-
-    public void createApUser(String name, String email, String password, String editionName) throws UserNotFoundException{
-        Edition edition = getApUserByEdition(editionName);
-//        String name, String email, String password, Edition edition
-        this.create(new ApUser(name, email, password, edition));
-        
-        
-        
-//        create(apuser);
-//        apuser.setEdition(edition);
-//        edition.getUserList().add(apuser);
-//        edit(apuser);
-//        em.merge(edition);
-
+    public void updateApUser(ApUser user) {
+        this.edit(user);
     }
 }

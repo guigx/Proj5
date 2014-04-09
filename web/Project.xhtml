@@ -25,27 +25,31 @@
                     </h:outputText>
                 </p:column>
 
-                <p:column headerText="">
-                    <h:outputText  />
-                </p:column>
+
 
                 <p:column>
 
                     <p:commandButton id="multiViewButton" value="Add Student" icon="ui-icon-search"
-                                     oncomplete="PF('liststudent').show();"/>
+                                     oncomplete="PF('liststudent').show();" action="#{loggedUser.setSelectedProject(item)}"/>
+
+                </p:column>
+                <p:column>
+
+                    <h:commandButton id="multiViewButton11" value="Remove Project"  action="#{projetController.deleteProject(item)}"/>
 
                 </p:column>
             </p:dataTable>
+            <h:outputLabel style="color:red" value="#{projetController.error}"/>
         </h:form>
 
         <h:form>
             <p:dialog id="dialog"  widgetVar="liststudent" height="auto" width="auto"
                       showEffect="fade" hideEffect="explode">
-                <p:dataTable  id="StudentList" var="item" rowKey="#{item.apUserId}" value="#{loggedUser.currentEdition.userList}" paginator="true" rows="10"
-                              selection="#{projetController.studentList}">
+                <p:dataTable  id="StudentList" var="item" rowKey="#{item}" value="#{loggedUser.currentEdition.userList}" paginator="true" rows="10"
+                              selection="#{projetController.selectedStudentsToSubcribeInProject}">
 
                     <f:facet name="header">
-                        Student LIst
+                        Student List
                     </f:facet>
 
                     <p:column selectionMode="multiple" style="width:2%" />
@@ -55,7 +59,7 @@
                     </p:column>
 
                     <f:facet name="footer">
-                        <p:commandButton id="multiViewButton" value="Select" />
+                        <p:commandButton id="multiViewButton" value="Select" oncomplete="PF('liststudent').hide()"  action="#{projetController.subscribeStudentToProject()}"/>
                     </f:facet>
                 </p:dataTable>
             </p:dialog>

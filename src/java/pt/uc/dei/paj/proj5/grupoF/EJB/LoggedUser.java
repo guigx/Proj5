@@ -11,6 +11,7 @@ import javax.inject.Named;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApAdmin;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
+import pt.uc.dei.paj.proj5.grupoF.Entity.Project;
 
 /**
  *
@@ -24,6 +25,7 @@ public class LoggedUser implements Serializable {
     private ApUser loggedUser;
     private ApAdmin loggedAdmin;
     private Edition currentEdition;
+    private Project selectedProject;
 
     public LoggedUser() {
     }
@@ -50,6 +52,14 @@ public class LoggedUser implements Serializable {
 
     public void setCurrentEdition(Edition currentEdition) {
         this.currentEdition = currentEdition;
+    }
+
+    public Project getSelectedProject() {
+        return selectedProject;
+    }
+
+    public void setSelectedProject(Project selectedProject) {
+        this.selectedProject = selectedProject;
     }
 
 }

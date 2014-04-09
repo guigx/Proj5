@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
@@ -31,6 +32,8 @@ import pt.uc.dei.paj.proj5.grupoF.Facades.EditionFacade;
 @ConversationScoped
 public class RegisterController implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Inject
     private Conversation conversation;
     private ApUser apuser;
@@ -40,9 +43,6 @@ public class RegisterController implements Serializable {
     private ApUserFacade ejbUser;
     @Inject
     private EditionFacade editionFacade;
-    private String name;
-    private String email;
-    private String password;
     private String confirmPassword;
     private String editionname;
 
@@ -54,18 +54,39 @@ public class RegisterController implements Serializable {
     public RegisterController() {
     }
 
+    @PostConstruct
+    public void initApUser() {
+        this.apuser = new ApUser();
+    }
+
+    public String createUser() {
+        System.out.println("entrou");
+        apuser.setPassword(EncriptPassword.md5(apuser.getPassword()));
+        ejbUser.createApUser(apuser, confirmPassword, edition);
+        try {
+            System.out.println("tryyyy");
+            ApUser loggedUser = ejbUser.getApUserByEmail(apuser.getEmail());
+            lg.setLoggedUser(loggedUser);
+            conversation.end();
+            return "StudentPrincipal";
+        } catch (UserNotFoundException ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, "Erro na autenticação de utilizador.", ex);
+            return "Login.xhtml?faces-redirect=true";
+        }
+    }
+
     public String createNewUser() {
         FacesContext ctx = FacesContext.getCurrentInstance();
         if (!ejbUser.emailExists(apuser.getEmail())) {
             if (apuser.getPassword().equals(confirmPassword)) {
                 //Encrypt password
                 apuser.setPassword(EncriptPassword.md5(apuser.getPassword()));
-//                ejbUser.createApUser(apuser, confirmPassword, edition);
+                ejbUser.createApUser(apuser, confirmPassword, edition);
                 try {
                     ApUser loggedUser = ejbUser.getApUserByEmail(apuser.getEmail());
                     lg.setLoggedUser(loggedUser);
                     conversation.end();
-                    return "Admin.xhtml?faces-redirect=true";
+                    return "StudentPrincipal";
                 } catch (UserNotFoundException ex) {
                     Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, "Erro na autenticação de utilizador.", ex);
                     return "Login.xhtml?faces-redirect=true";
@@ -80,11 +101,13 @@ public class RegisterController implements Serializable {
     }
 
     public Edition getEdition() {
+        System.out.println("cenaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + getEditionName());
         return edition;
     }
 
     public void setEdition(Edition edition) {
         this.edition = edition;
+        System.out.println("edition set...ssdasdasdasdasdasda.");
     }
 
     public EditionFacade getEditionFacade() {
@@ -93,15 +116,6 @@ public class RegisterController implements Serializable {
 
     public void setEditionFacade(EditionFacade editionFacade) {
         this.editionFacade = editionFacade;
-    }
-
-    public String getName() {
-        System.out.println("EDITION!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + name);
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public ApUserFacade getEjbUser() {
@@ -166,20 +180,12 @@ public class RegisterController implements Serializable {
         this.editionname = editionname;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEditionName() {
+        if (this.edition != null) {
+            System.out.println("will return edition name:" + this.edition.getName());
+            return this.edition.getName();
+        }
+        System.out.println("nothing to return");
+        return "";
     }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
 }

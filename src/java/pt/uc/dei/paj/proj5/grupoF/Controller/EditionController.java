@@ -6,6 +6,8 @@
 package pt.uc.dei.paj.proj5.grupoF.Controller;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -15,6 +17,7 @@ import pt.uc.dei.paj.proj5.grupoF.EJB.TransationBean;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Criterion;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Project;
+import pt.uc.dei.paj.proj5.grupoF.Exception.InvalidDeleteEdition;
 import pt.uc.dei.paj.proj5.grupoF.Facades.EditionFacade;
 
 /**
@@ -34,6 +37,7 @@ public class EditionController {
     @Inject
     private TransationBean transation;
     private String name;
+    private String error;
     private int scale;
     private List<Criterion> criterionList;
     private Edition edition;
@@ -65,11 +69,10 @@ public class EditionController {
         return null;
     }
 
-    //clears list if no review
-    public void deleteEdition() {
-        transation.deleteEditionTransation(selectedEdition.getId());
-    }
-
+//    //clears list if no review
+//    public void deleteEdition() {
+//        transation.deleteEditionTransation(selectedEdition.getId());
+//    }
     public List<Project> getProjectList() {
         return projectList;
     }
@@ -90,6 +93,14 @@ public class EditionController {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 
     public List<Edition> getAllEdition() {
@@ -148,4 +159,12 @@ public class EditionController {
         this.lg = lg;
     }
 
+    public void removeEdition(Edition ed) {
+        try {
+            editionfacade.deleteEdition(ed);
+        } catch (InvalidDeleteEdition e) {
+            Logger.getLogger(EditionController.class.getName()).log(Level.SEVERE, null, e);
+            error = e.getMessage();
+        }
+    }
 }
