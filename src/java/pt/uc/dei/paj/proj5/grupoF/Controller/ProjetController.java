@@ -39,6 +39,7 @@ public class ProjetController {
     private List<Project> projectOfEdition;
     private List<ApUser> StudentList;
     private Date initialDate;
+    private Date currentDay = new Date();
 
     private ApUser[] selectedStudentsToSubcribeInProject;
 
@@ -123,6 +124,10 @@ public class ProjetController {
 
     public List<Project> getAllProject() {
         return projectfacade.findAll();
+    }
+
+    public List<Project> getAllProjectOpen() {
+        return projectfacade.findAllOpenByEdition(currentDay/*, lg.getLoggedUser().getApUserId()*/);
     }
 
     public ProjectFacade getProjectfacade() {

@@ -5,10 +5,12 @@
  */
 package pt.uc.dei.paj.proj5.grupoF.Facades;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Project;
@@ -43,6 +45,19 @@ public class ProjectFacade extends AbstractFacade<Project> {
         p.setEdition(edition);
         this.create(p);
         em.merge(edition);
+    }
+
+    public List<Project> findAllOpenByEdition(Date currentDay/*, long ApUserId*/) {
+        TypedQuery<Project> q = em.createNamedQuery("Project.findByProjectOpen", Project.class);
+        q.setParameter("currentDay", currentDay);
+//        q.setParameter("ApUserId", ApUserId);
+        try {
+            return q.getResultList(); // envia os criterios para tabela para atrubuir notas
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;   //enviar para pagina de erro com informacao de que
+            //nao existe objecto com este valor
+        }
     }
 
     public void updateProject(Project p) {

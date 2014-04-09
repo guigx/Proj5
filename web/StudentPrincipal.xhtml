@@ -8,18 +8,22 @@
 
     <ui:define name="content">
         <h:form>
-            <p:dataTable var="item" value="#{editionController.allEdition}">
-                <p:column headerText="Edition">
-                    <h:outputText value="#{item.name}" />
+            <p:dataTable var="selectProject" value="#{projetController.allProjectOpen}">
+                <p:column headerText="Name">
+                    <h:outputText value="#{selectProject.name}" />
                 </p:column>
-
-                <p:column headerText="Scale">
-                    <h:outputText value="#{item.scale}" />
-
+                <p:column headerText="Inicial Date">
+                    <h:outputText value="#{selectProject.initialDate}" >
+                    <f:convertDateTime type="date" pattern="dd-MM-yyyy" timeZone="Europe/Lisbon"/>
+                    </h:outputText>
                 </p:column>
-
+                <p:column headerText="Final Date">
+                    <h:outputText value="#{selectProject.finalDate}" >
+                    <f:convertDateTime type="date" pattern="dd-MM-yyyy" timeZone="Europe/Lisbon"/>
+                    </h:outputText>
+                </p:column>
                 <p:column>
-                    <h:commandButton value="Select" action="#{editionController.EditionLogin(item)}" ></h:commandButton>
+                    <h:commandButton value="Select" action="#{projetController.EditionLogin(selectProject)}" ></h:commandButton>
                 </p:column>
             </p:dataTable>
         </h:form>
@@ -49,7 +53,6 @@
                 </table>
             </h:form>
         </p:dialog>
-
 
 
     </ui:define>

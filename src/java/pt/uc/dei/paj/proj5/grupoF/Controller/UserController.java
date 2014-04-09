@@ -168,8 +168,8 @@ public class UserController {
         try {
             ApUser loggedUser = ejbUser.validAuthenticationApuser(email, password);
             lg.setLoggedUser(loggedUser);
-
-            return "Admin.hxtml?faces-redirect=true";
+            lg.setCurrentEdition(loggedUser.getEdition());
+            return "/StudentPrincipal.xhtml?faces-redirect=true";
 
         } catch (InvalidAuthException | UserNotFoundException ex) {
             ctx.addMessage("login", new FacesMessage("Email ou password inválidos."));
