@@ -52,11 +52,9 @@ public class ProjectFacade extends AbstractFacade<Project> {
     public void subscribeApUsersToProject(ApUser[] apUsers, Project project) {
 
         for (int i = 0; i < apUsers.length; i++) {
-
             apUsers[i].getProjectList().add(project);
             em.merge(apUsers[i]);
             project.getApuserList().add(apUsers[i]);
-            System.out.println("adicionado cenassasssssssssssssssss");
         }
         em.merge(project);
     }
