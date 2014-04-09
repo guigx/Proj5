@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import pt.uc.dei.paj.proj5.grupoF.EJB.EncriptPassword;
@@ -74,29 +76,29 @@ public class RegisterController implements Serializable {
     }
 
     public String createNewUser() {
-        //FacesContext ctx = FacesContext.getCurrentInstance();
-        //if (!ejbUser.emailExists(apuser.getEmail())) {
-        //if (apuser.getPassword().equals(confirmPassword)) {
-        //Encrypt password
-        apuser.setPassword(EncriptPassword.md5(apuser.getPassword()));
-        ejbUser.createApUser(apuser, confirmPassword, edition);
-        try {
-            ApUser loggedUser = ejbUser.getApUserByEmail(apuser.getEmail());
-            lg.setLoggedUser(loggedUser);
-            conversation.end();
-            return "Admin.xhtml?faces-redirect=true";
-        } catch (UserNotFoundException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, "Erro na autenticação de utilizador.", ex);
-            return "Login.xhtml?faces-redirect=true";
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        if (!ejbUser.emailExists(apuser.getEmail())) {
+            if (apuser.getPassword().equals(confirmPassword)) {
+                //Encrypt password
+                apuser.setPassword(EncriptPassword.md5(apuser.getPassword()));
+                ejbUser.createApUser(apuser, confirmPassword, edition);
+                try {
+                    ApUser loggedUser = ejbUser.getApUserByEmail(apuser.getEmail());
+                    lg.setLoggedUser(loggedUser);
+                    conversation.end();
+                    return "StudentPrincipal";
+                } catch (UserNotFoundException ex) {
+                    Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, "Erro na autenticação de utilizador.", ex);
+                    return "Login.xhtml?faces-redirect=true";
+                }
+            }
+            ctx.addMessage("newUser:password", new FacesMessage("As passwords não coincidem."));
+            ctx.addMessage("newUser:confirmpassword", new FacesMessage("As passwords não coincidem."));
+            return null;
         }
+        ctx.addMessage("newUser:email", new FacesMessage("Esse email já está registado."));
+        return null;
     }
-//            ctx.addMessage("newUser:password", new FacesMessage("As passwords não coincidem."));
-//            ctx.addMessage("newUser:confirmpassword", new FacesMessage("As passwords não coincidem."));
-    // return null;
-//}
-//        ctx.addMessage("newUser:email", new FacesMessage("Esse email já está registado."));
-// return null;
-// }
 
     public Edition getEdition() {
         System.out.println("cenaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + getEditionName());

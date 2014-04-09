@@ -7,6 +7,8 @@ package pt.uc.dei.paj.proj5.grupoF.Controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -16,6 +18,7 @@ import javax.inject.Named;
 import pt.uc.dei.paj.proj5.grupoF.EJB.LoggedUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Project;
+import pt.uc.dei.paj.proj5.grupoF.Exception.InvalidDeleteEdition;
 import pt.uc.dei.paj.proj5.grupoF.Facades.ProjectFacade;
 
 /**
@@ -29,6 +32,7 @@ public class ProjetController {
     @Inject
     private ProjectFacade projectfacade;
     private String name;
+    private String error;
     private Project project;
     @Inject
     private LoggedUser lg;
@@ -56,6 +60,14 @@ public class ProjetController {
 
     public Date getInitialDate() {
         return initialDate;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 
     public void setInitialDate(Date initialDate) {
@@ -138,14 +150,16 @@ public class ProjetController {
     }
 
     public void subscribeStudentToProject() {
-        for (int i = 0; i < selectedStudentsToSubcribeInProject.length; i++) {
-            System.out.println("PRoject: " + lg.getSelectedProject().getName() + " | selected user------------------------:" + selectedStudentsToSubcribeInProject[i].getEmail());
-        }
-
+        System.out.println("array" + selectedStudentsToSubcribeInProject.length);
         projectfacade.subscribeApUsersToProject(selectedStudentsToSubcribeInProject, lg.getSelectedProject());
     }
 
-    private void getStudentsSubcribedInProject() {
-
+    public void deleteProject(Project project) {
+        try {
+            projectfacade.deleteProject(lg.getCurrentEdition(), project);
+        } catch (InvalidDeleteEdition ex) {
+            Logger.getLogger(ProjetController.class.getName()).log(Level.SEVERE, null, ex);
+            error = ex.getMessage();
+        }
     }
 }

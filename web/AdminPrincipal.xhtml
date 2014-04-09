@@ -21,7 +21,12 @@
                 <p:column>
                     <h:commandButton value="Select" action="#{editionController.EditionLogin(item)}" ></h:commandButton>
                 </p:column>
+                <p:column>
+                    <h:commandButton value="Delete" action="#{editionController.removeEdition(item)}" ></h:commandButton>
+
+                </p:column>
             </p:dataTable>
+            <h:outputLabel style="color:red" value="#{editionController.error}"/>
         </h:form>
         <h:form>
             <div align="right">
@@ -46,11 +51,12 @@
                         <td></td>
                         <td><h:commandButton value="SAVE" action="#{editionController.createEdition()}"></h:commandButton></td>
                     </tr>
+
                 </table>
             </h:form>
         </p:dialog>
 
-       
+
 
     </ui:define>
 

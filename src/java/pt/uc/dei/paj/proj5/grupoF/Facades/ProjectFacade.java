@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Project;
+import pt.uc.dei.paj.proj5.grupoF.Exception.InvalidDeleteEdition;
 
 /**
  *
@@ -51,20 +52,22 @@ public class ProjectFacade extends AbstractFacade<Project> {
     public void subscribeApUsersToProject(ApUser[] apUsers, Project project) {
 
         for (int i = 0; i < apUsers.length; i++) {
-            project.getApuserList().add(apUsers[i]);
-            em.merge(project);
 
             apUsers[i].getProjectList().add(project);
             em.merge(apUsers[i]);
-            //apUserFacade.edit(apUsers[i]);
-            //projectFacade.updateProject(project);
+            project.getApuserList().add(apUsers[i]);
             System.out.println("adicionado cenassasssssssssssssssss");
         }
-
+        em.merge(project);
     }
-    /*
-     public ArrayList<ApUser> getStudentsSubscribedInProject(Project p) {
-     ArrayList<ApUser> users = em.find(Project.class, p)
-     }
-     */
+
+    public void deleteProject(Edition edition, Project project) throws InvalidDeleteEdition {
+        if (!project.getEvaluationList().isEmpty()) {
+            throw new InvalidDeleteEdition();
+        } else {
+            edition.getProjectList().remove(project);
+            remove(project);
+            em.merge(edition);
+        }
+    }
 }

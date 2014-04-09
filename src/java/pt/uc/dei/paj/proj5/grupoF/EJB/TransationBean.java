@@ -29,10 +29,9 @@ public class TransationBean implements Serializable {
     @Inject
     private ApUserFacade apUserFacade;
 
-    public void deleteEditionTransation(Long selectedEdition) {
-        if (evaluationfacade.findEvaluationByIdEdition(selectedEdition) == 0) {
-            editionfacade.deleteEdition(selectedEdition);
-        }
-    }
-
+//    public void deleteEditionTransation(Long selectedEdition) {
+//        if (evaluationfacade.findEvaluationByIdEdition(selectedEdition) == 0) {
+//            editionfacade.deleteEdition(selectedEdition);
+//        }
+//    }
 }
