@@ -32,7 +32,9 @@
                 </p:column>
                 <p:column  style="width:25%">
                     <p:commandButton id="multiViewButton" value="View Results"
-                                     oncomplete="PF('results').show();" action="#{evaluationController.prepareResultsView(item)}"/>
+                                     action="#{evaluationController.prepareResultsView(item)}"  oncomplete="PF('results').show();">
+                        <f:setPropertyActionListener value="#{item}" target="#{evaluationController.project}"/>
+                    </p:commandButton>
                 </p:column>
             </p:dataTable>
         </h:form>

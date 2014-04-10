@@ -13,7 +13,6 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import pt.uc.dei.paj.proj5.grupoF.EJB.EncriptPassword;
 import pt.uc.dei.paj.proj5.grupoF.EJB.LoggedUser;
-import pt.uc.dei.paj.proj5.grupoF.EJB.SendEmail;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApAdmin;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
@@ -36,7 +35,7 @@ public class UserController {
     private ApAdminFacade ejbAdmin;
     @Inject
     private LoggedUser lg;
-    private SendEmail sendemail;
+    // private SendEmail sendemail;
     private ApUser apuser;
     private ApAdmin apadmin;
     private String confirmPassword;
@@ -45,7 +44,7 @@ public class UserController {
     private Edition edition;
 
     public UserController() {
-        sendemail = SendEmail.getSendEmail();
+        //     sendemail = SendEmail.getSendEmail();
     }
 
     public Edition getEdition() {
@@ -130,14 +129,13 @@ public class UserController {
         this.password = password;
     }
 
-    public SendEmail getSendemail() {
-        return sendemail;
-    }
-
-    public void setSendemail(SendEmail sendemail) {
-        this.sendemail = sendemail;
-    }
-
+//    public SendEmail getSendemail() {
+//        return sendemail;
+//    }
+//
+//    public void setSendemail(SendEmail sendemail) {
+//        this.sendemail = sendemail;
+//    }
     /**
      * Checks if the email and password inserted are valid authentication.
      *
@@ -168,7 +166,7 @@ public class UserController {
         FacesContext ctx = FacesContext.getCurrentInstance();
         //Encrypt password
         password = EncriptPassword.md5(password);
-        sendemail.sendEMail("acertarorumo@gmail.com", "TEST", "Oi \nParece que isto do email já funciona.\nVenha a proxima.", "katos.pt@gmail.com");
+        //  sendemail.sendEMail("acertarorumo@gmail.com", "TEST", "Oi \nParece que isto do email já funciona.\nVenha a proxima.", "katos.pt@gmail.com");
 
         try {
             ApUser loggedUser = ejbUser.validAuthenticationApuser(email, password);
@@ -222,7 +220,7 @@ public class UserController {
     }
 
     public void sendEmails(ApUser apuser) {
-        sendemail.sendEMail("acertarorumo@gmail.com", "TEST", "Oi \nParece que isto do email já funciona.\nVenha a proxima.", apuser.getEmail());
+        //  sendemail.sendEMail("acertarorumo@gmail.com", "TEST", "Oi \nParece que isto do email já funciona.\nVenha a proxima.", apuser.getEmail());
 
     }
 
