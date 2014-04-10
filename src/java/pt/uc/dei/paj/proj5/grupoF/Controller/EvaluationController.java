@@ -44,7 +44,6 @@ public class EvaluationController {
     @PostConstruct
     public void initEvaluationController() {
         this.evaluation = new Evaluation();
-        this.evaluationList = evaluationfacade.studentEvaluationsSetCriteria(lg.getLoggedUser(), lg.getSelectedProject());
     }
 
     public LoggedUser getLg() {

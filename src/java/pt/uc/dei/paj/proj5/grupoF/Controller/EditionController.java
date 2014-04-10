@@ -15,7 +15,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import pt.uc.dei.paj.proj5.grupoF.EJB.LoggedUser;
-import pt.uc.dei.paj.proj5.grupoF.EJB.TransationBean;
+import pt.uc.dei.paj.proj5.grupoF.EJB.Check;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Criterion;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Project;
@@ -37,7 +37,7 @@ public class EditionController {
     @Inject
     private LoggedUser lg;
     @Inject
-    private TransationBean transation;
+    private Check transation;
     private String name;
     private String error;
     private int scale;
@@ -149,11 +149,11 @@ public class EditionController {
         this.selectedEdition = selectedEdition;
     }
 
-    public TransationBean getTransation() {
+    public Check getTransation() {
         return transation;
     }
 
-    public void setTransation(TransationBean transation) {
+    public void setTransation(Check transation) {
         this.transation = transation;
     }
 

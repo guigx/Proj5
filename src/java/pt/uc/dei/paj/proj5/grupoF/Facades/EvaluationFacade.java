@@ -96,7 +96,7 @@ public class EvaluationFacade extends AbstractFacade<Evaluation> {
     /**
      * Persit the List of Evaluations from 1student about 1project
      *
-     * @param list
+     * @param envaluationList
      */
     public void evaluationsSubmit(List<Evaluation> envaluationList) {
         for (Evaluation e : envaluationList) {

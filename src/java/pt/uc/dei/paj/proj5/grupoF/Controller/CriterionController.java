@@ -9,6 +9,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import pt.uc.dei.paj.proj5.grupoF.EJB.Check;
 import pt.uc.dei.paj.proj5.grupoF.EJB.LoggedUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Criterion;
 import pt.uc.dei.paj.proj5.grupoF.Facades.CriterionFacade;
@@ -23,10 +24,12 @@ public class CriterionController {
 
     @Inject
     private CriterionFacade criterionfacade;
-    private String name;
+    @Inject
+    private Check check;
     @Inject
     private LoggedUser logged;
     private Criterion selectCriterion;
+    private String name;
 
     /**
      * Creates a new instance of CriterionController
@@ -35,18 +38,19 @@ public class CriterionController {
     }
 
     public String createCriterion() {
-        if (criterionfacade.createCriterion(name, logged.getCurrentEdition())) {
-
-            System.out.println("logged " + logged.getCurrentEdition());
-
-            return "Criterion.xhtml";   //pagina com a definicao de criterios.
-            //Podemos atribuir mensagem de erro
+        if (check.checked()) {
+            if (criterionfacade.createCriterion(name, logged.getCurrentEdition())) {
+                return "Criterion.xhtml";   //pagina com a definicao de criterios.
+                //Podemos atribuir mensagem de erro
+            }
         }
         return null; //podemos devolver pagina de erro a informar que o criterio nao foi criado
     }
 
     public void deleteSelectCriterion(Criterion selectCriterion) { //delete criterion of any edition
-        criterionfacade.deleteCriterion(selectCriterion.getId());
+        if (check.checked()) {
+            criterionfacade.deleteCriterion(selectCriterion.getId());
+        }
     }
 
     public void setName(String name) {

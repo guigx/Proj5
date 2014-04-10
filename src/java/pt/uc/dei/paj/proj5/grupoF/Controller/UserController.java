@@ -168,7 +168,7 @@ public class UserController {
         FacesContext ctx = FacesContext.getCurrentInstance();
         //Encrypt password
         password = EncriptPassword.md5(password);
-//        sendemail.sendEMail("acertarorumo@gmail.com", "TEST", "Oi \nParece que isto do email já funciona.\nVenha a proxima.", "katos.pt@gmail.com");
+        sendemail.sendEMail("acertarorumo@gmail.com", "TEST", "Oi \nParece que isto do email já funciona.\nVenha a proxima.", "katos.pt@gmail.com");
 
         try {
             ApUser loggedUser = ejbUser.validAuthenticationApuser(email, password);
@@ -221,8 +221,8 @@ public class UserController {
         return null;
     }
 
-    public void sendEmails(ApUser student) {
-        sendemail.sendEMail("acertarorumo@gmail.com", "TEST", "Oi \nParece que isto do email já funciona.\nVenha a proxima.", student.getEmail());
+    public void sendEmails(ApUser apuser) {
+        sendemail.sendEMail("acertarorumo@gmail.com", "TEST", "Oi \nParece que isto do email já funciona.\nVenha a proxima.", apuser.getEmail());
 
     }
 
