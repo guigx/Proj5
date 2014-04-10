@@ -29,20 +29,20 @@
                 </p:column>
                 <p:column  style="width:25%">
                     <p:commandButton id="multiViewButton" value="Submit"
-                                     oncomplete="PF('submitAv').show();" action="#{loggedUser.setSelectedProject(item)}"/>
+                                     oncomplete="#{evaluationController.saveProject(item)}"/>
                 </p:column>
             </p:dataTable>
         </h:form>
 
 
-        <p:dialog id="modalDialog" header="Submite Evaluation" widgetVar="submitAv" modal="true" height="auto" width="auto">
+        <p:dialog id="modalDialog" header="Submite Evaluation" widgetVar="submitAv" modal="true" height="auto" width="auto" rendered="#{loggedUser.selectedProject != null}">
             <h:form id="newUser">
-                <p:dataTable  var="item" value="#{loggedUser.currentEdition.criterionList}">
+                <p:dataTable  rowKey="#{item}" var="item" value="#{evaluationController.evaluationList}">
                     <p:column headerText="Criterion">
-                        <h:outputText value="#{item.question}" />
+                        <h:outputText value="#{item.criterion.question}" />
                     </p:column>
                     <p:column headerText="Evaluation">
-                        <p:spinner id="spinnerBasic" value="#{evaluationController.rating}"
+                        <p:spinner id="spinnerBasic" value="#{item.rating}"
                                    min="0" max="#{loggedUser.currentEdition.scale}"/>
                     </p:column>
                     <f:facet name="footer">

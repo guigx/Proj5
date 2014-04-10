@@ -44,6 +44,7 @@ public class EvaluationController {
     @PostConstruct
     public void initEvaluationController() {
         this.evaluation = new Evaluation();
+        this.evaluationList = evaluationfacade.studentEvaluationsSetCriteria(lg.getLoggedUser(), lg.getSelectedProject());
     }
 
     public LoggedUser getLg() {
@@ -136,9 +137,24 @@ public class EvaluationController {
         }
     }
 
-    public void validateEvaluation() {
+    public String saveProject(Project project) {
+        lg.setSelectedProject(project);
+        return "PF('submitAv').show();";
+    }
+
+    public List<Evaluation> evaluationListStudentProject() {
         this.evaluationList = evaluationfacade.studentEvaluationsSetCriteria(lg.getLoggedUser(), lg.getSelectedProject());
+        return this.evaluationList;
+    }
+
+    public void validateEvaluation() {
         evaluationfacade.evaluationsSubmit(evaluationList);
+    }
+
+    public void prepareResults(ApUser student) {
+
+        student = lg.getLoggedUser();
+        evaluationList = evaluationfacade.findStudentProjectEvaluation(student, lg.getSelectedProject());
     }
 
 //    public List<Evaluation> givenEvaluations() {
