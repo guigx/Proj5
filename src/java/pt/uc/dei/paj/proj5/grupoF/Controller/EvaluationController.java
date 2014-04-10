@@ -129,13 +129,17 @@ public class EvaluationController {
     }
 
     public String status(ApUser student) {
-        apUserSelected = student;
+        //apUserSelected = student;
         if (studentStatus(student).equalsIgnoreCase("Submited")) {
             evaluationList = evaluationfacade.findStudentProjectEvaluation(student, lg.getSelectedProject());
             return "PF('Result').show();";
         } else {
             return "PF('Email').show();";
         }
+    }
+
+    public void prepareResultsView(Project project) {
+        evaluationList = evaluationfacade.findStudentProjectEvaluation(lg.getLoggedUser(), project);
     }
 
     public String saveProject(Project project) {
@@ -154,7 +158,6 @@ public class EvaluationController {
     }
 
     public void prepareResults(ApUser student) {
-
         student = lg.getLoggedUser();
         evaluationList = evaluationfacade.findStudentProjectEvaluation(student, lg.getSelectedProject());
     }

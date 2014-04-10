@@ -32,7 +32,9 @@
                 </p:column>
                 <p:column  style="width:25%">
                     <p:commandButton id="multiViewButton" value="Submit"
-                                     oncomplete="#{evaluationController.saveProject(item)}"/>
+                                     action="#{evaluationController.saveProject(item)}" oncomplete="#{evaluationController.saveProject(item)}">
+                        <f:setPropertyActionListener value="#{item}" target="#{evaluationController.project}"/>
+                    </p:commandButton>
                 </p:column>
             </p:dataTable>
 
