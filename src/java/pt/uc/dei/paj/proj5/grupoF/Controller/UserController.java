@@ -36,7 +36,6 @@ public class UserController {
     @Inject
     private LoggedUser lg;
     private ApUser apuser;
-//    private ApUser deleteUser;
     private ApAdmin apadmin;
     private String confirmPassword;
     private String email;
@@ -128,13 +127,6 @@ public class UserController {
         this.password = password;
     }
 
-//    public ApUser getDeleteUser() {
-//        return deleteUser;
-//    }
-//
-//    public void setDeleteUser(ApUser deleteUser) {
-//        this.deleteUser = deleteUser;
-//    }
     /**
      * Checks if the email and password inserted are valid authentication.
      *
@@ -177,40 +169,9 @@ public class UserController {
         }
     }
 
-    /**
-     * Creates a new user. Checks if the email inserted is valid. If the user is
-     * correctly created, is logged in the application.
-     *
-     * @return The next page if the user is created, null otherwise.
-     */
-//    public String createNewUser() throws UserNotFoundException {
-//        FacesContext ctx = FacesContext.getCurrentInstance();
-//        if (!ejbUser.emailExists(apuser.getEmail())) {
-//            if (apuser.getPassword().equals(confirmPassword)) {
-//                //Encrypt password
-//                apuser.setPassword(EncriptPassword.md5(apuser.getPassword()));
-//                ejbUser.create(apuser);
-//                try {
-//                    ApUser loggedUser = ejbUser.getApUserByEmail(apuser.getEmail());
-//                    lg.setLoggedUser(loggedUser);
-//                    return "/AdminPrincipal?faces-redirect=true";
-//                } catch (UserNotFoundException ex) {
-//                    Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, "Erro na autenticação de utilizador.", ex);
-//                    return "/Login?faces-redirect=true";
-//                }
-//            }
-//            ctx.addMessage("newUser:password", new FacesMessage("As passwords não coincidem."));
-//            ctx.addMessage("newUser:confirmpassword", new FacesMessage("As passwords não coincidem."));
-//            return null;
-//        }
-//        ctx.addMessage("newUser:email", new FacesMessage("Esse email já está registado."));
-//        return null;
-////////////////        ejbUser.createApUser( name, email, password, editionName);
-//        return null;
-//    }
     public String deleteApUser() {
         ejbUser.remove(lg.getLoggedUser());
-        return "Login";
+        return "/Login?faces-redirect=true";
     }
 
     public String logout() {
