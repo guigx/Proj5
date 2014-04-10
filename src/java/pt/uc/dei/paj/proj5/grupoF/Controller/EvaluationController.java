@@ -120,6 +120,7 @@ public class EvaluationController {
 
     public String studentStatus(ApUser student) {
         if (evaluationfacade.findStudentProjectEvaluation(student, lg.getSelectedProject()).isEmpty()) {
+
             return "Send Mail";
         } else {
             return "Submited";
@@ -134,6 +135,13 @@ public class EvaluationController {
         } else {
             return "PF('Email').show();";
         }
+    }
+
+    public String disableLink(ApUser student) {
+        if (studentStatus(student).equals("Submited")) {
+            return "true";
+        }
+        return "false";
     }
 
     public void prepareResultsView(Project project) {
