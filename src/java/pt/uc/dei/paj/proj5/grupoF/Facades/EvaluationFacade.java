@@ -80,20 +80,17 @@ public class EvaluationFacade extends AbstractFacade<Evaluation> {
      * @return Evaluation's list
      */
     public List<Evaluation> studentEvaluationsSetCriteria(ApUser student, Project p) {
-        if (findStudentProjectEvaluation(student, p).isEmpty()) {
-            List<Evaluation> studentEvaluations = new ArrayList<>();
-            for (Criterion c : student.getEdition().getCriterionList()) {
-                Evaluation evaluation = new Evaluation();
-                evaluation.setCriterion(c);
-                evaluation.setRating(0);
-                evaluation.setApUser(student);
-                evaluation.setProject(p);
-                studentEvaluations.add(evaluation);
-            }
-            return studentEvaluations;
-        } else {
-            return findStudentProjectEvaluation(student, p);
+        List<Evaluation> studentEvaluations = new ArrayList<>();
+        System.out.println("entrou-------------------------------------");
+        for (Criterion c : student.getEdition().getCriterionList()) {
+            Evaluation evaluation = new Evaluation();
+            evaluation.setCriterion(c);
+            evaluation.setRating(0);
+            evaluation.setApUser(student);
+            evaluation.setProject(p);
+            studentEvaluations.add(evaluation);
         }
+        return studentEvaluations;
     }
 
     /**
@@ -105,10 +102,11 @@ public class EvaluationFacade extends AbstractFacade<Evaluation> {
         for (Evaluation e : envaluationList) {
             create(e);
             e.getProject().getEvaluationList().add(e);
-            e.getApUser().getEvaluationList().add(e);
-            e.getCriterion().getEvaluationList().add(e);
+            System.out.println("zxddsdasdasd" + e.getRating());
             em.merge(e.getProject());
+            e.getApUser().getEvaluationList().add(e);
             em.merge(e.getApUser());
+            e.getCriterion().getEvaluationList().add(e);
             em.merge(e.getCriterion());
         }
 
