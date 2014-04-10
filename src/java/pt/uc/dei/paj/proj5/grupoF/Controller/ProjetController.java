@@ -125,11 +125,11 @@ public class ProjetController {
     }
 
     public List<Project> openProjectOfEdition() {
-        return projectfacade.openProjectEdition();
+        return projectfacade.openProjectEdition(lg.getCurrentEdition());
     }
 
     public List<Project> closeProjectOfEdition() {
-        return projectfacade.closeProjectEdition();
+        return projectfacade.closeProjectEdition(lg.getCurrentEdition());
     }
 
     public List<Project> getProjectNoSubmited() {
@@ -191,8 +191,6 @@ public class ProjetController {
 
     public String prepareProject(Project project) {
         lg.setSelectedProject(project);
-        System.out.println("Auuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
-        System.out.println(lg.getSelectedProject());
         return "PrivateProject";
     }
 

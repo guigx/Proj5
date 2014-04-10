@@ -40,6 +40,10 @@ public class Log implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date operationDate;
 
+    @JoinColumn(name = "ApUser_user_id", referencedColumnName = "user_id")
+    @ManyToOne
+    private ApUser apUser;
+
     public String getLogOperation() {
         return logOperation;
     }
@@ -63,10 +67,6 @@ public class Log implements Serializable {
     public void setApUser(ApUser apUser) {
         this.apUser = apUser;
     }
-
-    @JoinColumn(name = "ApUser_user_id", referencedColumnName = "user_id")
-    @ManyToOne
-    private ApUser apUser;
 
     public Log() {
     }

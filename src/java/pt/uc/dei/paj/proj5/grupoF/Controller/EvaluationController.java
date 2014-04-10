@@ -129,6 +129,7 @@ public class EvaluationController {
     public String status(ApUser student) {
         apUserSelected = student;
         if (studentStatus(student).equalsIgnoreCase("Submited")) {
+            evaluationList = evaluationfacade.findStudentProjectEvaluation(student, lg.getSelectedProject());
             return "PF('Result').show();";
         } else {
             return "PF('Email').show();";
