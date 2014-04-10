@@ -43,8 +43,9 @@ public class EvaluationController {
 
     @PostConstruct
     public void initEvaluationController() {
+
         this.evaluation = new Evaluation();
-        this.evaluationList = evaluationfacade.studentEvaluationsSetCriteria(lg.getLoggedUser(), lg.getSelectedProject());
+
     }
 
     public LoggedUser getLg() {
@@ -139,6 +140,7 @@ public class EvaluationController {
 
     public String saveProject(Project project) {
         lg.setSelectedProject(project);
+        this.evaluationList = evaluationfacade.studentEvaluationsSetCriteria(lg.getLoggedUser(), project);
         return "PF('submitAv').show();";
     }
 
