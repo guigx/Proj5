@@ -35,7 +35,8 @@ public class UserController {
     private ApAdminFacade ejbAdmin;
     @Inject
     private LoggedUser lg;
-    // private SendEmail sendemail;
+    @Inject
+    private SendEmail sendemail;
     private ApUser apuser;
     private ApAdmin apadmin;
     private String confirmPassword;
@@ -44,7 +45,7 @@ public class UserController {
     private Edition edition;
 
     public UserController() {
-        //     sendemail = SendEmail.getSendEmail();
+//        sendemail = SendEmail.getSendEmail();
     }
 
     public Edition getEdition() {
