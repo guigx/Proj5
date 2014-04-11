@@ -36,8 +36,7 @@ import javax.validation.constraints.Pattern;
     @NamedQuery(name = "ApUser.findByEmail", query = "SELECT u FROM ApUser u WHERE u.email = :email"),
     @NamedQuery(name = "ApUser.findByEdition", query = "SELECT u FROM ApUser u WHERE u.edition = :edition"),
     @NamedQuery(name = "ApUser.findByPassword", query = "SELECT u FROM ApUser u WHERE u.password = :password"),
-    @NamedQuery(name = "ApUser.findByregisterDate", query = "SELECT u FROM ApUser u WHERE u.registerDate = :registerDate"),
-    @NamedQuery(name = "ApUser.findByregisterlogList", query = "SELECT u FROM ApUser u WHERE u.logList = :logList"),})
+    @NamedQuery(name = "ApUser.findByregisterDate", query = "SELECT u FROM ApUser u WHERE u.registerDate = :registerDate"),})
 @Entity
 public class ApUser implements Serializable {
 
@@ -68,9 +67,6 @@ public class ApUser implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date registerDate;
 
-    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<Log> logList;
-
     @OneToMany(mappedBy = "apUser", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Evaluation> evaluationList;
 
@@ -88,7 +84,6 @@ public class ApUser implements Serializable {
         this.email = email;
         this.password = password;
         this.registerDate = new Date();
-        this.logList = new ArrayList();
         this.evaluationList = new ArrayList();
         this.edition = edition;
         this.projectList = new ArrayList();
@@ -118,10 +113,6 @@ public class ApUser implements Serializable {
         this.registerDate = registerDate;
     }
 
-    public void setLogList(List<Log> logList) {
-        this.logList = logList;
-    }
-
     public void setEvaluationList(List<Evaluation> evaluationList) {
         this.evaluationList = evaluationList;
     }
@@ -144,10 +135,6 @@ public class ApUser implements Serializable {
 
     public String getName() {
         return name;
-    }
-
-    public List<Log> getLogList() {
-        return logList;
     }
 
     public List<Evaluation> getEvaluationList() {

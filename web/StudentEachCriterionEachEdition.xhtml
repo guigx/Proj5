@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition template="./TemplateAdmin.xhtml"  xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="./TemplateStudent.xhtml"  xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:f="http://java.sun.com/jsf/core"
@@ -8,32 +8,30 @@
 
     <ui:define name="content">
 
-        <h:form id="graf1">
+        <h:form id="graf3">
             <h:panelGrid id="rap1" columns="2" cellpadding="0">
-                <p:dataTable id="dataTable" var="evaluation" value="#{averageController.averageEachStudentEachProject()}"
+                <p:dataTable id="dataTable" var="evaluation" value="#{averageController.avgStudentEachCriterionEdition()}"
                              paginator="true" rows="10">
                     <f:facet name="header">
-                        Average - Each user in Each Project
+                        Average - Each Criterion in Edition
                     </f:facet>
                     <p:column headerText="Value" >
                         <h:outputText value="#{evaluation[0]}" >
                             <f:convertNumber minFractionDigits="1" maxFractionDigits="2"/>
                         </h:outputText>
                     </p:column>
-                    <p:column headerText="Student">
+                    <p:column headerText="Criterion Name">
                         <h:outputText value="#{evaluation[1]}" />
                     </p:column>
-                    <p:column headerText="Project Name">
-                        <h:outputText value="#{evaluation[2]}" />
-                    </p:column>
                 </p:dataTable>
-                <p:barChart id="stacked" value="#{averageController.cartesianModel}" legendPosition="ne" style="height:150px; width: 600px;"
-                            barMargin="30" min="0" max="#{loggedUser.currentEdition.scale}" animate="true"/>
+<!--                <p:barChart id="stacked" value="#{averageController.cartesianModel2}" legendPosition="ne" style="height:150px; width: 600px;"
+                            barMargin="30" min="0" max="#{loggedUser.currentEdition.scale}" animate="true"/>-->
             </h:panelGrid>
             <p:commandButton value="Print" type="button" icon="ui-icon-print">
-                <p:printer target="graf1"/>
+                <p:printer target="graf3"/>
             </p:commandButton>
         </h:form>
+
     </ui:define>
 
 </ui:composition>

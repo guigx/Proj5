@@ -14,7 +14,9 @@ import org.primefaces.model.chart.CartesianChartModel;
 import org.primefaces.model.chart.ChartSeries;
 import pt.uc.dei.paj.proj5.grupoF.EJB.LoggedUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApUser;
+import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
 import pt.uc.dei.paj.proj5.grupoF.Facades.ApUserFacade;
+import pt.uc.dei.paj.proj5.grupoF.Facades.EditionFacade;
 import pt.uc.dei.paj.proj5.grupoF.Facades.EvaluationFacade;
 
 /**
@@ -31,7 +33,11 @@ public class AverageController {
     private LoggedUser lg;
     @Inject
     private ApUserFacade apuserfacade;
+    @Inject
+    private EditionFacade editionfacade;
     private CartesianChartModel cartesianModel;
+    private CartesianChartModel cartesianModel1;
+    private CartesianChartModel cartesianModel2;
 
     public AverageController() {
     }
@@ -39,6 +45,32 @@ public class AverageController {
     @PostConstruct
     public void initControllerAvg() {
         createCategoryModel();
+        createCategoryModel1();
+        createCategoryModel2();
+    }
+
+    public CartesianChartModel getCartesianModel2() {
+        return cartesianModel2;
+    }
+
+    public void setCartesianModel2(CartesianChartModel cartesianModel2) {
+        this.cartesianModel2 = cartesianModel2;
+    }
+
+    public EditionFacade getEditionfacade() {
+        return editionfacade;
+    }
+
+    public void setEditionfacade(EditionFacade editionfacade) {
+        this.editionfacade = editionfacade;
+    }
+
+    public CartesianChartModel getCartesianModel1() {
+        return cartesianModel1;
+    }
+
+    public void setCartesianModel1(CartesianChartModel cartesianModel1) {
+        this.cartesianModel1 = cartesianModel1;
     }
 
     public EvaluationFacade getEvaluationfacade() {
@@ -93,7 +125,61 @@ public class AverageController {
         }
     }
 
-    public List<Object[]> averageAnsEachStudEachProj() {
+    public void createCategoryModel1() {
+        cartesianModel1 = new CartesianChartModel();
+
+        for (Edition e : editionfacade.findAll()) {
+            ChartSeries a = new ChartSeries();
+            a.setLabel(e.getName());
+            List<Object[]> data = evaluationfacade.avgEachProjEdition(e);
+            for (Object[] o : data) {
+                Double avg = (Double) o[0];
+                a.set(e.getName(), avg);
+
+            }
+            cartesianModel1.addSeries(a);
+        }
+
+    }
+
+    public void createCategoryModel2() {
+        cartesianModel2 = new CartesianChartModel();
+
+        for (Edition e : editionfacade.findAll()) {
+            ChartSeries a = new ChartSeries();
+            a.setLabel(e.getName());
+            List<Object[]> data = evaluationfacade.avgEachCriterionEachProj(e);
+            for (Object[] o : data) {
+                Double avg = (Double) o[0];
+                a.set(e.getName(), avg);
+
+            }
+            cartesianModel2.addSeries(a);
+        }
+
+    }
+
+    public List<Object[]> averageEachStudentEachProject() {
         return evaluationfacade.avgAdminStudentProject(lg.getCurrentEdition());
+    }
+
+    public List<Object[]> averageProjectEachEdition() {
+        return evaluationfacade.avgEachProjEdition(lg.getCurrentEdition());
+    }
+
+    public List<Object[]> avgEachCriterionEachProj() {
+        return evaluationfacade.avgEachCriterionEachProj(lg.getCurrentEdition());
+    }
+
+    public List<Object[]> avgEachCriterionInEdition() {
+        return evaluationfacade.avgEachCriterionInEdition(lg.getCurrentEdition());
+    }
+
+    public List<Object[]> avgStudentEachCriterionEdition() {
+        return evaluationfacade.avgStudentEachCriterionEdition(lg.getLoggedUser().getApUserId());
+    }
+
+    public List<Object[]> avgEachProjInEdition() {
+        return evaluationfacade.avgStudentEachCriterionEdition(lg.getLoggedUser().getApUserId());
     }
 }

@@ -31,10 +31,9 @@
                         <li class='has-sub last'><a href='#'><span>Avarage</span></a>
                             <ul>
                                 <li><h:commandLink disabled="#{loggedUser.currentEdition eq null}" class="menu2" value="Each user/Projects" action="/EachUserProjects?faces-redirect=true"/></li>
-                                <li><h:commandLink disabled="#{loggedUser.currentEdition eq null}" class="menu2" value="Each user/all Projects" action="/EachUserAllProjects?faces-redirect=true"/></li>
-                                <li><h:commandLink disabled="#{loggedUser.currentEdition eq null}" class="menu2" value="All user/each Criterion in Each Project" action="?faces-redirect=true"/></li>
-                                <li><h:commandLink disabled="#{loggedUser.currentEdition eq null}" class="menu2" value="All user/each Criterion in all Projects" action="?faces-redirect=true"/></li>
-                                <li><h:commandLink disabled="#{loggedUser.currentEdition eq null}" class="menu2" value="Compare Results" action="?faces-redirect=true"/></li>
+                                <li><h:commandLink disabled="#{loggedUser.currentEdition eq null}" class="menu2" value="Each Project/Edition" action="/EachProjectEdition?faces-redirect=true"/></li>
+                                <li><h:commandLink disabled="#{loggedUser.currentEdition eq null}" class="menu2" value="All user/each Criterion in Each Project" action="/AllUserEachCriterionEachProejct?faces-redirect=true"/></li>
+                                <li><h:commandLink disabled="#{loggedUser.currentEdition eq null}" class="menu2" value="All user/each Criterion in All Projects" action="/AllUserEachCriterionAllProejct?faces-redirect=true"/></li>
                             </ul>
                         </li>
                         <li class='has-sub last'><a href='#'><span>My Profile</span></a>

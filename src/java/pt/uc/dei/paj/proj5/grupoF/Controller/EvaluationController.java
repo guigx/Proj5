@@ -7,7 +7,7 @@ package pt.uc.dei.paj.proj5.grupoF.Controller;
 
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import pt.uc.dei.paj.proj5.grupoF.EJB.LoggedUser;
@@ -24,7 +24,7 @@ import pt.uc.dei.paj.proj5.grupoF.Facades.LogFacade;
  * @author Grupo F
  */
 @Named
-@RequestScoped
+@ViewScoped
 public class EvaluationController {
 
     @Inject
@@ -171,7 +171,7 @@ public class EvaluationController {
     public String saveProject(Project project) {
         lg.setSelectedProject(project);
         this.evaluationList = evaluationfacade.studentEvaluationsSetCriteria(lg.getLoggedUser(), project);
-        log.setApUser(lg.getLoggedUser());
+        log.setApUserId(lg.getLoggedUser().getApUserId());
         log.setLogOperation("Open Evaluation");
         logfacade.createLog(log);
         return "PF('submitAv').show();";
@@ -184,7 +184,7 @@ public class EvaluationController {
 
     public void validateEvaluation() {
         evaluationfacade.evaluationsSubmit(evaluationList);
-        log.setApUser(lg.getLoggedUser());
+        log.setApUserId(lg.getLoggedUser().getApUserId());
         log.setLogOperation("Save Evaluation");
         logfacade.createLog(log);
     }

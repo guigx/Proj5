@@ -41,7 +41,7 @@
                       showEffect="fade" hideEffect="explode">
                 <p:dataTable  id="StudentList" var="item" rowKey="#{item}" value="#{loggedUser.currentEdition.userList}" paginator="true" paginatorPosition="bottom" rows="10"
                               selection="#{projetController.selectedStudentsToSubcribeInProject}"
-                              filteredValue="#{loggedUser.currentEdition.userList}">
+                              >
 
                     <f:facet name="header">
                         Student List
@@ -49,7 +49,11 @@
 
                     <p:column selectionMode="multiple" style="width:2%" />
 
-                    <p:column headerText="Name" style="width:25%" filterBy="name">
+
+
+                    <p:column filterBy="name" filterMatchMode="contains" headerText="Name" style="width:25%" sortBy="#{item.name}">
+
+
                         #{item.name}
                     </p:column>
 

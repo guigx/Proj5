@@ -11,7 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -35,8 +34,7 @@ public class Log implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date operationDate;
 
-    @ManyToOne
-    private ApUser apUser;
+    private Long apUserId;
 
     public String getLogOperation() {
         return logOperation;
@@ -54,12 +52,12 @@ public class Log implements Serializable {
         this.operationDate = operationDate;
     }
 
-    public ApUser getApUser() {
-        return apUser;
+    public Long getApUserId() {
+        return apUserId;
     }
 
-    public void setApUser(ApUser apUser) {
-        this.apUser = apUser;
+    public void setApUserId(Long apUserId) {
+        this.apUserId = apUserId;
     }
 
     public Log() {

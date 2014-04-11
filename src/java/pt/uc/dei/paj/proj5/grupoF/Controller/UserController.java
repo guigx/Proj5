@@ -13,6 +13,7 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import pt.uc.dei.paj.proj5.grupoF.EJB.EncriptPassword;
 import pt.uc.dei.paj.proj5.grupoF.EJB.LoggedUser;
+import pt.uc.dei.paj.proj5.grupoF.EJB.SendEmail;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApAdmin;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
