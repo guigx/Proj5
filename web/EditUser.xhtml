@@ -8,32 +8,34 @@
 
     <ui:define name="content">
 
-        <div>
-            <h:form id="editUser">
-                <!--<h:outputLabel class="title" value="Editar Perfil" />-->
 
-                <h:panelGrid columns="3" rowClasses="gridRows">
-                    <h:outputLabel value="Nome" class="labels" for="nome"/>
-                    <h:inputText id="nome" title="Nome" class="textFields" value="#{userController.apuser.name}" required="true" requiredMessage="Introduza um nome."/>
-                    <h:message id="msg1" for="nome" class="errorMessages"/>
-                    <h:outputLabel value="Email" class="labels" for="email"/>
-                    <h:inputText id="email" title="Email" class="textFields" disabled="true" value="#{userController.lg.loggedUser.email}"/>
-                    <h:message id="msg2" for="email" class="errorMessages"/>
-                    <h:outputLabel value="Nova Password" class="labels" for="password"/>
-                    <h:inputSecret id="password" title="Nova Password" class="textFields" value="#{userController.apuser.password}" required="true" requiredMessage="Introduza uma password."/>
-                    <h:message id="msg3" for="password" class="errorMessages"/>
-                    <h:outputLabel value="Confirme a Password" class="labels" for="confirmpassword"/>
-                    <h:inputSecret id="confirmpassword" title="Confirme a Password" class="textFields" value="#{userController.confirmPassword}" required="true" requiredMessage="Confirme a password."/>
-                    <h:message id="msg4" for="confirmpassword" class="errorMessages"/>
-                </h:panelGrid>
+        <h:form id="editUser">
+            <h:panelGrid columns="3" rowClasses="gridRows">
+                <h:outputLabel value="Nome" class="labels" for="nome"/>
+                <h:inputText id="nome" title="Nome" class="textFields" value="#{userController.apuser.name}" required="true" requiredMessage="Introduza um nome."/>
+                <h:message id="msg1" for="nome" class="errorMessages"/>
+                <h:outputLabel value="Email" class="labels" for="email"/>
+                <h:inputText id="email" title="Email" class="textFields" disabled="true" value="#{userController.lg.loggedUser.email}"/>
+                <h:message id="msg2" for="email" class="errorMessages"/>
+                <h:outputLabel value="Nova Password" class="labels" for="password"/>
+                <h:inputSecret id="password" title="Nova Password" class="textFields" value="#{userController.apuser.password}" required="true" requiredMessage="Introduza uma password."/>
+                <h:message id="msg3" for="password" class="errorMessages"/>
+                <h:outputLabel value="Confirme a Password" class="labels" for="confirmpassword"/>
+                <h:inputSecret id="confirmpassword" title="Confirme a Password" class="textFields" value="#{userController.confirmPassword}" required="true" requiredMessage="Confirme a password."/>
+                <h:message id="msg4" for="confirmpassword" class="errorMessages"/>
+            </h:panelGrid>
 
+            <h:panelGrid columns="3" rowClasses="gridRows">
+                <h:commandButton id="cancelar" value="Cancelar" class="btn" action="StudentPrincipal.xhtml"/>
                 <h:commandButton id="success" value="Guardar" class="btn" action="#{userController.editUser()}"/>
                 <h:message for="success" class="nameLabel"/>
-                <br/>
-                <h:commandLink class="linkLogin" value="Eliminar conta de utilizador" immediate="true" action="#{userController.deleteApUser()}"/>
-            </h:form>
 
-        </div>
+            </h:panelGrid>
+
+            <h:commandLink class="linkLogin" value="Eliminar conta de utilizador" immediate="true" action="#{userController.deleteApUser()}"/>
+        </h:form>
+
+
 
 
     </ui:define>

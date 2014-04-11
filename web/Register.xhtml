@@ -11,12 +11,13 @@
     <h:body>
 
 
+
         <h:form >
             <div align="center">
 
                 <div style="margin: 30px">
-                    <h:graphicImage style="margin-bottom: 20px;" value="#{resource['images:logotipo_peq.png']}"/>
-                    <br/><h:outputLabel value="Regista-te" class="bigTitle"/>
+                    <h:graphicImage value="#{resource['images:logo_uc.png']}"/>
+                    <br/><h:outputLabel value="Registo" class="bigTitle"/>
                 </div>
                 <h:panelGrid columns="3" rowClasses="gridRows">
                     <h:outputLabel value="Nome" class="labels"/>
@@ -36,11 +37,13 @@
                     <h:message for="confirmpassword" class="errorMessages"/>
 
                     <h:outputLabel value="Edition" class="labels"/>
-                    <p:commandButton value="Edition" oncomplete="PF('dlg2').show();" update="newUser"/>
+                    <p:commandButton value="Edition" oncomplete="PF('dlg2').show();" update="newUser"  />
                     <br/>
-                    <h:commandButton value="Submeter" class="btn" action="#{registerController.createNewUser}"/>
                     <h:commandButton value="Cancelar" class="btn" action="#{registerController.goToLogin()}" />
+                    <h:commandButton value="Submeter" class="btn" action="#{registerController.createNewUser}"/>
+
                 </h:panelGrid>
+
                 <h:form id="newUser">
                     <p:dialog id="modalDialog" header="Select Edition" widgetVar="dlg2" modal="true" height="auto" width="auto">
 
@@ -62,8 +65,7 @@
 
 
 
-        </h:form>
-
+        </h:form>‏
 
     </h:body>
 

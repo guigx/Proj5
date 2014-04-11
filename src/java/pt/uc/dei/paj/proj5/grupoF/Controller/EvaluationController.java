@@ -5,6 +5,7 @@
  */
 package pt.uc.dei.paj.proj5.grupoF.Controller;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -25,7 +26,7 @@ import pt.uc.dei.paj.proj5.grupoF.Facades.LogFacade;
  */
 @Named
 @ViewScoped
-public class EvaluationController {
+public class EvaluationController implements Serializable {
 
     @Inject
     private EvaluationFacade evaluationfacade;

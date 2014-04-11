@@ -152,9 +152,9 @@ public class EvaluationFacade extends AbstractFacade<Evaluation> {
         return (List<Object[]>) q.getResultList();
     }
 
-    public List<Object[]> avgEachProjInEdition(Long apuserid) {
-        Query q = em.createNamedQuery("Evaluation.avgStudentEachCriterionEdition");
-        q.setParameter("apuserId", apuserid);
+    public List<Object[]> avgEachProjInEdition(Edition edition) {
+        Query q = em.createNamedQuery("Evaluation.avgEachProjInEdition");
+        q.setParameter("edition", edition);
         return (List<Object[]>) q.getResultList();
     }
 }

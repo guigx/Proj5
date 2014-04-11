@@ -27,8 +27,8 @@
                         <h:outputText value="#{evaluation[2]}" />
                     </p:column>
                 </p:dataTable>
-                <p:barChart id="stacked" value="#{averageController.cartesianModel2}" legendPosition="ne" style="height:150px; width: 600px;"
-                            barMargin="30" min="0" max="#{loggedUser.currentEdition.scale}" animate="true"/>
+<!--                <p:barChart id="stacked" value="#{averageController.cartesianModel2}" legendPosition="ne" style="height:150px; width: 600px;"
+                            barMargin="30" min="0" max="#{loggedUser.currentEdition.scale}" animate="true"/>-->
             </h:panelGrid>
             <p:commandButton value="Print" type="button" icon="ui-icon-print">
                 <p:printer target="graf3"/>

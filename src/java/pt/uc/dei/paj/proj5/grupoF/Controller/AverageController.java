@@ -46,7 +46,6 @@ public class AverageController {
     public void initControllerAvg() {
         createCategoryModel();
         createCategoryModel1();
-        createCategoryModel2();
     }
 
     public CartesianChartModel getCartesianModel2() {
@@ -140,23 +139,23 @@ public class AverageController {
             cartesianModel1.addSeries(a);
         }
 
-    }
-
-    public void createCategoryModel2() {
-        cartesianModel2 = new CartesianChartModel();
-
-        for (Edition e : editionfacade.findAll()) {
-            ChartSeries a = new ChartSeries();
-            a.setLabel(e.getName());
-            List<Object[]> data = evaluationfacade.avgEachCriterionEachProj(e);
-            for (Object[] o : data) {
-                Double avg = (Double) o[0];
-                a.set(e.getName(), avg);
-
-            }
-            cartesianModel2.addSeries(a);
-        }
-
+//        List<Edition> list = editionfacade.findAll();
+//        cartesianModel = new CartesianChartModel();
+//        for (int i = 0; i < list.size(); i++) {
+//            ChartSeries a = new ChartSeries();
+//            String est = list.get(i).getName();
+//            a.setLabel(est);
+//            List<Object[]> data = evaluationfacade.avgEachProjEdition(list.get(i));
+//            if (!data.isEmpty()) {
+//                a.setLabel(est);
+//                for (int j = 0; j < data.size(); j++) {
+//                    Double avg = (Double) data.get(j)[0];
+//                    String proj = (String) data.get(j)[1];
+//                    a.set(proj, avg);
+//                }
+//                cartesianModel.addSeries(a);
+//            }
+//        }
     }
 
     public List<Object[]> averageEachStudentEachProject() {
@@ -180,6 +179,6 @@ public class AverageController {
     }
 
     public List<Object[]> avgEachProjInEdition() {
-        return evaluationfacade.avgStudentEachCriterionEdition(lg.getLoggedUser().getApUserId());
+        return evaluationfacade.avgEachProjInEdition(lg.getLoggedUser().getEdition());
     }
 }
