@@ -36,7 +36,7 @@
             </p:dataTable>
 
 
-            <p:dialog id="modalDialog" header="Submite Evaluation" widgetVar="submitAv" modal="true" height="auto" width="auto" rendered="#{loggedUser.selectedProject != null}">
+            <p:dialog id="modalDialog" header="Submite Evaluation" widgetVar="submitAv" modal="true" height="auto" width="auto" >
                 <h:form id="newUser">
                     <p:dataTable  rowKey="#{item}" var="item" value="#{evaluationController.evaluationList}">
                         <p:column headerText="Criterion">

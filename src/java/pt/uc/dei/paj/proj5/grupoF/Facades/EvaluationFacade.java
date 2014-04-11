@@ -10,9 +10,11 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Criterion;
+import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Evaluation;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Project;
 
@@ -112,6 +114,18 @@ public class EvaluationFacade extends AbstractFacade<Evaluation> {
             em.merge(e.getCriterion());
         }
 
+    }
+
+    public List<Object[]> avgAdminStudentProject(Edition edition) {
+        Query q = em.createNamedQuery("Evaluation.avgAdminStudentProject");
+        q.setParameter("edition", edition);
+        return (List<Object[]>) q.getResultList();
+    }
+
+    public List<Object[]> avgAdminStdEachProj(ApUser apuser) {
+        Query q = em.createNamedQuery("Evaluation.avgAdminStdEachProj");
+        q.setParameter("apuser", apuser);
+        return (List<Object[]>) q.getResultList();
     }
 
 }

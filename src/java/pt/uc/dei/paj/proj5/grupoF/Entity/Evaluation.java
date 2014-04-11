@@ -21,7 +21,9 @@ import javax.validation.constraints.NotNull;
  */
 @NamedQueries({
     @NamedQuery(name = "Evaluation.findByIdEdition", query = "SELECT e FROM Evaluation e WHERE e.project.edition.id = :id_edition"),
-    @NamedQuery(name = "Evaluation.findStudentProject", query = "SELECT e FROM Evaluation e WHERE e.apUser.ApUserId = :apUserId and e.project.id = :projectId")})
+    @NamedQuery(name = "Evaluation.findStudentProject", query = "SELECT e FROM Evaluation e WHERE e.apUser.ApUserId = :apUserId and e.project.id = :projectId"),
+    @NamedQuery(name = "Evaluation.avgAdminStudentProject", query = "SELECT AVG(u.rating), u.apUser.name, u.project.name FROM Evaluation u WHERE u.project.edition = :edition group by u.apUser.name, u.project.name"),
+    @NamedQuery(name = "Evaluation.avgAdminStdEachProj", query = "SELECT AVG(u.rating), u.project.name FROM Evaluation u WHERE u.apUser = :apuser group by u.project.name")})
 @Entity
 public class Evaluation implements Serializable {
 

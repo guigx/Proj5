@@ -111,4 +111,10 @@ public class ApUserFacade extends AbstractFacade<ApUser> {
         q.setParameter("project", project);
         return (List<ApUser>) q.getResultList();
     }
+
+    public List<ApUser> apuserByEdition(Edition edition) {
+        Query q = em.createNamedQuery("ApUser.findByEdition");
+        q.setParameter("edition", edition);
+        return (List<ApUser>) q.getResultList();
+    }
 }

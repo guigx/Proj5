@@ -68,10 +68,10 @@ public class ApUser implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date registerDate;
 
-    @OneToMany(mappedBy = "apUser", cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Log> logList;
 
-    @OneToMany(mappedBy = "apUser", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "apUser", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Evaluation> evaluationList;
 
     @ManyToOne(cascade = CascadeType.PERSIST)

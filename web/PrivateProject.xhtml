@@ -9,7 +9,7 @@
     <ui:define name="content">
         <h:form>
             <h:panelGroup>
-                <p:dataTable id="dataTableStudent" rowKey="#{student}" var="student" value="#{loggedUser.selectedProject.apuserList}">
+                <h:dataTable id="dataTableStudent" var="student" value="#{loggedUser.selectedProject.apuserList}">
                     <f:facet name="header">
                         Students Registered
                     </f:facet>
@@ -23,19 +23,19 @@
                     <p:column headerText="Status">
                         <p:commandLink value="#{evaluationController.studentStatus(student)}"  action="#{userController.sendEmails(student)}" oncomplete="#{evaluationController.status(student)}" />
                     </p:column>
-                </p:dataTable>
+                </h:dataTable>
             </h:panelGroup>
 
             <p:dialog id="modalResult" header="Evaluation" widgetVar="Result" modal="true" height="auto" width="auto">
                 <h:form id="newUser">
-                    <p:dataTable  var="item" value="#{evaluationController.evaluationList}" rowKey="#{item}">
+                    <h:dataTable  var="item" value="#{evaluationController.evaluationList}" >
                         <p:column headerText="Criterion">
                             <h:outputText value="#{item.criterion.question}" />
                         </p:column>
                         <p:column headerText="Evaluation">
                             <h:outputText value="#{item.rating}" />
                         </p:column>
-                    </p:dataTable>
+                    </h:dataTable>
                 </h:form>
 
             </p:dialog>
@@ -44,7 +44,7 @@
                 <h:form>
                     <h:outputText value="Sent Email"/>
 
-                    
+
                 </h:form>
 
             </p:dialog>

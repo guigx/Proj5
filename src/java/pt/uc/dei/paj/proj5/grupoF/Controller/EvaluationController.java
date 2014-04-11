@@ -14,8 +14,10 @@ import pt.uc.dei.paj.proj5.grupoF.EJB.LoggedUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Criterion;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Evaluation;
+import pt.uc.dei.paj.proj5.grupoF.Entity.Log;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Project;
 import pt.uc.dei.paj.proj5.grupoF.Facades.EvaluationFacade;
+import pt.uc.dei.paj.proj5.grupoF.Facades.LogFacade;
 
 /**
  *
@@ -27,7 +29,8 @@ public class EvaluationController {
 
     @Inject
     private EvaluationFacade evaluationfacade;
-
+    @Inject
+    private LogFacade logfacade;
     private Evaluation evaluation;
     private List<Evaluation> evaluationList;
     private ApUser apUser;
@@ -35,6 +38,7 @@ public class EvaluationController {
     private Criterion criterion;
     private Project project;
     private int rating;
+    private Log log;
     @Inject
     private LoggedUser lg;
 
@@ -44,6 +48,23 @@ public class EvaluationController {
     @PostConstruct
     public void initEvaluationController() {
         this.evaluation = new Evaluation();
+        this.log = new Log();
+    }
+
+    public Log getLog() {
+        return log;
+    }
+
+    public void setLog(Log log) {
+        this.log = log;
+    }
+
+    public LogFacade getLogfacade() {
+        return logfacade;
+    }
+
+    public void setLogfacade(LogFacade logfacade) {
+        this.logfacade = logfacade;
     }
 
     public LoggedUser getLg() {
@@ -143,6 +164,9 @@ public class EvaluationController {
     public String saveProject(Project project) {
         lg.setSelectedProject(project);
         this.evaluationList = evaluationfacade.studentEvaluationsSetCriteria(lg.getLoggedUser(), project);
+        log.setApUser(lg.getLoggedUser());
+        log.setLogOperation("Open Evaluation");
+        logfacade.createLog(log);
         return "PF('submitAv').show();";
     }
 
@@ -153,6 +177,9 @@ public class EvaluationController {
 
     public void validateEvaluation() {
         evaluationfacade.evaluationsSubmit(evaluationList);
+        log.setApUser(lg.getLoggedUser());
+        log.setLogOperation("Save Evaluation");
+        logfacade.createLog(log);
     }
 
     public void prepareResults(ApUser student) {
