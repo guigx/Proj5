@@ -85,13 +85,11 @@ public class RegisterController implements Serializable {
     }
 
     public Edition getEdition() {
-        System.out.println("cenaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + getEditionName());
         return edition;
     }
 
     public void setEdition(Edition edition) {
         this.edition = edition;
-        System.out.println("edition set...ssdasdasdasdasdasda.");
     }
 
     public EditionFacade getEditionFacade() {
@@ -166,10 +164,8 @@ public class RegisterController implements Serializable {
 
     public String getEditionName() {
         if (this.edition != null) {
-            System.out.println("will return edition name:" + this.edition.getName());
             return this.edition.getName();
         }
-        System.out.println("nothing to return");
         return "";
     }
 }

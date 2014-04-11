@@ -19,7 +19,9 @@
                     <p:commandLink value="#{student.name}" onclick ="#{evaluationController.status(student)}" disabled="#{!evaluationController.disableLink(student)}" />
                 </p:column>
                 <p:column headerText="Status">
-                    <p:commandLink value="#{evaluationController.studentStatus(student)}" onclick="#{userController.sendEmails(student)}"   action="#{userController.sendEmails(student)}" disabled="#{evaluationController.disableLink(student)}"  />
+                    <p:commandLink value="#{evaluationController.studentStatus(student)}"
+                                   action="#{userController.sendEmails(student)}"
+                                   disabled="#{evaluationController.disableLink(student)}" onsuccess="PF('Email).show()" />
                 </p:column>
             </p:dataTable>
             <p:dialog id="modalResult" header="Evaluation" widgetVar="Result" modal="true" height="auto" width="auto">

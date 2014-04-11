@@ -17,10 +17,12 @@ import pt.uc.dei.paj.proj5.grupoF.EJB.SendEmail;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApAdmin;
 import pt.uc.dei.paj.proj5.grupoF.Entity.ApUser;
 import pt.uc.dei.paj.proj5.grupoF.Entity.Edition;
+import pt.uc.dei.paj.proj5.grupoF.Entity.Log;
 import pt.uc.dei.paj.proj5.grupoF.Exception.InvalidAuthException;
 import pt.uc.dei.paj.proj5.grupoF.Exception.UserNotFoundException;
 import pt.uc.dei.paj.proj5.grupoF.Facades.ApAdminFacade;
 import pt.uc.dei.paj.proj5.grupoF.Facades.ApUserFacade;
+import pt.uc.dei.paj.proj5.grupoF.Facades.LogFacade;
 
 /**
  *
@@ -44,9 +46,11 @@ public class UserController {
     private String email;
     private String password;
     private Edition edition;
+    private Log log;
+    @Inject
+    private LogFacade logfacade;
 
     public UserController() {
-//        sendemail = SendEmail.getSendEmail();
     }
 
     public Edition getEdition() {
@@ -131,13 +135,6 @@ public class UserController {
         this.password = password;
     }
 
-//    public SendEmail getSendemail() {
-//        return sendemail;
-//    }
-//
-//    public void setSendemail(SendEmail sendemail) {
-//        this.sendemail = sendemail;
-//    }
     /**
      * Checks if the email and password inserted are valid authentication.
      *
@@ -168,12 +165,9 @@ public class UserController {
         FacesContext ctx = FacesContext.getCurrentInstance();
         //Encrypt password
         password = EncriptPassword.md5(password);
-//        sendemail.sendEMail("acertarorumo@gmail.com", "TEST", "Oi \nParece que isto do email já funciona.\nVenha a proxima.", "katos.pt@gmail.com");
-
         try {
             ApUser loggedUser = ejbUser.validAuthenticationApuser(email, password);
             lg.setLoggedUser(loggedUser);
-            lg.setCurrentEdition(loggedUser.getEdition());
             return "/StudentPrincipal.xhtml?faces-redirect=true";
 
         } catch (InvalidAuthException | UserNotFoundException ex) {
@@ -184,6 +178,9 @@ public class UserController {
 
     public String deleteApUser() {
         ejbUser.remove(lg.getLoggedUser());
+        log.setApUserId(lg.getLoggedUser().getApUserId());
+        log.setLogOperation("User Removed");
+        logfacade.createLog(log);
         return "/Login?faces-redirect=true";
     }
 
@@ -212,7 +209,9 @@ public class UserController {
 
             this.ejbUser.edit(logged);
             ctx.addMessage("editUser:success", new FacesMessage("Perfil alterado."));
-
+            log.setApUserId(lg.getLoggedUser().getApUserId());
+            log.setLogOperation("Profile Edited");
+            logfacade.createLog(log);
             return "Login";
         }
 

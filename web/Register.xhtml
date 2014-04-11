@@ -9,12 +9,8 @@
         <title>Sistema de Autoavaliação PAJ</title>
     </h:head>
     <h:body>
-
-
-
         <h:form >
             <div align="center">
-
                 <div style="margin: 30px">
                     <h:graphicImage value="#{resource['images:logo_uc.png']}"/>
                     <br/><h:outputLabel value="Registo" class="bigTitle"/>
@@ -23,27 +19,21 @@
                     <h:outputLabel value="Nome" class="labels"/>
                     <h:inputText id="nome" title="Nome" class="textFields" value="#{registerController.apuser.name}" required="true" requiredMessage="Introduza um nome."/>
                     <h:message for="nome" class="errorMessages"/>
-
                     <h:outputLabel value="Email" class="labels"/>
                     <h:inputText id="email" title="Email" class="textFields" value="#{registerController.apuser.email}" required="true" requiredMessage="Introduza um email."/>
                     <h:message for="email" class="errorMessages"/>
-
                     <h:outputLabel value="Password" class="labels"/>
                     <h:inputSecret id="password" title="Password" class="textFields" value="#{registerController.apuser.password}" required="true" requiredMessage="Introduza uma password."/>
                     <h:message for="password" class="errorMessages"/>
-
                     <h:outputLabel value="Confirme a Password" class="labels"/>
                     <h:inputSecret id="confirmpassword" title="Confirme a Password" class="textFields" value="#{registerController.confirmPassword}" required="true" requiredMessage="Confirme a password."/>
                     <h:message for="confirmpassword" class="errorMessages"/>
-
                     <h:outputLabel value="Edition" class="labels"/>
                     <p:commandButton value="Edition" oncomplete="PF('dlg2').show();" update="newUser"  />
                     <br/>
                     <h:commandButton value="Cancelar" class="btn" action="#{registerController.goToLogin()}" />
                     <h:commandButton value="Submeter" class="btn" action="#{registerController.createNewUser}"/>
-
                 </h:panelGrid>
-
                 <h:form id="newUser">
                     <p:dialog id="modalDialog" header="Select Edition" widgetVar="dlg2" modal="true" height="auto" width="auto">
 
@@ -60,14 +50,8 @@
 
                     </p:dialog>
                 </h:form>
-
             </div>
-
-
-
         </h:form>‏
-
     </h:body>
-
 </html>
 

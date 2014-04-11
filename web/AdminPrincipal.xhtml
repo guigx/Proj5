@@ -7,7 +7,6 @@
                 xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="content">
-
         <h:form>
             <p:dataTable  id="EditionList" rowKey="#{item}" var="item" value="#{editionController.allEdition}" paginator="true" paginatorPosition="bottom" rows="10">
                 <f:facet name="header">
@@ -30,11 +29,9 @@
         </h:form>
         <h:form>
             <div align="right">
-
             </div>
             <p:commandButton id="modalDialogButton" value="Add new Edition" onclick="PF('dlg2').show();" type="button"/>
         </h:form>
-
         <p:dialog id="modalDialogButton" header="Create New Edition" widgetVar="dlg2" modal="true" height="auto" width="auto">
             <h:form>
                 <table>
@@ -51,13 +48,8 @@
                         <td></td>
                         <td><h:commandButton id="createEdition" value="SAVE" action="#{editionController.createEdition()}"></h:commandButton></td>
                     </tr>
-
                 </table>
             </h:form>
         </p:dialog>
-
-
-
     </ui:define>
-
 </ui:composition>

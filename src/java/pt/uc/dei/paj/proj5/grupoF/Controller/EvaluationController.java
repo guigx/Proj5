@@ -32,6 +32,7 @@ public class EvaluationController implements Serializable {
     private EvaluationFacade evaluationfacade;
     @Inject
     private LogFacade logfacade;
+    private Log log;
     private Evaluation evaluation;
     private List<Evaluation> evaluationList;
     private ApUser apUser;
@@ -39,7 +40,6 @@ public class EvaluationController implements Serializable {
     private Criterion criterion;
     private Project project;
     private int rating;
-    private Log log;
     @Inject
     private LoggedUser lg;
 
