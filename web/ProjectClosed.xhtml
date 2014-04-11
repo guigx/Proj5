@@ -11,7 +11,7 @@
         <h:form>
             <p:dataTable   id="OpenProjectList" var="item" value="#{projetController.closeProjectOfEdition()}" paginator="true" paginatorPosition="bottom" rows="10" >
                 <f:facet name="header">
-                    Open Projects List
+                    Closed Projects List
                 </f:facet>
                 <p:column headerText="Name" style="width:25%">
                     <h:commandLink value="#{item.name}" action="#{projetController.prepareProject(item)}" />

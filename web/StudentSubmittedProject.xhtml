@@ -12,7 +12,7 @@
 
             <p:dataTable   id="OpenProjectStudent" var="item" value="#{projetController.projectSubmited}" paginator="true" paginatorPosition="bottom" rows="10" >
                 <f:facet name="header">
-                    Open Projects List
+                    Closed Projects List
                 </f:facet>
                 <p:column headerText="Name" style="width:25%">
                     <h:outputText value="#{item.name}" />
