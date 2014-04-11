@@ -24,7 +24,6 @@ public class SendEmail {
     private SimpleEmail email;
 
     public SendEmail() {
-
     }
 
     @PostConstruct

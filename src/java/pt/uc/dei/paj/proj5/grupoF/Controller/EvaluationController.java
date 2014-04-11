@@ -7,7 +7,7 @@ package pt.uc.dei.paj.proj5.grupoF.Controller;
 
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import pt.uc.dei.paj.proj5.grupoF.EJB.LoggedUser;
@@ -24,7 +24,7 @@ import pt.uc.dei.paj.proj5.grupoF.Facades.LogFacade;
  * @author Grupo F
  */
 @Named
-@ViewScoped
+@RequestScoped
 public class EvaluationController {
 
     @Inject
@@ -141,7 +141,6 @@ public class EvaluationController {
 
     public String studentStatus(ApUser student) {
         if (evaluationfacade.findStudentProjectEvaluation(student, lg.getSelectedProject()).isEmpty()) {
-
             return "Send Mail";
         } else {
             return "Submited";
